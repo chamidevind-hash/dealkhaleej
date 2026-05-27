@@ -605,9 +605,6 @@ const server = http.createServer(async (request, response) => {
   }
 });
 
-server.listen(port, "127.0.0.1", () => {
-  console.log(`DealKhaleej running at http://127.0.0.1:${port}`);
-  if (!adminPassword) {
-    console.warn("Warning: ADMIN_PASSWORD is not set. Admin login is disabled until it is configured.");
-  }
+server.listen(port, "0.0.0.0", () => {
+  console.log(`DealKhaleej running on port ${port}`);
 });
