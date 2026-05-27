@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Noon",
+    "category": "Marketplace",
+    "url": "#",
+    "logo": "assets/logos/noon.png"
+  },
+  {
+    "name": "Amazon",
+    "category": "Marketplace",
+    "url": "#",
+    "logo": "assets/logos/amazon.png"
+  },
+  {
+    "name": "iHerb",
+    "category": "Health & Beauty",
+    "url": "#",
+    "logo": "assets/logos/iherb.png"
+  },
+  {
+    "name": "SHEIN",
+    "category": "Fashion",
+    "url": "#",
+    "logo": "assets/logos/shein.png"
+  },
+  {
+    "name": "Temu",
+    "category": "Marketplace",
+    "url": "#",
+    "logo": "assets/logos/temu.png"
+  },
+  {
+    "name": "Namshi",
+    "category": "Fashion",
+    "url": "#",
+    "logo": "assets/logos/namshi.png"
+  }
+]

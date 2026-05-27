@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DealKhaleej | Saudi Coupon Codes and Deals</title>
+  <meta name="description" content="DealKhaleej helps Saudi shoppers find verified promo codes, featured stores, and daily deals.">
+  <meta property="og:title" content="DealKhaleej - Saudi Coupon Codes">
+  <meta property="og:description" content="Verified Saudi coupon codes and daily deals.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dealkhaleej.com">
+  <meta property="og:image" content="https://dealkhaleej.com/assets/preview.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DealKhaleej">
+  <meta name="twitter:description" content="Saudi coupon codes and daily offers">
+  <meta name="twitter:image" content="https://dealkhaleej.com/assets/preview.jpg">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XW886N4BQ8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XW886N4BQ8');
+  </script>
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="DealKhaleej home">
+      <img class="brand-logo" src="assets/brand/dealkhaleej-logo.png" alt="DealKhaleej">
+    </a>
+
+    <nav class="main-nav" aria-label="Primary navigation" data-i18n-aria-label="primaryNavigation">
+      <a href="#deals" data-i18n="topDeals">Top Deals</a>
+      <a href="#stores" data-i18n="stores">Stores</a>
+      <a href="#guide" data-i18n="howItWorks">How It Works</a>
+      <a href="#app" data-i18n="app">App</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-button" id="language-toggle" type="button" aria-label="Switch language">AR</button>
+      <a class="primary-button" href="#deals" data-i18n="viewDeals">View Deals</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-media" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="eyebrow" data-i18n="verifiedSaudi">DealKhaleej | Verified in Saudi Arabia</p>
+        <h1 data-i18n="heroTitle">Saudi coupon codes.</h1>
+        <p class="hero-copy" data-i18n-html="heroCopy"><strong>Find the code before checkout.</strong> Browse promo codes, flash offers, and store discounts without digging through endless lists.</p>
+
+        <form class="search-panel" role="search">
+          <label for="deal-search" data-i18n="searchCoupons">Search coupons</label>
+          <div class="search-row">
+            <input id="deal-search" type="search" placeholder="Search store, code, or category" data-i18n-placeholder="searchPlaceholder" autocomplete="off">
+            <button class="primary-button" type="submit" data-i18n="search">Search</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="quick-strip" aria-label="Savings summary" data-i18n-aria-label="savingsSummary">
+      <article>
+        <strong id="active-coupon-count">0</strong>
+        <span data-i18n="activeCoupons">Active coupons</span>
+      </article>
+      <article>
+        <strong id="verified-count">0</strong>
+        <span data-i18n="verifiedToday">Verified today</span>
+      </article>
+      <article>
+        <strong id="category-count">0</strong>
+        <span data-i18n="popularCategories">Popular categories</span>
+      </article>
+      <article>
+        <strong id="freshness-label">Live</strong>
+        <span data-i18n="freshOffers">Fresh Saudi offers</span>
+      </article>
+    </section>
+
+    <section class="category-section" aria-label="Coupon categories" data-i18n-aria-label="couponCategories">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="shopByCategory">Shop by category</p>
+        <h2 data-i18n="browseMenu">Browse the deal menu</h2>
+      </div>
+      <div class="category-rail" role="list">
+        <button class="category-chip active" type="button" data-filter="all" data-i18n="all">All</button>
+        <button class="category-chip favorites-chip" type="button" data-filter="favorites">
+          <span class="favorites-heart" aria-hidden="true">&#9825;</span>
+          <span data-i18n="favorites">Favorites</span>
+          <strong id="favorites-count">0</strong>
+        </button>
+        <button class="category-chip" type="button" data-filter="fashion" data-i18n="fashion">Fashion</button>
+        <button class="category-chip" type="button" data-filter="beauty" data-i18n="beauty">Beauty</button>
+        <button class="category-chip" type="button" data-filter="grocery" data-i18n="grocery">Grocery</button>
+        <button class="category-chip" type="button" data-filter="travel" data-i18n="travel">Travel</button>
+        <button class="category-chip" type="button" data-filter="electronics" data-i18n="electronics">Electronics</button>
+        <button class="category-chip" type="button" data-filter="food" data-i18n="food">Food</button>
+        <button class="category-chip" type="button" data-filter="sports" data-i18n="sportswear">Sportswear</button>
+        <button class="category-chip" type="button" data-filter="services" data-i18n="digitalServices">Digital Services</button>
+      </div>
+    </section>
+
+    <section class="trending-section" aria-labelledby="trending-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow" data-i18n="mostClicked">Most clicked today</p>
+          <h2 id="trending-title" data-i18n="trendingToday">Trending Today</h2>
+        </div>
+      </div>
+      <div class="trending-grid" id="trending-grid" aria-live="polite">
+        <p class="empty-state">Loading trending coupons...</p>
+      </div>
+    </section>
+
+    <section class="deals-layout" id="deals">
+      <aside class="spotlight">
+        <p class="eyebrow" data-i18n="editorPick">Editor pick</p>
+        <h2 data-i18n="nextFeatured">Your next featured deal</h2>
+        <p data-i18n="featuredCopy">Once you add coupons in the admin dashboard, featured codes can be promoted here for Saudi shoppers.</p>
+        <div class="spotlight-code">
+          <span data-i18n="comingSoon">COMING SOON</span>
+          <a class="secondary-button" href="#stores" data-i18n="browseStores">Browse Stores</a>
+        </div>
+        <img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?auto=format&fit=crop&w=900&q=80" alt="Online shopping parcels and bags">
+      </aside>
+
+      <div class="deal-board" aria-live="polite">
+        <div class="section-heading compact">
+          <p class="eyebrow" data-i18n="liveBoard">Live board</p>
+          <h2 data-i18n="featuredCoupons">Featured coupon cards</h2>
+        </div>
+
+        <div class="coupon-grid" id="coupon-grid">
+          <p class="empty-state">Loading coupons...</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stores-section" id="stores">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="popularStores">Popular stores</p>
+        <h2 data-i18n="shopOfficialStores">Shop official stores</h2>
+      </div>
+      <div class="store-grid" id="store-grid">
+        <p class="empty-state">Loading stores...</p>
+      </div>
+    </section>
+
+    <section class="guide-section" id="guide">
+      <div class="guide-copy">
+        <p class="eyebrow" data-i18n="checkoutFlow">Simple checkout flow</p>
+        <h2 data-i18n="howShoppersUse">How shoppers use DealKhaleej</h2>
+        <p data-i18n="guideCopy">Search for your store, copy a verified coupon, then paste it into the promo field at checkout. We separate coupon codes from regular offers so shoppers know what to expect before leaving the page.</p>
+      </div>
+      <ol class="steps">
+        <li><span class="step-number">01</span> <span data-i18n="stepOne">Pick a store or category.</span></li>
+        <li><span class="step-number">02</span> <span data-i18n="stepTwo">Copy a code or save an offer.</span></li>
+        <li><span class="step-number">03</span> <span data-i18n="stepThree">Apply it before payment.</span></li>
+      </ol>
+    </section>
+
+    <section class="app-banner" id="app">
+      <div>
+        <p class="eyebrow" data-i18n="mobileReady">Mobile ready</p>
+        <h2 data-i18n="neverMiss">Never miss a checkout code.</h2>
+        <p data-i18n="alertsCopy">Turn on alerts for fashion drops, grocery weekends, travel deals, and new-user promos.</p>
+        <p class="push-alert-status" id="push-alert-status" role="status" aria-live="polite"></p>
+      </div>
+      <button class="primary-button" id="push-alert-button" type="button" data-i18n="enableAlerts">Enable Deal Alerts</button>
+    </section>
+  </main>
+
+  <section class="newsletter-section" aria-labelledby="newsletter-title">
+    <div class="newsletter-inner">
+      <div>
+        <p class="eyebrow" data-i18n="dealAlerts">Deal alerts</p>
+        <h2 id="newsletter-title" data-i18n="newsletterTitle">Get fresh coupon codes by email.</h2>
+        <p class="newsletter-copy" data-i18n="newsletterCopy">New Saudi offers and popular savings, delivered when they matter.</p>
+      </div>
+      <form class="newsletter-form" id="newsletter-form">
+        <label for="newsletter-email" data-i18n="emailAddress">Email address</label>
+        <div class="newsletter-controls">
+          <input id="newsletter-email" name="email" type="email" placeholder="you@email.com" data-i18n-placeholder="emailPlaceholder" autocomplete="email" required>
+          <button class="primary-button" type="submit" data-i18n="subscribe">Subscribe</button>
+        </div>
+        <p class="newsletter-status" id="newsletter-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Code copied</div>
+
+  <footer class="site-footer">
+    <p data-i18n="footerBrand">DealKhaleej Saudi</p>
+    <nav aria-label="Footer navigation">
+      <a href="#" data-i18n="saudiArabia">Saudi Arabia</a>
+      <a href="#" data-i18n="uae">UAE</a>
+      <a href="#" data-i18n="kuwait">Kuwait</a>
+      <a href="#" data-i18n="contact">Contact</a>
+      <a href="/blog" data-i18n="blog">Blog</a>
+    </nav>
+  </footer>
+
+  <a class="telegram-float" href="https://t.me/dealkhaleej" target="_blank" rel="noopener noreferrer">
+    <span data-i18n="telegramDeals">Telegram Deals</span>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>
