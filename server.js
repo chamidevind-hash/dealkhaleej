@@ -542,18 +542,26 @@ async function serveStatic(request, response, url) {
   const isStoreRoute = /^\/store\/[^/]+\/?$/.test(url.pathname);
   const isBlogIndexRoute = /^\/blog\/?$/.test(url.pathname);
   const isArticleRoute = /^\/blog\/[^/]+\/?$/.test(url.pathname);
+  const staticPages = {
+    "/about": "/about.html",
+    "/contact": "/contact.html",
+    "/privacy-policy": "/privacy-policy.html",
+    "/terms": "/terms.html",
+    "/affiliate-disclosure": "/affiliate-disclosure.html"
+  };
   if (isArticleRoute) {
     await serveArticlePage(response, decodeURIComponent(url.pathname.replace(/^\/blog\//, "").replace(/\/$/, "")));
     return;
   }
 
+  const normalizedPath = url.pathname.replace(/\/$/, "") || "/";
   const requestedPath = url.pathname === "/"
     ? "/index.html"
     : isStoreRoute
       ? "/store.html"
       : isBlogIndexRoute
         ? "/blog.html"
-        : decodeURIComponent(url.pathname);
+        : staticPages[normalizedPath] || decodeURIComponent(url.pathname);
   const filePath = path.normalize(path.join(root, requestedPath));
 
   if (!filePath.startsWith(root)) {
