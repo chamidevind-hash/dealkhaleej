@@ -54,11 +54,13 @@ const translations = {
     browseMenu: "Browse the deal menu",
     all: "All",
     favorites: "Favorites",
+    shopping: "Shopping",
     fashion: "Fashion",
     beauty: "Beauty",
     grocery: "Grocery",
     travel: "Travel",
     electronics: "Electronics",
+    gifts: "Gifts",
     food: "Food",
     sportswear: "Sportswear",
     digitalServices: "Digital Services",
@@ -157,11 +159,13 @@ const translations = {
     browseMenu: "تصفح قائمة العروض",
     all: "الكل",
     favorites: "المفضلة",
+    shopping: "التسوق",
     fashion: "الأزياء",
     beauty: "الجمال",
     grocery: "البقالة",
     travel: "السفر",
     electronics: "الإلكترونيات",
+    gifts: "هدايا",
     food: "الطعام",
     sportswear: "الملابس الرياضية",
     digitalServices: "الخدمات الرقمية",
@@ -341,20 +345,42 @@ function applyLanguage(refreshDynamic = true) {
   if (refreshDynamic) renderTrendingCoupons();
 }
 
+function normalizeCategory(category) {
+  const normalized = String(category || "")
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "");
+  const aliases = {
+    digitalservice: "digitalservices",
+    digitalservices: "digitalservices",
+    service: "digitalservices",
+    services: "digitalservices",
+    healthandbeauty: "healthBeauty",
+    sportswear: "sports",
+    sport: "sports",
+    sports: "sports"
+  };
+
+  return aliases[normalized] || normalized;
+}
+
 function categoryLabel(category) {
   const categoryKeys = {
     marketplace: "marketplace",
+    shopping: "shopping",
     fashion: "fashion",
     beauty: "beauty",
     grocery: "grocery",
     travel: "travel",
     electronics: "electronics",
+    gifts: "gifts",
     food: "food",
     sports: "sportswear",
-    services: "digitalServices",
-    "health & beauty": "healthBeauty"
+    digitalservices: "digitalServices",
+    healthBeauty: "healthBeauty"
   };
-  const key = categoryKeys[String(category || "").toLowerCase()];
+  const key = categoryKeys[normalizeCategory(category)];
   return key ? translate(key) : category;
 }
 
@@ -469,9 +495,11 @@ function couponCard(coupon) {
   const actionClass = isCode ? "coupon-action" : "coupon-action muted";
   const actionText = translate(isCode ? "copyCode" : "save");
   const copyValue = isCode ? coupon.code : `${coupon.store} ${translate("savedOffer")}`;
+  const category = String(coupon.category || "");
+  const searchableKeywords = [coupon.keywords, category, normalizeCategory(category)].filter(Boolean).join(" ");
 
   return `
-    <article class="coupon-card" data-category="${escapeHtml(coupon.category)}" data-keywords="${escapeHtml(coupon.keywords)}" data-favorite="${favoriteCoupons.has(String(coupon.id))}">
+    <article class="coupon-card" data-category="${escapeHtml(normalizeCategory(category))}" data-keywords="${escapeHtml(searchableKeywords)}" data-favorite="${favoriteCoupons.has(String(coupon.id))}">
       <div class="logo-tile">
         <img src="${escapeHtml(coupon.logo || "assets/logos/placeholder.png")}" alt="${escapeHtml(coupon.store)} logo">
         <span>${escapeHtml(initials(coupon.store))}</span>
@@ -579,6 +607,7 @@ function renderCoupons() {
   verifiedCount.textContent = String(activeCoupons.filter((coupon) => coupon.verified).length);
   categoryCount.textContent = String(new Set(activeCoupons.map((coupon) => coupon.category)).size);
   updateFavoritesCount();
+  console.log(`Total coupons rendered: ${activeCoupons.length}`);
 
   setupLogoFallbacks(document);
   applyFilters();
@@ -588,10 +617,11 @@ function applyFilters() {
   const query = searchInput.value.trim().toLowerCase();
   const cards = Array.from(document.querySelectorAll(".coupon-card"));
   const filterEmpty = couponGrid.querySelector(".filter-empty");
+  const normalizedFilter = normalizeCategory(activeFilter);
   let visibleCount = 0;
 
   cards.forEach((card) => {
-    const categoryMatch = activeFilter === "all" || activeFilter === "favorites" || card.dataset.category === activeFilter;
+    const categoryMatch = activeFilter === "all" || activeFilter === "favorites" || card.dataset.category === normalizedFilter;
     const favoriteMatch = activeFilter !== "favorites" || card.dataset.favorite === "true";
     const searchableText = `${card.textContent} ${card.dataset.keywords}`.toLowerCase();
     const searchMatch = !query || searchableText.includes(query);
@@ -616,6 +646,7 @@ async function loadCoupons() {
     ]);
     if (!couponResponse.ok || !storeResponse.ok) throw new Error("Unable to load data");
     coupons = await couponResponse.json();
+    console.log(`Total coupons received from API: ${Array.isArray(coupons) ? coupons.length : 0}`);
     stores = await storeResponse.json();
     renderCoupons();
   } catch {
