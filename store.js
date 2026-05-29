@@ -31,6 +31,12 @@ function initials(name) {
     .toUpperCase();
 }
 
+function assetPath(value) {
+  const path = String(value || "/assets/logos/placeholder.png").trim();
+  if (/^(?:https?:)?\/\//i.test(path) || path.startsWith("/")) return path;
+  return `/${path}`;
+}
+
 function loadFavoriteCoupons() {
   try {
     const saved = JSON.parse(localStorage.getItem(favoritesStorageKey) || "[]");
@@ -102,7 +108,7 @@ function couponCard(coupon) {
   return `
     <article class="coupon-card" data-category="${escapeHtml(coupon.category)}" data-keywords="${escapeHtml(coupon.keywords)}" data-favorite="${favoriteCoupons.has(String(coupon.id))}">
       <div class="logo-tile">
-        <img src="${escapeHtml(coupon.logo || "/assets/logos/placeholder.png")}" alt="${escapeHtml(coupon.store)} logo">
+        <img src="${escapeHtml(assetPath(coupon.logo))}" alt="${escapeHtml(coupon.store)} logo">
         <span>${escapeHtml(initials(coupon.store))}</span>
       </div>
       <div class="coupon-details">
@@ -160,7 +166,7 @@ async function loadStore() {
   couponTitle.textContent = `${store.name} Coupon Codes`;
   storeCategory.textContent = store.category;
   storeInitials.textContent = initials(store.name);
-  storeLogo.src = store.logo || "/assets/logos/placeholder.png";
+  storeLogo.src = assetPath(store.logo);
   storeLogo.alt = `${store.name} logo`;
   officialLink.href = store.url;
   setupLogoFallback(storeLogo);

@@ -39,108 +39,220 @@
     "name": "Hacoo",
     "category": "Fashion",
     "url": "https://dorinebeaumont.com/g/84e1j7pvh1840f7c9cb4f271888eea/",
-    "logo": "assets/logos/placeholder.png"
+    "logo": "assets/logos/hacoo.png"
   },
   {
     "name": "Retouch4me",
     "category": "Digital Services",
     "url": "https://plrvq.com/g/gp8po8i1u7840f7c9cb445d8e108c6/",
-    "logo": "assets/logos/placeholder.png"
+    "logo": "assets/logos/retouch4me.png"
   },
   {
     "name": "Redmagic",
     "category": "Electronics",
     "url": "https://yyczo.com/c/qmttmvxh1u840f7c9cb456637026d8/",
-    "logo": "assets/logos/placeholder.png"
+    "logo": "assets/logos/redmagic.png"
   },
   {
     "name": "DKNY",
     "category": "Fashion",
     "url": "https://plrvq.com/g/o8vhdobxgs840f7c9cb4414deb9469/",
-    "logo": "assets/logos/placeholder.png"
+    "logo": "assets/logos/dkny.png"
   },
   {
     "name": "METRO BRAZIL",
     "category": "Fashion",
     "url": "https://wpmsx.com/g/qlyyds59e0840f7c9cb4278029db65/",
-    "logo": "assets/logos/placeholder.png"
+    "logo": "assets/logos/metro-brazil.png"
   },
   {
     "name": "STYLEVANA",
     "category": "Beauty",
     "url": "https://grfpr.com/c/zaxgnm7sp3840f7c9cb4590a2462b6/",
-    "logo": "assets/logos/placeholder.png"
+    "logo": "assets/logos/stylevana.png"
   },
   {
     "name": "ticombo",
     "category": "Travel",
     "url": "https://zmgig.com/g/hn23xca4o8840f7c9cb4bcf92d8d7a/",
-    "logo": "assets/logos/placeholder.png"
+    "logo": "assets/logos/ticombo.png"
   },
   {
     "name": "Geekbuying",
     "category": "Electronics",
     "url": "https://bywiola.com/c/78tuvzaw8k840f7c9cb40267b86f6e/",
-    "logo": "assets/logos/placeholder.png"
+    "logo": "assets/logos/geekbuying.png"
   },
   {
     "name": "Cyber florist",
     "category": "Gifts",
     "url": "https://yjfca.com/g/75nfprdgef840f7c9cb45a87002712/",
-    "logo": "assets/logos/placeholder.png"
+    "logo": "assets/logos/cyber-florist.png"
   },
   {
     "name": "Wayrates",
     "category": "Fashion",
     "url": "https://zallj.com/g/gfhc91n9bb840f7c9cb41d81d40fc4/",
-    "logo": "assets/logos/placeholder.png"
+    "logo": "assets/logos/wayrates.png"
   },
   {
     "name": "Nubia",
     "category": "Electronics",
     "url": "https://ziejy.com/c/lh3bbik9ly840f7c9cb4e62ca5e32f/",
-    "logo": "assets/logos/placeholder.png"
+    "logo": "assets/logos/nubia.png"
   },
   {
     "name": "Palazzo Versace Dubai Hotel",
     "category": "Travel",
     "url": "https://xmknb.com/g/6z621dqopy840f7c9cb4080b20079f/",
-    "logo": "assets/logos/placeholder.png"
+    "logo": "assets/logos/palazzo-versace-dubai-hotel.png"
   },
   {
     "name": "Admitad",
     "category": "Digital Services",
     "url": "https://ytebb.com/g/h0cdgv41zq840f7c9cb462c6909e0c/",
-    "logo": "assets/logos/placeholder.png"
+    "logo": "assets/logos/admitad.png"
   },
   {
     "name": "LG",
     "category": "Electronics",
     "url": "https://zejcl.com/g/efmcw9mw1i840f7c9cb4c31d685009/",
-    "logo": "assets/logos/placeholder.png"
+    "logo": "assets/logos/lg.png"
   },
   {
     "name": "TravelInsurer",
     "category": "Travel",
     "url": "https://ewwhk.com/g/5k4hrrims2840f7c9cb45777f878ef/",
-    "logo": "assets/logos/placeholder.png"
+    "logo": "assets/logos/travelinsurer.png"
   },
   {
     "name": "MyESimGloberl",
     "category": "Digital Services",
     "url": "https://flcoz.com/g/2t1z1pyrrc840f7c9cb425cb6b6ed6/",
-    "logo": "assets/logos/placeholder.png"
+    "logo": "assets/logos/myesimgloberl.png"
   },
   {
     "name": "PC Sales Online Shop",
     "category": "Electronics",
     "url": "https://ewwhk.com/g/fwsqlvbm30840f7c9cb4bec73bd971/",
-    "logo": "assets/logos/placeholder.png"
+    "logo": "assets/logos/pc-sales-online-shop.png"
   },
   {
     "name": "ApplicantAlly",
     "category": "Digital Services",
     "url": "https://xqjeo.com/g/p8sdxttwko840f7c9cb430360631df/",
-    "logo": "assets/logos/placeholder.png"
+    "logo": "assets/logos/applicantally.png"
+  },
+  {
+    "name": "Amazon Saudi",
+    "category": "Marketplace",
+    "url": "https://www.amazon.sa/",
+    "logo": "assets/logos/amazon.png",
+    "description": "Amazon Saudi Arabia marketplace for electronics, home essentials, beauty, grocery, books, toys, and everyday online shopping deals."
+  },
+  {
+    "name": "Jarir",
+    "category": "Electronics",
+    "url": "https://www.jarir.com/sa-en",
+    "logo": "https://www.jarir.com/favicon.ico",
+    "description": "Jarir Bookstore retailer for laptops, mobiles, tablets, books, office supplies, gaming, school essentials, and electronics in Saudi Arabia."
+  },
+  {
+    "name": "Extra",
+    "category": "Electronics",
+    "url": "https://www.extra.com/en-sa",
+    "logo": "https://www.extra.com/favicon.ico",
+    "description": "eXtra Saudi electronics and home appliance store for mobiles, TVs, laptops, gaming, kitchen appliances, warranties, and tech offers."
+  },
+  {
+    "name": "Centrepoint",
+    "category": "Fashion",
+    "url": "https://www.centrepointstores.com/sa/en/",
+    "logo": "https://www.centrepointstores.com/favicon.ico",
+    "description": "Centrepoint Saudi fashion, baby, kids, beauty, footwear, home, and lifestyle shopping destination from Landmark Arabia."
+  },
+  {
+    "name": "6thStreet",
+    "category": "Fashion",
+    "url": "https://en-sa.6thstreet.com/",
+    "logo": "assets/logos/official/6thstreet.png",
+    "description": "6thStreet Saudi online fashion store for women, men, and kids, including clothing, shoes, bags, accessories, and lifestyle brands."
+  },
+  {
+    "name": "Ounass",
+    "category": "Luxury Fashion",
+    "url": "https://en-saudi.ounass.com/",
+    "logo": "assets/logos/official/ounass.ico",
+    "description": "Ounass Saudi luxury shopping site for designer fashion, beauty, accessories, homeware, gifting, and premium regional delivery."
+  },
+  {
+    "name": "Level Shoes",
+    "category": "Luxury Fashion",
+    "url": "https://en-saudi.levelshoes.com/",
+    "logo": "https://en-saudi.levelshoes.com/favicon.ico",
+    "description": "Level Shoes Saudi luxury destination for designer shoes, bags, accessories, drops, gifts, and premium footwear collections."
+  },
+  {
+    "name": "Golden Scent",
+    "category": "Beauty",
+    "url": "https://www.goldenscent.com/",
+    "logo": "https://www.goldenscent.com/favicon.ico",
+    "description": "Golden Scent Saudi beauty and fragrance platform for perfumes, home scents, cosmetics, niche brands, Arabic perfumes, and beauty offers."
+  },
+  {
+    "name": "AliExpress",
+    "category": "Marketplace",
+    "url": "https://www.aliexpress.com/",
+    "logo": "assets/logos/official/aliexpress.ico",
+    "description": "AliExpress global marketplace for Saudi and GCC shoppers browsing gadgets, accessories, home items, fashion, tools, and value deals."
+  },
+  {
+    "name": "Mumzworld",
+    "category": "Baby & Kids",
+    "url": "https://www.mumzworld.com/sa-en",
+    "logo": "https://www.mumzworld.com/favicon.ico",
+    "description": "Mumzworld Saudi baby and kids store for strollers, car seats, toys, feeding, diapers, maternity items, nursery products, and family essentials."
+  },
+  {
+    "name": "Nice One",
+    "category": "Beauty",
+    "url": "https://niceonesa.com/en",
+    "logo": "https://niceonesa.com/favicon.ico",
+    "description": "Nice One Saudi beauty ecommerce store for makeup, perfumes, skincare, haircare, lenses, devices, home scents, and premium beauty deals."
+  },
+  {
+    "name": "Saco",
+    "category": "Home Improvement",
+    "url": "https://www.saco.sa/",
+    "logo": "https://www.saco.sa/favicon.ico",
+    "description": "SACO Saudi home improvement and hardware retailer for tools, outdoor, appliances, furniture, garden, automotive, and DIY essentials."
+  },
+  {
+    "name": "HungerStation",
+    "category": "Food Delivery",
+    "url": "https://hungerstation.com/sa-en",
+    "logo": "https://hungerstation.com/favicon.ico",
+    "description": "HungerStation Saudi delivery app for restaurants, groceries, pharmacies, flowers, stores, pickup options, and app-exclusive food offers."
+  },
+  {
+    "name": "Jahez",
+    "category": "Food Delivery",
+    "url": "https://portal.jahez.net/index-en.html",
+    "logo": "https://portal.jahez.net/favicon.ico",
+    "description": "Jahez Saudi food delivery platform connecting shoppers with restaurants, home chefs, delivery partners, and local app-based ordering."
+  },
+  {
+    "name": "Nana",
+    "category": "Grocery",
+    "url": "https://nana.sa/english",
+    "logo": "https://nana.sa/favicon.ico",
+    "description": "Nana Saudi online grocery and essentials delivery service for supermarket items, fresh food, household goods, and scheduled grocery orders."
+  },
+  {
+    "name": "Floward",
+    "category": "Flowers & Gifts",
+    "url": "https://floward.com/en-sa/",
+    "logo": "https://floward.com/favicon.ico",
+    "description": "Floward Saudi online flowers and gifts platform for bouquets, arrangements, cakes, gifts, occasions, and same-day flower delivery options."
   }
 ]
