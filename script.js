@@ -24,7 +24,7 @@ let activeFilter = "all";
 let toastTimer;
 const favoritesStorageKey = "dealkhaleejFavoriteCoupons";
 const languageStorageKey = "dealkhaleejLanguage";
-const oneSignalAppId = "YOUR_ONESIGNAL_APP_ID";
+const oneSignalAppId = "ae10aeed-9b8c-4176-b7fe-3fc5b17f06ffx";
 let favoriteCoupons = loadFavoriteCoupons();
 let currentLanguage = loadLanguage();
 let oneSignalInitialized = false;

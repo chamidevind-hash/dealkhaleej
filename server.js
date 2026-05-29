@@ -63,6 +63,9 @@ function articleMarkup(article) {
       <section>
         <h2>${xmlEscape(section.heading)}</h2>
         ${section.paragraphs.map((paragraph) => `<p>${xmlEscape(paragraph)}</p>`).join("")}
+        ${(section.subsections || []).map((subsection) => `
+          <h3>${xmlEscape(subsection.heading)}</h3>
+          ${subsection.paragraphs.map((paragraph) => `<p>${xmlEscape(paragraph)}</p>`).join("")}`).join("")}
       </section>`)
     .join("");
   const relatedStores = article.relatedStores
