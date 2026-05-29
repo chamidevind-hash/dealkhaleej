@@ -516,6 +516,11 @@ async function handleSeoRoutes(response, url) {
   const homepageLastmod = sitemapDate(coupons.map((coupon) => coupon.updatedAt));
   const entries = [
     { loc: `${siteUrl}/`, lastmod: homepageLastmod },
+    { loc: `${siteUrl}/about`, lastmod: homepageLastmod },
+    { loc: `${siteUrl}/contact`, lastmod: homepageLastmod },
+    { loc: `${siteUrl}/privacy-policy`, lastmod: homepageLastmod },
+    { loc: `${siteUrl}/terms`, lastmod: homepageLastmod },
+    { loc: `${siteUrl}/affiliate-disclosure`, lastmod: homepageLastmod },
     { loc: `${siteUrl}/blog`, lastmod: sitemapDate(articles.map((article) => article.publishedAt)) },
     ...stores.map((store) => {
       const storeCoupons = coupons.filter((coupon) => coupon.store.toLowerCase() === store.name.toLowerCase());
@@ -542,6 +547,7 @@ async function serveStatic(request, response, url) {
   const isStoreRoute = /^\/store\/[^/]+\/?$/.test(url.pathname);
   const isBlogIndexRoute = /^\/blog\/?$/.test(url.pathname);
   const isArticleRoute = /^\/blog\/[^/]+\/?$/.test(url.pathname);
+  const normalizedPath = url.pathname.replace(/\/$/, "") || "/";
   const staticPages = {
     "/about": "/about.html",
     "/contact": "/contact.html",
@@ -554,14 +560,15 @@ async function serveStatic(request, response, url) {
     return;
   }
 
-  const normalizedPath = url.pathname.replace(/\/$/, "") || "/";
   const requestedPath = url.pathname === "/"
     ? "/index.html"
+    : staticPages[normalizedPath]
+      ? staticPages[normalizedPath]
     : isStoreRoute
       ? "/store.html"
       : isBlogIndexRoute
         ? "/blog.html"
-        : staticPages[normalizedPath] || decodeURIComponent(url.pathname);
+        : decodeURIComponent(url.pathname);
   const filePath = path.normalize(path.join(root, requestedPath));
 
   if (!filePath.startsWith(root)) {
