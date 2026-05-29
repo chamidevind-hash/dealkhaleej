@@ -16,6 +16,13 @@ const port = Number(process.env.PORT || 5173);
 const adminPassword = process.env.ADMIN_PASSWORD;
 const adminSessions = new Set();
 const siteUrl = "https://dealkhaleej.com";
+const staticPageRoutes = new Map([
+  ["/about", "/about.html"],
+  ["/contact", "/contact.html"],
+  ["/privacy-policy", "/privacy-policy.html"],
+  ["/terms", "/terms.html"],
+  ["/affiliate-disclosure", "/affiliate-disclosure.html"]
+]);
 let newsletterWriteQueue = Promise.resolve();
 
 const mimeTypes = {
@@ -507,6 +514,10 @@ async function handleSeoRoutes(response, url) {
   const entries = [
     { loc: `${siteUrl}/`, lastmod: homepageLastmod },
     { loc: `${siteUrl}/blog`, lastmod: sitemapDate(articles.map((article) => article.publishedAt)) },
+    ...[...staticPageRoutes.keys()].map((route) => ({
+      loc: `${siteUrl}${route}`,
+      lastmod: "2026-05-29"
+    })),
     ...stores.map((store) => {
       const storeCoupons = coupons.filter((coupon) => coupon.store.toLowerCase() === store.name.toLowerCase());
       return {
@@ -543,7 +554,7 @@ async function serveStatic(request, response, url) {
       ? "/store.html"
       : isBlogIndexRoute
         ? "/blog.html"
-        : decodeURIComponent(url.pathname);
+        : staticPageRoutes.get(url.pathname.replace(/\/$/, "")) || decodeURIComponent(url.pathname);
   const filePath = path.normalize(path.join(root, requestedPath));
 
   if (!filePath.startsWith(root)) {
