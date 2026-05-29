@@ -2,37 +2,121 @@
   {
     "name": "Noon",
     "category": "Marketplace",
-    "url": "#",
+    "url": "https://s.noon.com/8YccZnwyYPQ",
     "logo": "assets/logos/noon.png"
   },
   {
-    "name": "Amazon",
-    "category": "Marketplace",
-    "url": "#",
-    "logo": "assets/logos/amazon.png"
-  },
-  {
-    "name": "iHerb",
-    "category": "Health & Beauty",
-    "url": "#",
-    "logo": "assets/logos/iherb.png"
-  },
-  {
-    "name": "SHEIN",
+    "name": "Hacoo",
     "category": "Fashion",
-    "url": "#",
-    "logo": "assets/logos/shein.png"
+    "url": "https://dorinebeaumont.com/g/84e1j7pvh1840f7c9cb4f271888eea/",
+    "logo": "assets/logos/placeholder.png"
+  },
+  {
+    "name": "Retouch4me",
+    "category": "Digital Services",
+    "url": "https://plrvq.com/g/gp8po8i1u7840f7c9cb445d8e108c6/",
+    "logo": "assets/logos/placeholder.png"
+  },
+  {
+    "name": "Redmagic",
+    "category": "Electronics",
+    "url": "https://yyczo.com/c/qmttmvxh1u840f7c9cb456637026d8/",
+    "logo": "assets/logos/placeholder.png"
+  },
+  {
+    "name": "DKNY",
+    "category": "Fashion",
+    "url": "https://plrvq.com/g/o8vhdobxgs840f7c9cb4414deb9469/",
+    "logo": "assets/logos/placeholder.png"
+  },
+  {
+    "name": "METRO BRAZIL",
+    "category": "Fashion",
+    "url": "https://wpmsx.com/g/qlyyds59e0840f7c9cb4278029db65/",
+    "logo": "assets/logos/placeholder.png"
+  },
+  {
+    "name": "STYLEVANA",
+    "category": "Beauty",
+    "url": "https://grfpr.com/c/zaxgnm7sp3840f7c9cb4590a2462b6/",
+    "logo": "assets/logos/placeholder.png"
+  },
+  {
+    "name": "ticombo",
+    "category": "Travel",
+    "url": "https://zmgig.com/g/hn23xca4o8840f7c9cb4bcf92d8d7a/",
+    "logo": "assets/logos/placeholder.png"
+  },
+  {
+    "name": "Geekbuying",
+    "category": "Electronics",
+    "url": "https://bywiola.com/c/78tuvzaw8k840f7c9cb40267b86f6e/",
+    "logo": "assets/logos/placeholder.png"
+  },
+  {
+    "name": "Cyber florist",
+    "category": "Gifts",
+    "url": "https://yjfca.com/g/75nfprdgef840f7c9cb45a87002712/",
+    "logo": "assets/logos/placeholder.png"
+  },
+  {
+    "name": "Wayrates",
+    "category": "Fashion",
+    "url": "https://zallj.com/g/gfhc91n9bb840f7c9cb41d81d40fc4/",
+    "logo": "assets/logos/placeholder.png"
+  },
+  {
+    "name": "Nubia",
+    "category": "Electronics",
+    "url": "https://ziejy.com/c/lh3bbik9ly840f7c9cb4e62ca5e32f/",
+    "logo": "assets/logos/placeholder.png"
+  },
+  {
+    "name": "Palazzo Versace Dubai Hotel",
+    "category": "Travel",
+    "url": "https://xmknb.com/g/6z621dqopy840f7c9cb4080b20079f/",
+    "logo": "assets/logos/placeholder.png"
+  },
+  {
+    "name": "Admitad",
+    "category": "Digital Services",
+    "url": "https://ytebb.com/g/h0cdgv41zq840f7c9cb462c6909e0c/",
+    "logo": "assets/logos/placeholder.png"
+  },
+  {
+    "name": "LG",
+    "category": "Electronics",
+    "url": "https://zejcl.com/g/efmcw9mw1i840f7c9cb4c31d685009/",
+    "logo": "assets/logos/placeholder.png"
+  },
+  {
+    "name": "TravelInsurer",
+    "category": "Travel",
+    "url": "https://ewwhk.com/g/5k4hrrims2840f7c9cb45777f878ef/",
+    "logo": "assets/logos/placeholder.png"
+  },
+  {
+    "name": "MyESimGloberl",
+    "category": "Digital Services",
+    "url": "https://flcoz.com/g/2t1z1pyrrc840f7c9cb425cb6b6ed6/",
+    "logo": "assets/logos/placeholder.png"
+  },
+  {
+    "name": "PC Sales Online Shop",
+    "category": "Electronics",
+    "url": "https://ewwhk.com/g/fwsqlvbm30840f7c9cb4bec73bd971/",
+    "logo": "assets/logos/placeholder.png"
+  },
+  {
+    "name": "ApplicantAlly",
+    "category": "Digital Services",
+    "url": "https://xqjeo.com/g/p8sdxttwko840f7c9cb430360631df/",
+    "logo": "assets/logos/placeholder.png"
   },
   {
     "name": "Temu",
-    "category": "Marketplace",
-    "url": "#",
+    "category": "Shopping",
+    "url": "https://temu.to/k/e387y05s5p9",
     "logo": "assets/logos/temu.png"
-  },
-  {
-    "name": "Namshi",
-    "category": "Fashion",
-    "url": "#",
-    "logo": "assets/logos/namshi.png"
   }
 ]
