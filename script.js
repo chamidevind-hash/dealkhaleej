@@ -103,6 +103,7 @@ const translations = {
     copyCode: "Copy code",
     save: "Save",
     shopDeal: "Shop Deal",
+    getOffer: "Get Offer",
     savedOffer: "offer saved",
     saveFavorite: "Save {title} to favorites",
     removeFavorite: "Remove {title} from favorites",
@@ -206,6 +207,7 @@ const translations = {
     copyCode: "نسخ الكود",
     save: "حفظ",
     shopDeal: "تسوق العرض",
+    getOffer: "احصل على العرض",
     savedOffer: "تم حفظ العرض",
     saveFavorite: "حفظ {title} في المفضلة",
     removeFavorite: "إزالة {title} من المفضلة",
@@ -468,14 +470,12 @@ function couponCard(coupon) {
   const couponCode = String(coupon.code || "").trim();
   const isCode = couponCode && couponCode.toLowerCase() !== "deal" && couponCode.toLowerCase() !== "offer";
   const actionClass = isCode ? "coupon-action" : "coupon-action muted link-only";
-  const actionText = translate(isCode ? "copyCode" : "save");
-  const copyValue = isCode ? couponCode : `${coupon.store} ${translate("savedOffer")}`;
   const actionMarkup = isCode
     ? `
         <span>${escapeHtml(couponCode)}</span>
-        <button type="button" data-copy="${escapeHtml(copyValue)}" data-coupon-id="${escapeHtml(coupon.id)}" data-store="${escapeHtml(coupon.store)}" data-code="${escapeHtml(couponCode)}" data-title="${escapeHtml(coupon.title)}">${actionText}</button>
+        <button type="button" data-copy="${escapeHtml(couponCode)}" data-coupon-id="${escapeHtml(coupon.id)}" data-store="${escapeHtml(coupon.store)}" data-code="${escapeHtml(couponCode)}" data-title="${escapeHtml(coupon.title)}">${escapeHtml(translate("copyCode"))}</button>
         <a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}">${escapeHtml(translate("shopDeal"))}</a>`
-    : `<a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}">${escapeHtml(translate("shopDeal"))}</a>`;
+    : `<a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}">${escapeHtml(translate("getOffer"))}</a>`;
 
   return `
     <article class="coupon-card" data-category="${escapeHtml(coupon.category)}" data-keywords="${escapeHtml(coupon.keywords)}" data-favorite="${favoriteCoupons.has(String(coupon.id))}">

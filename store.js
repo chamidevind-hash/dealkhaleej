@@ -110,7 +110,7 @@ function couponCard(coupon) {
         <span>${escapeHtml(couponCode)}</span>
         <button type="button" data-copy="${escapeHtml(couponCode)}" data-coupon-id="${escapeHtml(coupon.id)}" data-store="${escapeHtml(coupon.store)}" data-code="${escapeHtml(couponCode)}" data-title="${escapeHtml(coupon.title)}">Copy code</button>
         <a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}">Shop Deal</a>`
-    : `<a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}">Shop Deal</a>`;
+    : `<a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}">Get Offer</a>`;
 
   return `
     <article class="coupon-card" data-category="${escapeHtml(coupon.category)}" data-keywords="${escapeHtml(coupon.keywords)}" data-favorite="${favoriteCoupons.has(String(coupon.id))}">
