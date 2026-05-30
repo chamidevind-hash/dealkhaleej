@@ -154,21 +154,21 @@
     "name": "Jarir",
     "category": "Electronics",
     "url": "https://www.jarir.com/sa-en",
-    "logo": "https://www.jarir.com/favicon.ico",
+    "logo": "assets/logos/official/jarir.png",
     "description": "Jarir Bookstore retailer for laptops, mobiles, tablets, books, office supplies, gaming, school essentials, and electronics in Saudi Arabia."
   },
   {
     "name": "Extra",
     "category": "Electronics",
     "url": "https://www.extra.com/en-sa",
-    "logo": "https://www.extra.com/favicon.ico",
+    "logo": "assets/logos/official/extra.png",
     "description": "eXtra Saudi electronics and home appliance store for mobiles, TVs, laptops, gaming, kitchen appliances, warranties, and tech offers."
   },
   {
     "name": "Centrepoint",
     "category": "Fashion",
     "url": "https://www.centrepointstores.com/sa/en/",
-    "logo": "https://www.centrepointstores.com/favicon.ico",
+    "logo": "assets/logos/official/centrepoint.png",
     "description": "Centrepoint Saudi fashion, baby, kids, beauty, footwear, home, and lifestyle shopping destination from Landmark Arabia."
   },
   {
@@ -189,14 +189,14 @@
     "name": "Level Shoes",
     "category": "Luxury Fashion",
     "url": "https://en-saudi.levelshoes.com/",
-    "logo": "https://en-saudi.levelshoes.com/favicon.ico",
+    "logo": "assets/logos/official/level-shoes.png",
     "description": "Level Shoes Saudi luxury destination for designer shoes, bags, accessories, drops, gifts, and premium footwear collections."
   },
   {
     "name": "Golden Scent",
     "category": "Beauty",
     "url": "https://www.goldenscent.com/",
-    "logo": "https://www.goldenscent.com/favicon.ico",
+    "logo": "assets/logos/official/golden-scent.png",
     "description": "Golden Scent Saudi beauty and fragrance platform for perfumes, home scents, cosmetics, niche brands, Arabic perfumes, and beauty offers."
   },
   {
@@ -210,49 +210,49 @@
     "name": "Mumzworld",
     "category": "Baby & Kids",
     "url": "https://www.mumzworld.com/sa-en",
-    "logo": "https://www.mumzworld.com/favicon.ico",
+    "logo": "assets/logos/official/mumzworld.png",
     "description": "Mumzworld Saudi baby and kids store for strollers, car seats, toys, feeding, diapers, maternity items, nursery products, and family essentials."
   },
   {
     "name": "Nice One",
     "category": "Beauty",
     "url": "https://niceonesa.com/en",
-    "logo": "https://niceonesa.com/favicon.ico",
+    "logo": "assets/logos/official/nice-one.png",
     "description": "Nice One Saudi beauty ecommerce store for makeup, perfumes, skincare, haircare, lenses, devices, home scents, and premium beauty deals."
   },
   {
     "name": "Saco",
     "category": "Home Improvement",
     "url": "https://www.saco.sa/",
-    "logo": "https://www.saco.sa/favicon.ico",
+    "logo": "assets/logos/official/saco.png",
     "description": "SACO Saudi home improvement and hardware retailer for tools, outdoor, appliances, furniture, garden, automotive, and DIY essentials."
   },
   {
     "name": "HungerStation",
     "category": "Food Delivery",
     "url": "https://hungerstation.com/sa-en",
-    "logo": "https://hungerstation.com/favicon.ico",
+    "logo": "assets/logos/official/hungerstation.png",
     "description": "HungerStation Saudi delivery app for restaurants, groceries, pharmacies, flowers, stores, pickup options, and app-exclusive food offers."
   },
   {
     "name": "Jahez",
     "category": "Food Delivery",
     "url": "https://portal.jahez.net/index-en.html",
-    "logo": "https://portal.jahez.net/favicon.ico",
+    "logo": "assets/logos/official/jahez.png",
     "description": "Jahez Saudi food delivery platform connecting shoppers with restaurants, home chefs, delivery partners, and local app-based ordering."
   },
   {
     "name": "Nana",
     "category": "Grocery",
     "url": "https://nana.sa/english",
-    "logo": "https://nana.sa/favicon.ico",
+    "logo": "assets/logos/official/nana.png",
     "description": "Nana Saudi online grocery and essentials delivery service for supermarket items, fresh food, household goods, and scheduled grocery orders."
   },
   {
     "name": "Floward",
     "category": "Flowers & Gifts",
     "url": "https://floward.com/en-sa/",
-    "logo": "https://floward.com/favicon.ico",
+    "logo": "assets/logos/official/floward.png",
     "description": "Floward Saudi online flowers and gifts platform for bouquets, arrangements, cakes, gifts, occasions, and same-day flower delivery options."
   }
 ]
