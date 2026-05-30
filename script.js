@@ -465,10 +465,17 @@ function setupLogoFallbacks(scope = document) {
 }
 
 function couponCard(coupon) {
-  const isCode = coupon.code && coupon.code.toLowerCase() !== "deal" && coupon.code.toLowerCase() !== "offer";
-  const actionClass = isCode ? "coupon-action" : "coupon-action muted";
+  const couponCode = String(coupon.code || "").trim();
+  const isCode = couponCode && couponCode.toLowerCase() !== "deal" && couponCode.toLowerCase() !== "offer";
+  const actionClass = isCode ? "coupon-action" : "coupon-action muted link-only";
   const actionText = translate(isCode ? "copyCode" : "save");
-  const copyValue = isCode ? coupon.code : `${coupon.store} ${translate("savedOffer")}`;
+  const copyValue = isCode ? couponCode : `${coupon.store} ${translate("savedOffer")}`;
+  const actionMarkup = isCode
+    ? `
+        <span>${escapeHtml(couponCode)}</span>
+        <button type="button" data-copy="${escapeHtml(copyValue)}" data-coupon-id="${escapeHtml(coupon.id)}" data-store="${escapeHtml(coupon.store)}" data-code="${escapeHtml(couponCode)}" data-title="${escapeHtml(coupon.title)}">${actionText}</button>
+        <a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}">${escapeHtml(translate("shopDeal"))}</a>`
+    : `<a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}">${escapeHtml(translate("shopDeal"))}</a>`;
 
   return `
     <article class="coupon-card" data-category="${escapeHtml(coupon.category)}" data-keywords="${escapeHtml(coupon.keywords)}" data-favorite="${favoriteCoupons.has(String(coupon.id))}">
@@ -487,9 +494,7 @@ function couponCard(coupon) {
         ${coupon.expiry ? `<p class="expiry">${escapeHtml(translate("ends"))} ${escapeHtml(coupon.expiry)}</p>` : ""}
       </div>
       <div class="${actionClass}">
-        <span>${escapeHtml(coupon.code || "OFFER")}</span>
-        <button type="button" data-copy="${escapeHtml(copyValue)}" data-coupon-id="${escapeHtml(coupon.id)}" data-store="${escapeHtml(coupon.store)}" data-code="${escapeHtml(coupon.code || "OFFER")}" data-title="${escapeHtml(coupon.title)}">${actionText}</button>
-        <a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}">${escapeHtml(translate("shopDeal"))}</a>
+        ${actionMarkup}
       </div>
     </article>
   `;

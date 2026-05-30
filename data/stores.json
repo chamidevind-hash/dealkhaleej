@@ -3,256 +3,329 @@
     "name": "Noon",
     "category": "Marketplace",
     "url": "https://s.noon.com/8YccZnwyYPQ",
-    "logo": "assets/logos/noon.png"
+    "logo": "assets/logos/noon.png",
+    "description": "Noon marketplace coupons and offers for GCC shoppers, including Saudi Arabia and UAE deals."
   },
   {
-    "name": "Amazon",
+    "name": "UBUY",
     "category": "Marketplace",
-    "url": "#",
-    "logo": "assets/logos/amazon.png"
+    "url": "https://www.ubuy.com/",
+    "logo": "assets/logos/gcc/ubuy.svg",
+    "description": "UBUY marketplace offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
   },
   {
-    "name": "iHerb",
-    "category": "Health & Beauty",
-    "url": "#",
-    "logo": "assets/logos/iherb.png"
-  },
-  {
-    "name": "SHEIN",
-    "category": "Fashion",
-    "url": "#",
-    "logo": "assets/logos/shein.png"
-  },
-  {
-    "name": "Temu",
-    "category": "Marketplace",
-    "url": "#",
-    "logo": "assets/logos/temu.png"
-  },
-  {
-    "name": "Namshi",
-    "category": "Fashion",
-    "url": "#",
-    "logo": "assets/logos/namshi.png"
-  },
-  {
-    "name": "Hacoo",
-    "category": "Fashion",
-    "url": "https://dorinebeaumont.com/g/84e1j7pvh1840f7c9cb4f271888eea/",
-    "logo": "assets/logos/hacoo.png"
-  },
-  {
-    "name": "Retouch4me",
-    "category": "Digital Services",
-    "url": "https://plrvq.com/g/gp8po8i1u7840f7c9cb445d8e108c6/",
-    "logo": "assets/logos/retouch4me.png"
-  },
-  {
-    "name": "Redmagic",
-    "category": "Electronics",
-    "url": "https://yyczo.com/c/qmttmvxh1u840f7c9cb456637026d8/",
-    "logo": "assets/logos/redmagic.png"
-  },
-  {
-    "name": "DKNY",
-    "category": "Fashion",
-    "url": "https://plrvq.com/g/o8vhdobxgs840f7c9cb4414deb9469/",
-    "logo": "assets/logos/dkny.png"
-  },
-  {
-    "name": "METRO BRAZIL",
-    "category": "Fashion",
-    "url": "https://wpmsx.com/g/qlyyds59e0840f7c9cb4278029db65/",
-    "logo": "assets/logos/metro-brazil.png"
-  },
-  {
-    "name": "STYLEVANA",
-    "category": "Beauty",
-    "url": "https://grfpr.com/c/zaxgnm7sp3840f7c9cb4590a2462b6/",
-    "logo": "assets/logos/stylevana.png"
-  },
-  {
-    "name": "ticombo",
-    "category": "Travel",
-    "url": "https://zmgig.com/g/hn23xca4o8840f7c9cb4bcf92d8d7a/",
-    "logo": "assets/logos/ticombo.png"
-  },
-  {
-    "name": "Geekbuying",
-    "category": "Electronics",
-    "url": "https://bywiola.com/c/78tuvzaw8k840f7c9cb40267b86f6e/",
-    "logo": "assets/logos/geekbuying.png"
-  },
-  {
-    "name": "Cyber florist",
-    "category": "Gifts",
-    "url": "https://yjfca.com/g/75nfprdgef840f7c9cb45a87002712/",
-    "logo": "assets/logos/cyber-florist.png"
-  },
-  {
-    "name": "Wayrates",
-    "category": "Fashion",
-    "url": "https://zallj.com/g/gfhc91n9bb840f7c9cb41d81d40fc4/",
-    "logo": "assets/logos/wayrates.png"
-  },
-  {
-    "name": "Nubia",
-    "category": "Electronics",
-    "url": "https://ziejy.com/c/lh3bbik9ly840f7c9cb4e62ca5e32f/",
-    "logo": "assets/logos/nubia.png"
-  },
-  {
-    "name": "Palazzo Versace Dubai Hotel",
-    "category": "Travel",
-    "url": "https://xmknb.com/g/6z621dqopy840f7c9cb4080b20079f/",
-    "logo": "assets/logos/palazzo-versace-dubai-hotel.png"
-  },
-  {
-    "name": "Admitad",
-    "category": "Digital Services",
-    "url": "https://ytebb.com/g/h0cdgv41zq840f7c9cb462c6909e0c/",
-    "logo": "assets/logos/admitad.png"
-  },
-  {
-    "name": "LG",
-    "category": "Electronics",
-    "url": "https://zejcl.com/g/efmcw9mw1i840f7c9cb4c31d685009/",
-    "logo": "assets/logos/lg.png"
-  },
-  {
-    "name": "TravelInsurer",
-    "category": "Travel",
-    "url": "https://ewwhk.com/g/5k4hrrims2840f7c9cb45777f878ef/",
-    "logo": "assets/logos/travelinsurer.png"
-  },
-  {
-    "name": "MyESimGloberl",
-    "category": "Digital Services",
-    "url": "https://flcoz.com/g/2t1z1pyrrc840f7c9cb425cb6b6ed6/",
-    "logo": "assets/logos/myesimgloberl.png"
-  },
-  {
-    "name": "PC Sales Online Shop",
-    "category": "Electronics",
-    "url": "https://ewwhk.com/g/fwsqlvbm30840f7c9cb4bec73bd971/",
-    "logo": "assets/logos/pc-sales-online-shop.png"
-  },
-  {
-    "name": "ApplicantAlly",
-    "category": "Digital Services",
-    "url": "https://xqjeo.com/g/p8sdxttwko840f7c9cb430360631df/",
-    "logo": "assets/logos/applicantally.png"
-  },
-  {
-    "name": "Amazon Saudi",
-    "category": "Marketplace",
-    "url": "https://www.amazon.sa/",
-    "logo": "assets/logos/amazon.png",
-    "description": "Amazon Saudi Arabia marketplace for electronics, home essentials, beauty, grocery, books, toys, and everyday online shopping deals."
-  },
-  {
-    "name": "Jarir",
-    "category": "Electronics",
-    "url": "https://www.jarir.com/sa-en",
-    "logo": "assets/logos/official/jarir.png",
-    "description": "Jarir Bookstore retailer for laptops, mobiles, tablets, books, office supplies, gaming, school essentials, and electronics in Saudi Arabia."
-  },
-  {
-    "name": "Extra",
-    "category": "Electronics",
-    "url": "https://www.extra.com/en-sa",
-    "logo": "assets/logos/official/extra.png",
-    "description": "eXtra Saudi electronics and home appliance store for mobiles, TVs, laptops, gaming, kitchen appliances, warranties, and tech offers."
-  },
-  {
-    "name": "Centrepoint",
-    "category": "Fashion",
-    "url": "https://www.centrepointstores.com/sa/en/",
-    "logo": "assets/logos/official/centrepoint.png",
-    "description": "Centrepoint Saudi fashion, baby, kids, beauty, footwear, home, and lifestyle shopping destination from Landmark Arabia."
-  },
-  {
-    "name": "6thStreet",
-    "category": "Fashion",
-    "url": "https://en-sa.6thstreet.com/",
-    "logo": "assets/logos/official/6thstreet.png",
-    "description": "6thStreet Saudi online fashion store for women, men, and kids, including clothing, shoes, bags, accessories, and lifestyle brands."
-  },
-  {
-    "name": "Ounass",
-    "category": "Luxury Fashion",
-    "url": "https://en-saudi.ounass.com/",
-    "logo": "assets/logos/official/ounass.ico",
-    "description": "Ounass Saudi luxury shopping site for designer fashion, beauty, accessories, homeware, gifting, and premium regional delivery."
-  },
-  {
-    "name": "Level Shoes",
-    "category": "Luxury Fashion",
-    "url": "https://en-saudi.levelshoes.com/",
-    "logo": "assets/logos/official/level-shoes.png",
-    "description": "Level Shoes Saudi luxury destination for designer shoes, bags, accessories, drops, gifts, and premium footwear collections."
-  },
-  {
-    "name": "Golden Scent",
-    "category": "Beauty",
-    "url": "https://www.goldenscent.com/",
-    "logo": "assets/logos/official/golden-scent.png",
-    "description": "Golden Scent Saudi beauty and fragrance platform for perfumes, home scents, cosmetics, niche brands, Arabic perfumes, and beauty offers."
-  },
-  {
-    "name": "AliExpress",
-    "category": "Marketplace",
-    "url": "https://www.aliexpress.com/",
-    "logo": "assets/logos/official/aliexpress.ico",
-    "description": "AliExpress global marketplace for Saudi and GCC shoppers browsing gadgets, accessories, home items, fashion, tools, and value deals."
+    "name": "Mamas & Papas",
+    "category": "Baby & Kids",
+    "url": "https://www.mamasandpapas.com/",
+    "logo": "assets/logos/gcc/mamas-and-papas.svg",
+    "description": "Mamas & Papas baby & kids offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
   },
   {
     "name": "Mumzworld",
     "category": "Baby & Kids",
     "url": "https://www.mumzworld.com/sa-en",
-    "logo": "assets/logos/official/mumzworld.png",
-    "description": "Mumzworld Saudi baby and kids store for strollers, car seats, toys, feeding, diapers, maternity items, nursery products, and family essentials."
+    "logo": "assets/logos/gcc/mumzworld.svg",
+    "description": "Mumzworld baby & kids offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
   },
   {
-    "name": "Nice One",
+    "name": "The Entertainer",
+    "category": "Travel",
+    "url": "https://www.theentertainerme.com/",
+    "logo": "assets/logos/gcc/the-entertainer.svg",
+    "description": "The Entertainer travel offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Fashio.sa",
+    "category": "Fashion",
+    "url": "https://fashio.sa/",
+    "logo": "assets/logos/gcc/fashio-sa.svg",
+    "description": "Fashio.sa fashion offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Yola",
+    "category": "Fashion",
+    "url": "https://yola.com/",
+    "logo": "assets/logos/gcc/yola.svg",
+    "description": "Yola fashion offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Noon Now Now",
+    "category": "Food",
+    "url": "https://www.noon.com/",
+    "logo": "assets/logos/gcc/noon-now-now.svg",
+    "description": "Noon Now Now food offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Delicut",
+    "category": "Food",
+    "url": "https://delicut.ae/",
+    "logo": "assets/logos/gcc/delicut.svg",
+    "description": "Delicut food offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Muji",
+    "category": "Fashion",
+    "url": "https://www.muji.com/",
+    "logo": "assets/logos/gcc/muji.svg",
+    "description": "Muji fashion offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Spring",
+    "category": "Fashion",
+    "url": "https://www.springfield.com/",
+    "logo": "assets/logos/gcc/spring.svg",
+    "description": "Spring fashion offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Metro Brazil",
+    "category": "Fashion",
+    "url": "https://www.metrobrazil.com/",
+    "logo": "assets/logos/gcc/metro-brazil.svg",
+    "description": "Metro Brazil fashion offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Renty",
+    "category": "Travel",
+    "url": "https://renty.ae/",
+    "logo": "assets/logos/gcc/renty.svg",
+    "description": "Renty travel offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Yallamomz",
+    "category": "Baby & Kids",
+    "url": "https://www.yallamomz.com/",
+    "logo": "assets/logos/gcc/yallamomz.svg",
+    "description": "Yallamomz baby & kids offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Al Matar",
+    "category": "Travel",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1964&aff_id=70942",
+    "logo": "assets/logos/gcc/al-matar.svg",
+    "description": "Al Matar travel offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Homzmart",
+    "category": "Marketplace",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1963&aff_id=70942",
+    "logo": "assets/logos/gcc/homzmart.svg",
+    "description": "Homzmart marketplace offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Samsung UAE",
+    "category": "Electronics",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1961&aff_id=70942",
+    "logo": "assets/logos/gcc/samsung-uae.svg",
+    "description": "Samsung UAE electronics offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Samsung KSA",
+    "category": "Electronics",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1960&aff_id=70942",
+    "logo": "assets/logos/gcc/samsung-ksa.svg",
+    "description": "Samsung KSA electronics offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Now Now UAE",
+    "category": "Food",
+    "url": "http://go.urtrackinglink.com/aff_c?offer_id=1959&aff_id=70942",
+    "logo": "assets/logos/gcc/now-now-uae.svg",
+    "description": "Now Now UAE food offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "VRBO Global",
+    "category": "Travel",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1958&aff_id=70942",
+    "logo": "assets/logos/gcc/vrbo-global.svg",
+    "description": "VRBO Global travel offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "IHG AMEA Global",
+    "category": "Hotels",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1956&aff_id=70942",
+    "logo": "assets/logos/gcc/ihg-amea-global.svg",
+    "description": "IHG AMEA Global hotels offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Nice SA",
     "category": "Beauty",
-    "url": "https://niceonesa.com/en",
-    "logo": "assets/logos/official/nice-one.png",
-    "description": "Nice One Saudi beauty ecommerce store for makeup, perfumes, skincare, haircare, lenses, devices, home scents, and premium beauty deals."
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1955&aff_id=70942",
+    "logo": "assets/logos/gcc/nice-sa.svg",
+    "description": "Nice SA beauty offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
   },
   {
-    "name": "Saco",
-    "category": "Home Improvement",
-    "url": "https://www.saco.sa/",
-    "logo": "assets/logos/official/saco.png",
-    "description": "SACO Saudi home improvement and hardware retailer for tools, outdoor, appliances, furniture, garden, automotive, and DIY essentials."
+    "name": "Natural SA",
+    "category": "Beauty",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1954&aff_id=70942",
+    "logo": "assets/logos/gcc/natural-sa.svg",
+    "description": "Natural SA beauty offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
   },
   {
-    "name": "HungerStation",
-    "category": "Food Delivery",
-    "url": "https://hungerstation.com/sa-en",
-    "logo": "assets/logos/official/hungerstation.png",
-    "description": "HungerStation Saudi delivery app for restaurants, groceries, pharmacies, flowers, stores, pickup options, and app-exclusive food offers."
+    "name": "Revibe GCC",
+    "category": "Electronics",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1953&aff_id=70942",
+    "logo": "assets/logos/gcc/revibe-gcc.svg",
+    "description": "Revibe GCC electronics offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
   },
   {
-    "name": "Jahez",
-    "category": "Food Delivery",
-    "url": "https://portal.jahez.net/index-en.html",
-    "logo": "assets/logos/official/jahez.png",
-    "description": "Jahez Saudi food delivery platform connecting shoppers with restaurants, home chefs, delivery partners, and local app-based ordering."
+    "name": "YSL Beauty SA",
+    "category": "Beauty",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1952&aff_id=70942",
+    "logo": "assets/logos/gcc/ysl-beauty-sa.svg",
+    "description": "YSL Beauty SA beauty offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
   },
   {
-    "name": "Nana",
-    "category": "Grocery",
-    "url": "https://nana.sa/english",
-    "logo": "assets/logos/official/nana.png",
-    "description": "Nana Saudi online grocery and essentials delivery service for supermarket items, fresh food, household goods, and scheduled grocery orders."
+    "name": "Puma UAE & KSA",
+    "category": "Fashion",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1563&aff_id=70942",
+    "logo": "assets/logos/gcc/puma-uae-and-ksa.svg",
+    "description": "Puma UAE & KSA fashion offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
   },
   {
-    "name": "Floward",
-    "category": "Flowers & Gifts",
-    "url": "https://floward.com/en-sa/",
-    "logo": "assets/logos/official/floward.png",
-    "description": "Floward Saudi online flowers and gifts platform for bouquets, arrangements, cakes, gifts, occasions, and same-day flower delivery options."
+    "name": "Rove Hotels Global",
+    "category": "Hotels",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1556&aff_id=70942",
+    "logo": "assets/logos/gcc/rove-hotels-global.svg",
+    "description": "Rove Hotels Global hotels offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Yas Island Global",
+    "category": "Travel",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1548&aff_id=70942",
+    "logo": "assets/logos/gcc/yas-island-global.svg",
+    "description": "Yas Island Global travel offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Warner Bros Abu Dhabi",
+    "category": "Travel",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1547&aff_id=70942",
+    "logo": "assets/logos/gcc/warner-bros-abu-dhabi.svg",
+    "description": "Warner Bros Abu Dhabi travel offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "GoCity Global",
+    "category": "Travel",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1546&aff_id=70942",
+    "logo": "assets/logos/gcc/gocity-global.svg",
+    "description": "GoCity Global travel offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Trip Global",
+    "category": "Travel",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1543&aff_id=70942",
+    "logo": "assets/logos/gcc/trip-global.svg",
+    "description": "Trip Global travel offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Ultahost Global",
+    "category": "Digital Services",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1538&aff_id=70942",
+    "logo": "assets/logos/gcc/ultahost-global.svg",
+    "description": "Ultahost Global digital services offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Ferrari World Abu Dhabi",
+    "category": "Travel",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1530&aff_id=70942",
+    "logo": "assets/logos/gcc/ferrari-world-abu-dhabi.svg",
+    "description": "Ferrari World Abu Dhabi travel offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "CDKeys GCC JO",
+    "category": "Digital Services",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1513&aff_id=70942",
+    "logo": "assets/logos/gcc/cdkeys-gcc-jo.svg",
+    "description": "CDKeys GCC JO digital services offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "StoreUs UAE",
+    "category": "Digital Services",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1498&aff_id=70942",
+    "logo": "assets/logos/gcc/storeus-uae.svg",
+    "description": "StoreUs UAE digital services offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Mothercare UAE KSA",
+    "category": "Baby & Kids",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1389&aff_id=70942",
+    "logo": "assets/logos/gcc/mothercare-uae-ksa.svg",
+    "description": "Mothercare UAE KSA baby & kids offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Trip.com Global",
+    "category": "Travel",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1321&aff_id=70942",
+    "logo": "assets/logos/gcc/trip-com-global.svg",
+    "description": "Trip.com Global travel offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "The Outnet Middle East GCC",
+    "category": "Fashion",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1282&aff_id=70942",
+    "logo": "assets/logos/gcc/the-outnet-middle-east-gcc.svg",
+    "description": "The Outnet Middle East GCC fashion offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "souKare Global",
+    "category": "Beauty",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=841&aff_id=70942",
+    "logo": "assets/logos/gcc/soukare-global.svg",
+    "description": "souKare Global beauty offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Airalo Global",
+    "category": "Digital Services",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=799&aff_id=70942",
+    "logo": "assets/logos/gcc/airalo-global.svg",
+    "description": "Airalo Global digital services offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "AliExpress Global",
+    "category": "Marketplace",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=743&aff_id=70942",
+    "logo": "assets/logos/gcc/aliexpress-global.svg",
+    "description": "AliExpress Global marketplace offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Amazon UAE",
+    "category": "Marketplace",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=685&aff_id=70942",
+    "logo": "assets/logos/gcc/amazon-uae.svg",
+    "description": "Amazon UAE marketplace offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Spring Feeling UAE",
+    "category": "Gifts",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=378&aff_id=70942",
+    "logo": "assets/logos/gcc/spring-feeling-uae.svg",
+    "description": "Spring Feeling UAE gifts offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Agoda Hotels GCC",
+    "category": "Hotels",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=252&aff_id=70942",
+    "logo": "assets/logos/gcc/agoda-hotels-gcc.svg",
+    "description": "Agoda Hotels GCC hotels offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "800 Flower UAE",
+    "category": "Gifts",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=194&aff_id=70942",
+    "logo": "assets/logos/gcc/800-flower-uae.svg",
+    "description": "800 Flower UAE gifts offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Ticketstodo Global",
+    "category": "Travel",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=128&aff_id=70942",
+    "logo": "assets/logos/gcc/ticketstodo-global.svg",
+    "description": "Ticketstodo Global travel offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "Daraz PK",
+    "category": "Marketplace",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=164&aff_id=70942",
+    "logo": "assets/logos/gcc/daraz-pk.svg",
+    "description": "Daraz PK marketplace offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
   }
 ]

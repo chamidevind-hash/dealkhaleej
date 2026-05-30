@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="256" viewBox="0 0 512 256" role="img" aria-label="StoreUs UAE logo">
+  <rect width="512" height="256" rx="28" fill="#2f2a6b"/>
+  <circle cx="94" cy="128" r="54" fill="#f472b6"/>
+  <text x="94" y="145" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="700" fill="#2f2a6b">SU</text>
+  <text x="172" y="118" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="700" fill="#ffffff">StoreUs UAE</text>
+  <text x="174" y="158" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="500" fill="#f472b6">Digital Services</text>
+</svg>

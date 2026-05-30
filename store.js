@@ -103,7 +103,14 @@ function setupLogoFallback(image) {
 }
 
 function couponCard(coupon) {
-  const isCode = coupon.code && !["deal", "offer"].includes(coupon.code.toLowerCase());
+  const couponCode = String(coupon.code || "").trim();
+  const isCode = couponCode && !["deal", "offer"].includes(couponCode.toLowerCase());
+  const actionMarkup = isCode
+    ? `
+        <span>${escapeHtml(couponCode)}</span>
+        <button type="button" data-copy="${escapeHtml(couponCode)}" data-coupon-id="${escapeHtml(coupon.id)}" data-store="${escapeHtml(coupon.store)}" data-code="${escapeHtml(couponCode)}" data-title="${escapeHtml(coupon.title)}">Copy code</button>
+        <a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}">Shop Deal</a>`
+    : `<a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}">Shop Deal</a>`;
 
   return `
     <article class="coupon-card" data-category="${escapeHtml(coupon.category)}" data-keywords="${escapeHtml(coupon.keywords)}" data-favorite="${favoriteCoupons.has(String(coupon.id))}">
@@ -121,10 +128,8 @@ function couponCard(coupon) {
         <p class="meta">${escapeHtml(coupon.meta)}</p>
         ${coupon.expiry ? `<p class="expiry">Ends: ${escapeHtml(coupon.expiry)}</p>` : ""}
       </div>
-      <div class="${isCode ? "coupon-action" : "coupon-action muted"}">
-        <span>${escapeHtml(coupon.code || "OFFER")}</span>
-        <button type="button" data-copy="${escapeHtml(isCode ? coupon.code : `${coupon.store} offer saved`)}" data-coupon-id="${escapeHtml(coupon.id)}" data-store="${escapeHtml(coupon.store)}" data-code="${escapeHtml(coupon.code || "OFFER")}" data-title="${escapeHtml(coupon.title)}">${isCode ? "Copy code" : "Save"}</button>
-        <a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}">Shop Deal</a>
+      <div class="${isCode ? "coupon-action" : "coupon-action muted link-only"}">
+        ${actionMarkup}
       </div>
     </article>
   `;
