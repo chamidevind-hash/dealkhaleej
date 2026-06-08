@@ -38,9 +38,9 @@ const translations = {
     howItWorks: "How It Works",
     app: "App",
     viewDeals: "View Deals",
-    verifiedSaudi: "DealKhaleej | Verified in Saudi Arabia",
-    heroTitle: "Saudi coupon codes.",
-    heroCopy: "<strong>Find the code before checkout.</strong> Browse promo codes, flash offers, and store discounts without digging through endless lists.",
+    verifiedSaudi: "DealKhaleej | Verified across the GCC",
+    heroTitle: "Verified Coupon Codes & Deals for GCC Shoppers",
+    heroCopy: "<strong>Find the code before checkout.</strong> Browse verified offers for Saudi Arabia, UAE, Kuwait, Qatar, Bahrain, and Oman.",
     searchCoupons: "Search coupons",
     searchPlaceholder: "Search store, code, or category",
     search: "Search",
@@ -48,7 +48,7 @@ const translations = {
     activeCoupons: "Active coupons",
     verifiedToday: "Verified today",
     popularCategories: "Popular categories",
-    freshOffers: "Fresh Saudi offers",
+    freshOffers: "Fresh GCC offers",
     couponCategories: "Coupon categories",
     shopByCategory: "Shop by category",
     browseMenu: "Browse the deal menu",
@@ -68,7 +68,7 @@ const translations = {
     trendingToday: "Trending Today",
     editorPick: "Editor pick",
     nextFeatured: "Your next featured deal",
-    featuredCopy: "Once you add coupons in the admin dashboard, featured codes can be promoted here for Saudi shoppers.",
+    featuredCopy: "Featured codes and offers for shoppers across the GCC are promoted here.",
     comingSoon: "COMING SOON",
     browseStores: "Browse Stores",
     liveBoard: "Live board",
@@ -87,14 +87,17 @@ const translations = {
     enableAlerts: "Enable Deal Alerts",
     dealAlerts: "Deal alerts",
     newsletterTitle: "Get fresh coupon codes by email.",
-    newsletterCopy: "New Saudi offers and popular savings, delivered when they matter.",
+    newsletterCopy: "New GCC offers and popular savings, delivered when they matter.",
     emailAddress: "Email address",
     emailPlaceholder: "you@email.com",
     subscribe: "Subscribe",
-    footerBrand: "DealKhaleej Saudi",
+    footerBrand: "DealKhaleej GCC",
     saudiArabia: "Saudi Arabia",
     uae: "UAE",
     kuwait: "Kuwait",
+    qatar: "Qatar",
+    bahrain: "Bahrain",
+    oman: "Oman",
     contact: "Contact",
     blog: "Blog",
     telegramDeals: "Telegram Deals",
@@ -240,6 +243,19 @@ const translations = {
   }
 };
 
+Object.assign(translations.ar, {
+  verifiedSaudi: "DealKhaleej | \u0645\u0648\u062b\u0642 \u0641\u064a \u062f\u0648\u0644 \u0627\u0644\u062e\u0644\u064a\u062c",
+  heroTitle: "\u0623\u0643\u0648\u0627\u062f \u062e\u0635\u0645 \u0648\u0639\u0631\u0648\u0636 \u0645\u0648\u062b\u0642\u0629 \u0644\u0645\u062a\u0633\u0648\u0642\u064a \u0627\u0644\u062e\u0644\u064a\u062c",
+  heroCopy: "<strong>\u0627\u0639\u062b\u0631 \u0639\u0644\u0649 \u0627\u0644\u0643\u0648\u062f \u0642\u0628\u0644 \u0627\u0644\u062f\u0641\u0639.</strong> \u062a\u0635\u0641\u062d \u0627\u0644\u0639\u0631\u0648\u0636 \u0627\u0644\u0645\u0648\u062b\u0642\u0629 \u0641\u064a \u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 \u0648\u0627\u0644\u0625\u0645\u0627\u0631\u0627\u062a \u0648\u0627\u0644\u0643\u0648\u064a\u062a \u0648\u0642\u0637\u0631 \u0648\u0627\u0644\u0628\u062d\u0631\u064a\u0646 \u0648\u0639\u0645\u0627\u0646.",
+  freshOffers: "\u0639\u0631\u0648\u0636 \u062e\u0644\u064a\u062c\u064a\u0629 \u062d\u062f\u064a\u062b\u0629",
+  featuredCopy: "\u0646\u0639\u0631\u0636 \u0647\u0646\u0627 \u0623\u0643\u0648\u0627\u062f \u0627\u0644\u062e\u0635\u0645 \u0648\u0627\u0644\u0639\u0631\u0648\u0636 \u0627\u0644\u0645\u0645\u064a\u0632\u0629 \u0644\u0644\u0645\u062a\u0633\u0648\u0642\u064a\u0646 \u0641\u064a \u062f\u0648\u0644 \u0627\u0644\u062e\u0644\u064a\u062c.",
+  newsletterCopy: "\u0639\u0631\u0648\u0636 \u062e\u0644\u064a\u062c\u064a\u0629 \u062c\u062f\u064a\u062f\u0629 \u0648\u062a\u0648\u0641\u064a\u0631\u0627\u062a \u0634\u0627\u0626\u0639\u0629 \u062a\u0635\u0644\u0643 \u0641\u064a \u0627\u0644\u0648\u0642\u062a \u0627\u0644\u0645\u0646\u0627\u0633\u0628.",
+  footerBrand: "DealKhaleej \u0627\u0644\u062e\u0644\u064a\u062c",
+  qatar: "\u0642\u0637\u0631",
+  bahrain: "\u0627\u0644\u0628\u062d\u0631\u064a\u0646",
+  oman: "\u0639\u0645\u0627\u0646"
+});
+
 function translate(key, replacements = {}) {
   return Object.entries(replacements).reduce(
     (text, [name, value]) => text.replace(`{${name}}`, value),
@@ -277,7 +293,7 @@ function updateStructuredData(monthYear) {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "DealKhaleej",
-    description: `Verified Saudi coupon codes and daily deals for ${monthYear}.`,
+    description: `Verified coupon codes and deals for GCC shoppers in Saudi Arabia, UAE, Kuwait, Qatar, Bahrain, and Oman for ${monthYear}.`,
     url: "https://dealkhaleej.com",
     potentialAction: {
       "@type": "SearchAction",
@@ -303,11 +319,11 @@ function updateStructuredData(monthYear) {
 function updateMonthlyPageContent() {
   const monthYear = getCurrentMonthYear();
   const title = currentLanguage === "ar"
-    ? `DealKhaleej | كوبونات وعروض السعودية - ${monthYear}`
-    : `DealKhaleej | Saudi Coupon Codes and Deals - ${monthYear}`;
+    ? `DealKhaleej | \u0623\u0643\u0648\u0627\u062f \u062e\u0635\u0645 \u0648\u0639\u0631\u0648\u0636 \u0645\u0648\u062b\u0642\u0629 \u0644\u0645\u062a\u0633\u0648\u0642\u064a \u0627\u0644\u062e\u0644\u064a\u062c - ${monthYear}`
+    : `DealKhaleej | Verified Coupon Codes & Deals for GCC Shoppers - ${monthYear}`;
   const description = currentLanguage === "ar"
-    ? `اعثر على كوبونات وأكواد خصم وعروض يومية موثقة للسعودية لشهر ${monthYear} على DealKhaleej.`
-    : `Find verified Saudi coupon codes, promo codes, and daily deals for ${monthYear} on DealKhaleej.`;
+    ? `\u0627\u0639\u062b\u0631 \u0639\u0644\u0649 \u0623\u0643\u0648\u0627\u062f \u062e\u0635\u0645 \u0648\u0639\u0631\u0648\u0636 \u0645\u0648\u062b\u0642\u0629 \u0644\u0645\u062a\u0633\u0648\u0642\u064a \u0627\u0644\u062e\u0644\u064a\u062c \u0641\u064a \u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 \u0648\u0627\u0644\u0625\u0645\u0627\u0631\u0627\u062a \u0648\u0627\u0644\u0643\u0648\u064a\u062a \u0648\u0642\u0637\u0631 \u0648\u0627\u0644\u0628\u062d\u0631\u064a\u0646 \u0648\u0639\u0645\u0627\u0646 \u0644\u0634\u0647\u0631 ${monthYear} \u0639\u0644\u0649 DealKhaleej.`
+    : `Find verified coupon codes, promo codes, and deals for GCC shoppers in Saudi Arabia, UAE, Kuwait, Qatar, Bahrain, and Oman for ${monthYear} on DealKhaleej.`;
 
   document.title = title;
   document.querySelector('meta[name="description"]').content = description;

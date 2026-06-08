@@ -255,6 +255,12 @@ h1 {
   letter-spacing: 0;
 }
 
+.hero h1 {
+  max-width: 700px;
+  font-size: 4.6rem;
+  line-height: 1;
+}
+
 h2 {
   margin: 0;
   font-size: clamp(2rem, 4vw, 3.25rem);
@@ -1327,6 +1333,10 @@ html[dir="rtl"] .coupon-action {
 }
 
 @media (max-width: 920px) {
+  .hero h1 {
+    font-size: 3.7rem;
+  }
+
   .site-header {
     align-items: flex-start;
     flex-wrap: wrap;
@@ -1365,6 +1375,10 @@ html[dir="rtl"] .coupon-action {
 }
 
 @media (max-width: 680px) {
+  .hero h1 {
+    font-size: 2.8rem;
+  }
+
   .site-header {
     min-height: auto;
   }
