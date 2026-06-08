@@ -35,7 +35,7 @@
     "description": "The Entertainer travel offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
   },
   {
-    "name": "Fashio.sa",
+    "name": "Fashion.sa",
     "category": "Fashion",
     "url": "https://fashio.sa/",
     "logo": "assets/logos/placeholder.png",
@@ -49,7 +49,7 @@
     "description": "Yola fashion offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
   },
   {
-    "name": "Noon Now Now",
+    "name": "Noon Now Now UAE KSA",
     "category": "Food",
     "url": "https://www.noon.com/",
     "logo": "assets/logos/noon-now-now.png",
@@ -175,7 +175,7 @@
     "description": "YSL Beauty SA beauty offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
   },
   {
-    "name": "Puma UAE & KSA",
+    "name": "PUMA",
     "category": "Fashion",
     "url": "https://go.urtrackinglink.com/aff_c?offer_id=1563&aff_id=70942",
     "logo": "assets/logos/puma.png",
@@ -294,7 +294,7 @@
     "description": "Amazon UAE marketplace offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
   },
   {
-    "name": "Spring Feeling UAE",
+    "name": "Spring Feeling",
     "category": "Gifts",
     "url": "https://go.urtrackinglink.com/aff_c?offer_id=378&aff_id=70942",
     "logo": "assets/logos/spring-feeling.png",
@@ -327,5 +327,19 @@
     "url": "https://go.urtrackinglink.com/aff_c?offer_id=164&aff_id=70942",
     "logo": "assets/logos/daraz.png",
     "description": "Daraz PK marketplace offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+  },
+  {
+    "name": "SquatWolf",
+    "category": "Fashion",
+    "url": "https://sa.squatwolf.com/",
+    "logo": "assets/logos/squatwolf.png",
+    "description": "SquatWolf performance gym wear, workout clothing, activewear, and fitness fashion for GCC shoppers."
+  },
+  {
+    "name": "Bloomingdales",
+    "category": "Fashion",
+    "url": "https://bloomingdales.ae/",
+    "logo": "assets/logos/bloomingdales.png",
+    "description": "Bloomingdales Middle East luxury fashion, beauty, home, accessories, and designer shopping offers."
   }
 ]
