@@ -341,5 +341,12 @@
     "url": "https://bloomingdales.ae/",
     "logo": "assets/logos/bloomingdales.png",
     "description": "Bloomingdales Middle East luxury fashion, beauty, home, accessories, and designer shopping offers."
+  },
+  {
+    "name": "Temu",
+    "category": "Marketplace",
+    "url": "https://temu.to/k/ecr4gunpxqi",
+    "logo": "assets/logos/temu.png",
+    "description": "Temu marketplace offers, coupon bundles, free shipping promotions, and shopping deals for GCC shoppers."
   }
 ]
