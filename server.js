@@ -21,7 +21,13 @@ const staticPageRoutes = new Map([
   ["/contact", "/contact.html"],
   ["/privacy-policy", "/privacy-policy.html"],
   ["/terms", "/terms.html"],
-  ["/affiliate-disclosure", "/affiliate-disclosure.html"]
+  ["/affiliate-disclosure", "/affiliate-disclosure.html"],
+  ["/travel", "/travel.html"],
+  ["/travel/hotels", "/travel-hotels.html"],
+  ["/travel/flights", "/travel-flights.html"],
+  ["/travel/car-rentals", "/travel-car-rentals.html"],
+  ["/travel/activities", "/travel-activities.html"],
+  ["/travel/esim", "/travel-esim.html"]
 ]);
 let newsletterWriteQueue = Promise.resolve();
 
