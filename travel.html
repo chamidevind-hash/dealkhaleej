@@ -11,6 +11,21 @@
   <meta property="og:url" content="https://dealkhaleej.com/travel">
   <link rel="canonical" href="https://dealkhaleej.com/travel">
   <link rel="stylesheet" href="/styles.css">
+  <style>
+    .flight-widget-card {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 12px 34px rgba(8, 26, 62, 0.1);
+    }
+
+    #flight-widget-mount {
+      min-height: 220px;
+      overflow: hidden;
+    }
+  </style>
 <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
   (function () {
       var script = document.createElement("script");
@@ -55,11 +70,11 @@
     <section class="travel-section flight-search-section">
       <div class="travel-section-heading">
         <p class="eyebrow">Flights</p>
-        <h2>Search Cheap Flights</h2>
-        <p>Compare flight prices from hundreds of airlines and travel agencies to find the best deals for your next trip.</p>
+        <h2>✈️ Search Cheap Flights</h2>
+        <p>Compare prices from hundreds of airlines and travel agencies.</p>
       </div>
       <div class="flight-widget-card">
-        <script async src="https://tpemd.com/content?currency=sar&trs=543479&shmarker=202923&locale=en&powered_by=true&limit=4&primary_color=00AE98&results_background_color=FFFFFF&form_background_color=FFFFFF&promo_id=4563&campaign_id=111" charset="utf-8"></script>
+        <div id="flight-widget-mount" aria-label="Cheap flight search widget"></div>
       </div>
     </section>
 
@@ -125,5 +140,22 @@
       <a href="/blog">Blog</a>
     </nav>
   </footer>
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      var mount = document.getElementById("flight-widget-mount");
+      if (!mount) return;
+
+      mount.innerHTML = '<script async src="https://tpemd.com/content?currency=sar&trs=543479&shmarker=202923&locale=en&powered_by=true&limit=4&primary_color=00AE98&results_background_color=FFFFFF&form_background_color=FFFFFF&promo_id=4563&campaign_id=111" charset="utf-8"><\/script>';
+
+      var inertScript = mount.querySelector("script");
+      if (!inertScript) return;
+
+      var script = document.createElement("script");
+      script.async = true;
+      script.src = "https://tpemd.com/content?currency=sar&trs=543479&shmarker=202923&locale=en&powered_by=true&limit=4&primary_color=00AE98&results_background_color=FFFFFF&form_background_color=FFFFFF&promo_id=4563&campaign_id=111";
+      script.charset = "utf-8";
+      inertScript.replaceWith(script);
+    });
+  </script>
 </body>
 </html>
