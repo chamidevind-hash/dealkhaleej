@@ -1270,6 +1270,29 @@ html[dir="rtl"] .coupon-action {
   font-size: 2rem;
 }
 
+.travel-section-heading > p:not(.eyebrow) {
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.flight-widget-card {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 220px;
+  padding: clamp(16px, 3vw, 26px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 14px 42px rgba(8, 26, 62, 0.08);
+}
+
+.flight-widget-card > * {
+  max-width: 100%;
+}
+
 .travel-intro {
   display: grid;
   grid-template-columns: 1fr 1fr;
