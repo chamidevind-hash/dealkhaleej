@@ -32,6 +32,10 @@ const staticPageRoutes = new Map([
   ["/travel/flights/deals", "/travel-flights-deals.html"],
   ["/travel/car-rentals", "/travel-car-rentals.html"],
   ["/travel/activities", "/travel-activities.html"],
+  ["/travel/activities/riyadh", "/travel-activities-riyadh.html"],
+  ["/travel/activities/transfers", "/travel-activities-transfers.html"],
+  ["/travel/activities/airport-transfers-jeddah", "/travel-activities-airport-transfers-jeddah.html"],
+  ["/travel/activities/deals", "/travel-activities-deals.html"],
   ["/travel/esim", "/travel-esim.html"]
 ]);
 let newsletterWriteQueue = Promise.resolve();

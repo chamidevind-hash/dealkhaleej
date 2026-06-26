@@ -10,9 +10,9 @@
     if (!sourceScript) return;
 
     var script = document.createElement("script");
-    script.async = true;
-    script.src = sourceScript.getAttribute("src");
-    script.charset = sourceScript.getAttribute("charset") || "utf-8";
+    Array.from(sourceScript.attributes).forEach(function (attribute) {
+      script.setAttribute(attribute.name, attribute.value);
+    });
 
     mount.appendChild(script);
     widget.dataset.widgetLoaded = "true";
