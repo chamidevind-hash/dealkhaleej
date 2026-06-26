@@ -21,6 +21,15 @@ function escapeHtml(value) {
     .replace(/'/g, "&#039;");
 }
 
+function storeSlug(value) {
+  return String(value)
+    .toLowerCase()
+    .replace(/&/g, " ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .replace(/-{2,}/g, "-");
+}
+
 function initials(name) {
   return name
     .split(/\s+/)
@@ -157,7 +166,7 @@ async function loadStore() {
   ]);
   const stores = await storeResponse.json();
   const coupons = await couponResponse.json();
-  const store = stores.find((item) => item.name.toLowerCase() === slug);
+  const store = stores.find((item) => item.name.toLowerCase() === slug || storeSlug(item.name) === slug);
 
   if (!store) {
     storeTitle.textContent = "Store not found";
@@ -176,7 +185,7 @@ async function loadStore() {
   officialLink.href = store.url;
   setupLogoFallback(storeLogo);
 
-  const available = coupons.filter((coupon) => coupon.active && coupon.store.toLowerCase() === slug);
+  const available = coupons.filter((coupon) => coupon.active && coupon.store.toLowerCase() === store.name.toLowerCase());
   couponGrid.innerHTML = available.length
     ? available.map(couponCard).join("")
     : '<p class="empty-state">No active coupons for this store yet.</p>';

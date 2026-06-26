@@ -29,6 +29,15 @@ let favoriteCoupons = loadFavoriteCoupons();
 let currentLanguage = loadLanguage();
 let oneSignalInitialized = false;
 
+function storeSlug(value) {
+  return String(value)
+    .toLowerCase()
+    .replace(/&/g, " ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .replace(/-{2,}/g, "-");
+}
+
 const translations = {
   en: {
     primaryNavigation: "Primary navigation",
@@ -531,7 +540,7 @@ function trackCouponClick(button) {
 
 function storeCard(store) {
   return `
-    <a href="/store/${encodeURIComponent(store.name.toLowerCase())}">
+    <a href="/store/${storeSlug(store.name)}">
       <span class="logo-tile small">
         <img src="${escapeHtml(store.logo || "assets/logos/placeholder.png")}" alt="${escapeHtml(store.name)} logo">
         <strong>${escapeHtml(initials(store.name))}</strong>

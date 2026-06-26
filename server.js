@@ -72,6 +72,15 @@ function xmlEscape(value) {
     .replace(/'/g, "&apos;");
 }
 
+function storeSlug(value) {
+  return String(value)
+    .toLowerCase()
+    .replace(/&/g, " ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .replace(/-{2,}/g, "-");
+}
+
 function isSafeArticleLink(href) {
   const value = String(href).trim();
   if (!value || /[\u0000-\u001f\u007f]/.test(value)) {
@@ -118,7 +127,7 @@ function articleMarkup(article) {
       </section>`)
     .join("");
   const relatedStores = article.relatedStores
-    .map((store) => `<a class="related-store-link" href="/store/${encodeURIComponent(store.slug)}">${xmlEscape(store.name)} Coupon Codes</a>`)
+    .map((store) => `<a class="related-store-link" href="/store/${storeSlug(store.slug || store.name)}">${xmlEscape(store.name)} Coupon Codes</a>`)
     .join("");
   const publishedDate = new Date(`${article.publishedAt}T00:00:00`).toLocaleDateString("en-SA", {
     day: "numeric",
@@ -573,7 +582,7 @@ async function handleSeoRoutes(response, url) {
     ...stores.map((store) => {
       const storeCoupons = coupons.filter((coupon) => coupon.store.toLowerCase() === store.name.toLowerCase());
       return {
-        loc: `${siteUrl}/store/${encodeURIComponent(store.name.toLowerCase())}`,
+        loc: `${siteUrl}/store/${storeSlug(store.name)}`,
         lastmod: sitemapDate(storeCoupons.map((coupon) => coupon.updatedAt))
       };
     }),
