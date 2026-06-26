@@ -20,11 +20,6 @@
       background: #fff;
       box-shadow: 0 12px 34px rgba(8, 26, 62, 0.1);
     }
-
-    #flight-widget-mount {
-      min-height: 220px;
-      overflow: hidden;
-    }
   </style>
 <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
   (function () {
@@ -74,7 +69,7 @@
         <p>Compare prices from hundreds of airlines and travel agencies.</p>
       </div>
       <div class="flight-widget-card">
-        <div id="flight-widget-mount" aria-label="Cheap flight search widget"></div>
+        <script async src="https://tpemd.com/content?currency=usd&trs=543479&shmarker=202923.sdsads&powered_by=true&locale=en&campaign_id=111&promo_id=4484" charset="utf-8"></script>
       </div>
     </section>
 
@@ -140,22 +135,5 @@
       <a href="/blog">Blog</a>
     </nav>
   </footer>
-  <script>
-    window.addEventListener("DOMContentLoaded", function () {
-      var mount = document.getElementById("flight-widget-mount");
-      if (!mount) return;
-
-      mount.innerHTML = '<script async src="https://tpemd.com/content?currency=sar&trs=543479&shmarker=202923&locale=en&powered_by=true&limit=4&primary_color=00AE98&results_background_color=FFFFFF&form_background_color=FFFFFF&promo_id=4563&campaign_id=111" charset="utf-8"><\/script>';
-
-      var inertScript = mount.querySelector("script");
-      if (!inertScript) return;
-
-      var script = document.createElement("script");
-      script.async = true;
-      script.src = "https://tpemd.com/content?currency=sar&trs=543479&shmarker=202923&locale=en&powered_by=true&limit=4&primary_color=00AE98&results_background_color=FFFFFF&form_background_color=FFFFFF&promo_id=4563&campaign_id=111";
-      script.charset = "utf-8";
-      inertScript.replaceWith(script);
-    });
-  </script>
 </body>
 </html>
