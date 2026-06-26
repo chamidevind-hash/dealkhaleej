@@ -72,15 +72,49 @@ function xmlEscape(value) {
     .replace(/'/g, "&apos;");
 }
 
+function isSafeArticleLink(href) {
+  const value = String(href).trim();
+  if (!value || /[\u0000-\u001f\u007f]/.test(value)) {
+    return false;
+  }
+  if (value.startsWith("/") && !value.startsWith("//")) {
+    return true;
+  }
+  return value === siteUrl || value.startsWith(`${siteUrl}/`);
+}
+
+function renderArticleText(value) {
+  const text = String(value);
+  const linkPattern = /\[([^\]\n]+)\]\(([^)\n]+)\)/g;
+  let output = "";
+  let lastIndex = 0;
+  let match;
+
+  while ((match = linkPattern.exec(text)) !== null) {
+    const [fullMatch, label, href] = match;
+    output += xmlEscape(text.slice(lastIndex, match.index));
+
+    if (isSafeArticleLink(href)) {
+      output += `<a class="article-link" href="${xmlEscape(href.trim())}">${xmlEscape(label)}</a>`;
+    } else {
+      output += xmlEscape(fullMatch);
+    }
+
+    lastIndex = match.index + fullMatch.length;
+  }
+
+  return output + xmlEscape(text.slice(lastIndex));
+}
+
 function articleMarkup(article) {
   const sections = article.sections
     .map((section) => `
       <section>
         <h2>${xmlEscape(section.heading)}</h2>
-        ${section.paragraphs.map((paragraph) => `<p>${xmlEscape(paragraph)}</p>`).join("")}
+        ${section.paragraphs.map((paragraph) => `<p>${renderArticleText(paragraph)}</p>`).join("")}
         ${(section.subsections || []).map((subsection) => `
           <h3>${xmlEscape(subsection.heading)}</h3>
-          ${subsection.paragraphs.map((paragraph) => `<p>${xmlEscape(paragraph)}</p>`).join("")}`).join("")}
+          ${subsection.paragraphs.map((paragraph) => `<p>${renderArticleText(paragraph)}</p>`).join("")}`).join("")}
       </section>`)
     .join("");
   const relatedStores = article.relatedStores

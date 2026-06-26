@@ -1418,6 +1418,11 @@ html[dir="rtl"] .coupon-action {
   font-weight: 850;
 }
 
+.article-content .article-link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .article-body {
   max-width: 800px;
   margin-inline: auto;
