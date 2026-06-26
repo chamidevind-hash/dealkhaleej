@@ -11,16 +11,6 @@
   <meta property="og:url" content="https://dealkhaleej.com/travel">
   <link rel="canonical" href="https://dealkhaleej.com/travel">
   <link rel="stylesheet" href="/styles.css">
-  <style>
-    .flight-widget-card {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 24px;
-      border-radius: 16px;
-      background: #fff;
-      box-shadow: 0 12px 34px rgba(8, 26, 62, 0.1);
-    }
-  </style>
 <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
   (function () {
       var script = document.createElement("script");
@@ -62,14 +52,17 @@
       </nav>
     </section>
 
-    <section class="travel-section flight-search-section">
+    <section class="travel-section">
       <div class="travel-section-heading">
         <p class="eyebrow">Flights</p>
-        <h2>✈️ Search Cheap Flights</h2>
-        <p>Compare prices from hundreds of airlines and travel agencies.</p>
+        <h2>Search Flights From GCC</h2>
+        <p>Compare flight prices and hotel options from leading travel providers before booking your next trip.</p>
       </div>
-      <div class="flight-widget-card">
-        <script async src="https://tpemd.com/content?currency=usd&trs=543479&shmarker=202923.sdsads&powered_by=true&locale=en&campaign_id=111&promo_id=4484" charset="utf-8"></script>
+      <div class="travel-widget-card" data-travelpayouts-widget>
+        <template>
+          <script async src="https://tpemd.com/content?currency=usd&trs=543479&shmarker=202923&searchUrl=www.aviasales.com%2Fsearch&locale=en&powered_by=true&show_hotels=true&primary_override=%2332a8dd&color_button=%2300A991&color_icons=%2332a8dd&dark=%23262626&light=%23FFFFFF&secondary=%23FFFFFF&special=%23C4C4C4&color_focused=%2332a8dd&border_radius=0&plain=false&promo_id=7879&campaign_id=100" charset="utf-8"></script>
+        </template>
+        <div class="travel-widget-mount" aria-label="Flight and hotel search widget"></div>
       </div>
     </section>
 
@@ -135,5 +128,6 @@
       <a href="/blog">Blog</a>
     </nav>
   </footer>
+  <script src="/travel-widgets.js" defer></script>
 </body>
 </html>

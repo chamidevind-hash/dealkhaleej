@@ -25,6 +25,11 @@ const staticPageRoutes = new Map([
   ["/travel", "/travel.html"],
   ["/travel/hotels", "/travel-hotels.html"],
   ["/travel/flights", "/travel-flights.html"],
+  ["/travel/flights/riyadh-to-dubai", "/travel-flights-riyadh-dubai.html"],
+  ["/travel/flights/riyadh-to-bangkok", "/travel-flights-riyadh-bangkok.html"],
+  ["/travel/flights/dammam", "/travel-flights-dammam.html"],
+  ["/travel/flights/map", "/travel-flights-map.html"],
+  ["/travel/flights/deals", "/travel-flights-deals.html"],
   ["/travel/car-rentals", "/travel-car-rentals.html"],
   ["/travel/activities", "/travel-activities.html"],
   ["/travel/esim", "/travel-esim.html"]

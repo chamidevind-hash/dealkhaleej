@@ -1276,27 +1276,64 @@ html[dir="rtl"] .coupon-action {
   line-height: 1.6;
 }
 
-.flight-widget-card {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  min-height: 220px;
-  padding: clamp(16px, 3vw, 26px);
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  background: #fff;
-  box-shadow: 0 14px 42px rgba(8, 26, 62, 0.08);
-}
-
-.flight-widget-card > * {
-  max-width: 100%;
-}
-
 .travel-intro {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 18px;
+}
+
+.travel-widget-stack {
+  display: grid;
+  gap: clamp(18px, 4vw, 30px);
+}
+
+.travel-widget-card {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 14px 42px rgba(8, 26, 62, 0.08);
+}
+
+.travel-widget-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.35rem;
+}
+
+.travel-widget-card > p {
+  margin: 0 0 18px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.travel-widget-mount {
+  min-height: 180px;
+}
+
+.travel-widget-mount iframe,
+.travel-widget-mount > * {
+  max-width: 100%;
+}
+
+.travel-link-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.travel-link-grid a {
+  min-height: 76px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel);
+  color: var(--navy);
+  font-weight: 850;
+  line-height: 1.25;
 }
 
 .travel-card-grid,
@@ -1508,7 +1545,8 @@ html[dir="rtl"] .coupon-action {
   }
 
   .travel-card-grid,
-  .travel-article-grid {
+  .travel-article-grid,
+  .travel-link-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -1572,7 +1610,8 @@ html[dir="rtl"] .coupon-action {
   }
 
   .travel-card-grid,
-  .travel-article-grid {
+  .travel-article-grid,
+  .travel-link-grid {
     grid-template-columns: 1fr;
   }
 
