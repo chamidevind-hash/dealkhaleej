@@ -1,6 +1,7 @@
 const couponGrid = document.querySelector("#coupon-grid");
 const storeGrid = document.querySelector("#store-grid");
 const trendingGrid = document.querySelector("#trending-grid");
+const popularStoreStrip = document.querySelector("#popular-store-strip");
 const categoryButtons = Array.from(document.querySelectorAll(".category-chip"));
 const searchInput = document.querySelector("#deal-search");
 const searchForm = document.querySelector(".search-panel");
@@ -15,12 +16,19 @@ const newsletterStatus = document.querySelector("#newsletter-status");
 const pushAlertButton = document.querySelector("#push-alert-button");
 const pushAlertStatus = document.querySelector("#push-alert-status");
 const languageToggle = document.querySelector("#language-toggle");
+const navToggle = document.querySelector("#nav-toggle");
+const mainNav = document.querySelector("#main-nav");
+const countrySelector = document.querySelector("#country-selector");
+const viewAllCouponsButton = document.querySelector("#view-all-coupons");
+const viewAllStoresButton = document.querySelector("#view-all-stores");
 
 let coupons = [];
 let stores = [];
 let trendingCoupons = [];
 let trendingUnavailable = false;
 let activeFilter = "all";
+let showAllCoupons = false;
+let showAllStores = false;
 let toastTimer;
 const favoritesStorageKey = "dealkhaleejFavoriteCoupons";
 const languageStorageKey = "dealkhaleejLanguage";
@@ -42,6 +50,9 @@ const translations = {
   en: {
     primaryNavigation: "Primary navigation",
     switchLanguage: "Switch to Arabic",
+    home: "Home",
+    coupons: "Coupons",
+    countryLabel: "Country",
     topDeals: "Top Deals",
     stores: "Stores",
     howItWorks: "How It Works",
@@ -50,6 +61,8 @@ const translations = {
     verifiedSaudi: "DealKhaleej | Verified across the GCC",
     heroTitle: "Verified Coupon Codes & Deals for GCC Shoppers",
     heroCopy: "<strong>Find the code before checkout.</strong> Browse verified offers for Saudi Arabia, UAE, Kuwait, Qatar, Bahrain, and Oman.",
+    heroCopyPlain: "Find verified coupons, store offers, travel deals, and shopping discounts for Saudi Arabia, UAE, Kuwait, Qatar, Bahrain, and Oman.",
+    heroNote: "Codes and offers are checked before they appear on DealKhaleej.",
     searchCoupons: "Search coupons",
     searchPlaceholder: "Search store, code, or category",
     search: "Search",
@@ -71,6 +84,8 @@ const translations = {
     food: "Food",
     sportswear: "Sportswear",
     digitalServices: "Digital Services",
+    babyKids: "Baby & Kids",
+    sports: "Sports",
     marketplace: "Marketplace",
     healthBeauty: "Health & Beauty",
     mostClicked: "Most clicked today",
@@ -82,6 +97,27 @@ const translations = {
     browseStores: "Browse Stores",
     liveBoard: "Live board",
     featuredCoupons: "Featured coupon cards",
+    popularStoreStrip: "Popular stores",
+    trustedGccStores: "Trusted GCC shopping brands",
+    verifiedCouponsEyebrow: "Verified coupons",
+    bestVerifiedCoupons: "Best verified coupons",
+    viewAllCoupons: "View All Coupons",
+    showFewerCoupons: "Show Fewer Coupons",
+    featuredTravelDeals: "Featured travel deals",
+    travelDealsEyebrow: "Travel deals",
+    flights: "Flights",
+    hotels: "Hotels",
+    activities: "Activities",
+    carRentals: "Car Rentals",
+    esim: "eSIM",
+    flightsCopy: "Compare routes and flight savings for GCC trips.",
+    hotelsCopy: "Find hotel offers for city breaks and family stays.",
+    activitiesCopy: "Discover attractions, tours, and things to do.",
+    carRentalsCopy: "Browse car rental options for airport and city travel.",
+    esimCopy: "Stay connected while traveling across the region.",
+    storeDirectory: "Popular stores directory",
+    viewAllStores: "View All Stores",
+    showFewerStores: "Show Fewer Stores",
     popularStores: "Popular stores",
     shopOfficialStores: "Shop official stores",
     checkoutFlow: "Simple checkout flow",
@@ -101,6 +137,21 @@ const translations = {
     emailPlaceholder: "you@email.com",
     subscribe: "Subscribe",
     footerBrand: "DealKhaleej GCC",
+    footerDisclosure: "DealKhaleej may earn a commission when shoppers use affiliate links. We keep coupons and offers organized so GCC shoppers can compare savings before checkout.",
+    popularCategoriesFooter: "Popular Categories",
+    gccCountries: "GCC Countries",
+    helpLegal: "Help & Legal",
+    affiliateDisclosure: "Affiliate Disclosure",
+    privacyPolicy: "Privacy Policy",
+    terms: "Terms",
+    about: "About",
+    sitemap: "Sitemap",
+    couponCodesAcrossGcc: "Coupon Codes and Online Deals Across the GCC",
+    howUseCouponCode: "How to Use a Coupon Code",
+    howVerifiesOffers: "How DealKhaleej Verifies Offers",
+    seoGccCopy: "DealKhaleej helps shoppers compare verified coupon codes and online promotions from brands serving Saudi Arabia, UAE, Kuwait, Qatar, Bahrain, and Oman. We keep the homepage focused on active offers so shoppers can move quickly from search to checkout.",
+    seoUseCodeCopy: "Choose a store, copy the code shown on the coupon card, open the deal link, and paste the code into the checkout promo field. For offer-only deals, use the Get Offer button and confirm the promotion on the store website before paying.",
+    seoVerifyCopy: "We organize codes, expiry dates, store pages, and offer notes so shoppers can understand each deal before leaving DealKhaleej. Promotions may change, so always review the final price and terms on the advertiser website.",
     saudiArabia: "Saudi Arabia",
     uae: "UAE",
     kuwait: "Kuwait",
@@ -111,6 +162,8 @@ const translations = {
     blog: "Blog",
     telegramDeals: "Telegram Deals",
     trending: "Trending",
+    verified: "Verified",
+    region: "Region",
     ends: "Ends:",
     copyCode: "Copy code",
     save: "Save",
@@ -375,14 +428,59 @@ function categoryLabel(category) {
     beauty: "beauty",
     grocery: "grocery",
     travel: "travel",
+    hotels: "travel",
+    flights: "travel",
     electronics: "electronics",
     food: "food",
     sports: "sportswear",
+    "sports & fashion": "sportswear",
     services: "digitalServices",
+    "digital services": "digitalServices",
+    "baby & kids": "babyKids",
+    "baby-and-kids": "babyKids",
     "health & beauty": "healthBeauty"
   };
   const key = categoryKeys[String(category || "").toLowerCase()];
   return key ? translate(key) : category;
+}
+
+function categoryFilterValue(category) {
+  const normalized = String(category || "")
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  if (normalized.includes("baby")) return "baby-and-kids";
+  if (normalized.includes("sport")) return "sports";
+  if (normalized.includes("digital") || normalized.includes("service") || normalized.includes("gaming")) return "services";
+  if (normalized.includes("hotel") || normalized.includes("flight") || normalized.includes("travel") || normalized.includes("activity") || normalized.includes("rental") || normalized.includes("esim")) return "travel";
+  if (normalized.includes("beauty")) return "beauty";
+  if (normalized.includes("fashion") || normalized.includes("luxury")) return "fashion";
+  if (normalized.includes("electronic")) return "electronics";
+  if (normalized.includes("food")) return "food";
+  return normalized || "marketplace";
+}
+
+function couponRegion(coupon) {
+  const text = `${coupon.store || ""} ${coupon.title || ""} ${coupon.meta || ""} ${coupon.keywords || ""}`.toLowerCase();
+  const matches = [];
+
+  if (/(ksa|saudi|riyadh|jeddah|dammam)/.test(text)) matches.push("Saudi Arabia");
+  if (/(uae|dubai|abu dhabi)/.test(text)) matches.push("UAE");
+  if (text.includes("kuwait")) matches.push("Kuwait");
+  if (text.includes("qatar")) matches.push("Qatar");
+  if (text.includes("bahrain")) matches.push("Bahrain");
+  if (text.includes("oman")) matches.push("Oman");
+
+  if (text.includes("global")) return matches.length ? `${matches[0]} + Global` : "Global";
+  if (text.includes("gcc") || matches.length > 2) return "GCC";
+  return matches.length ? Array.from(new Set(matches)).slice(0, 2).join(" + ") : "GCC";
+}
+
+function isCouponCode(code) {
+  const couponCode = String(code || "").trim();
+  return Boolean(couponCode && !["deal", "offer"].includes(couponCode.toLowerCase()));
 }
 
 function initials(name) {
@@ -493,7 +591,7 @@ function setupLogoFallbacks(scope = document) {
 
 function couponCard(coupon) {
   const couponCode = String(coupon.code || "").trim();
-  const isCode = couponCode && couponCode.toLowerCase() !== "deal" && couponCode.toLowerCase() !== "offer";
+  const isCode = isCouponCode(couponCode);
   const actionClass = isCode ? "coupon-action" : "coupon-action muted link-only";
   const actionMarkup = isCode
     ? `
@@ -503,7 +601,7 @@ function couponCard(coupon) {
     : `<a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}">${escapeHtml(translate("getOffer"))}</a>`;
 
   return `
-    <article class="coupon-card" data-category="${escapeHtml(coupon.category)}" data-keywords="${escapeHtml(coupon.keywords)}" data-favorite="${favoriteCoupons.has(String(coupon.id))}">
+    <article class="coupon-card" data-category="${escapeHtml(categoryFilterValue(coupon.category))}" data-keywords="${escapeHtml(coupon.keywords)}" data-favorite="${favoriteCoupons.has(String(coupon.id))}">
       <div class="logo-tile">
         <img src="${escapeHtml(coupon.logo || "assets/logos/placeholder.png")}" alt="${escapeHtml(coupon.store)} logo">
         <span>${escapeHtml(initials(coupon.store))}</span>
@@ -513,7 +611,10 @@ function couponCard(coupon) {
           <p class="store-name">${escapeHtml(coupon.store)}</p>
           ${favoriteButton(coupon)}
         </div>
-        ${coupon.verified ? `<span class="trending-badge">${escapeHtml(translate("trending"))} &#128293;</span>` : ""}
+        <div class="coupon-badges">
+          ${coupon.verified ? `<span class="verified-badge">${escapeHtml(translate("verified"))}</span>` : ""}
+          <span class="coupon-region">${escapeHtml(translate("region"))}: ${escapeHtml(couponRegion(coupon))}</span>
+        </div>
         <h3>${escapeHtml(coupon.title)}</h3>
         <p class="meta">${escapeHtml(coupon.meta)}</p>
         ${coupon.expiry ? `<p class="expiry">${escapeHtml(translate("ends"))} ${escapeHtml(coupon.expiry)}</p>` : ""}
@@ -551,6 +652,61 @@ function storeCard(store) {
   `;
 }
 
+function popularStoreCard(store) {
+  return `
+    <a class="logo-strip-card" href="/store/${storeSlug(store.name)}" aria-label="${escapeHtml(store.name)} coupons">
+      <span class="logo-tile small">
+        <img src="${escapeHtml(store.logo || "assets/logos/placeholder.png")}" alt="${escapeHtml(store.name)} logo">
+        <strong>${escapeHtml(initials(store.name))}</strong>
+      </span>
+      <span>${escapeHtml(store.name.replace(/\s+(UAE|KSA|Global|GCC|Web|App)$/i, ""))}</span>
+    </a>
+  `;
+}
+
+function renderPopularStoreStrip() {
+  if (!popularStoreStrip) return;
+
+  const priority = [
+    "Noon",
+    "Temu",
+    "Samsung UAE",
+    "SHEIN",
+    "PUMA",
+    "Mumzworld",
+    "UBUY",
+    "Airalo Global",
+    "Agoda Hotels GCC",
+    "Nike UAE Web",
+    "Mamas & Papas",
+    "Trip.com Global"
+  ];
+  const picked = [];
+  const usedNames = new Set();
+
+  priority.forEach((name) => {
+    const store = stores.find((item) => item.name.toLowerCase() === name.toLowerCase())
+      || stores.find((item) => item.name.toLowerCase().includes(name.toLowerCase().split(" ")[0]));
+    if (store && !usedNames.has(store.name)) {
+      picked.push(store);
+      usedNames.add(store.name);
+    }
+  });
+
+  stores.forEach((store) => {
+    if (picked.length >= 12) return;
+    if (!usedNames.has(store.name) && store.logo && !store.logo.includes("placeholder")) {
+      picked.push(store);
+      usedNames.add(store.name);
+    }
+  });
+
+  popularStoreStrip.innerHTML = picked.length
+    ? picked.slice(0, 12).map(popularStoreCard).join("")
+    : `<p class="empty-state">${escapeHtml(translate("noStores"))}</p>`;
+  setupLogoFallbacks(popularStoreStrip);
+}
+
 function trendingCard(coupon, index) {
   return `
     <article class="trending-card">
@@ -570,6 +726,8 @@ function trendingCard(coupon, index) {
 }
 
 async function loadTrendingCoupons() {
+  if (!trendingGrid) return;
+
   try {
     const response = await fetch("/api/trending");
     if (!response.ok) throw new Error("Unable to load trending coupons");
@@ -583,6 +741,8 @@ async function loadTrendingCoupons() {
 }
 
 function renderTrendingCoupons() {
+  if (!trendingGrid) return;
+
   if (trendingUnavailable) {
     trendingGrid.innerHTML = `<p class="empty-state">${escapeHtml(translate("trendingUnavailable"))}</p>`;
     return;
@@ -596,19 +756,30 @@ function renderTrendingCoupons() {
 
 function renderCoupons() {
   const activeCoupons = coupons.filter((coupon) => coupon.active);
+  const visibleCoupons = showAllCoupons ? activeCoupons : activeCoupons.slice(0, 8);
+  const visibleStores = showAllStores ? stores : stores.slice(0, 18);
 
   couponGrid.innerHTML = activeCoupons.length
-    ? `${activeCoupons.map(couponCard).join("")}<p class="empty-state filter-empty is-hidden">${escapeHtml(translate("noFavorites"))}</p>`
+    ? `${visibleCoupons.map(couponCard).join("")}<p class="empty-state filter-empty is-hidden">${escapeHtml(translate("noFavorites"))}</p>`
     : `<p class="empty-state">${escapeHtml(translate("noActive"))}</p>`;
 
   storeGrid.innerHTML = stores.length
-    ? stores.map(storeCard).join("")
+    ? visibleStores.map(storeCard).join("")
     : `<p class="empty-state">${escapeHtml(translate("noStores"))}</p>`;
 
   activeCouponCount.textContent = String(activeCoupons.length);
   verifiedCount.textContent = String(activeCoupons.filter((coupon) => coupon.verified).length);
-  categoryCount.textContent = String(new Set(activeCoupons.map((coupon) => coupon.category)).size);
+  categoryCount.textContent = String(new Set(activeCoupons.map((coupon) => categoryFilterValue(coupon.category))).size);
+  if (viewAllCouponsButton) {
+    viewAllCouponsButton.textContent = translate(showAllCoupons ? "showFewerCoupons" : "viewAllCoupons");
+    viewAllCouponsButton.classList.toggle("is-hidden", activeCoupons.length <= 8);
+  }
+  if (viewAllStoresButton) {
+    viewAllStoresButton.textContent = translate(showAllStores ? "showFewerStores" : "viewAllStores");
+    viewAllStoresButton.classList.toggle("is-hidden", stores.length <= 18);
+  }
   updateFavoritesCount();
+  renderPopularStoreStrip();
 
   setupLogoFallbacks(document);
   applyFilters();
@@ -657,17 +828,68 @@ async function loadCoupons() {
 categoryButtons.forEach((button) => {
   button.addEventListener("click", () => {
     activeFilter = button.dataset.filter;
+    showAllCoupons = true;
     categoryButtons.forEach((item) => item.classList.toggle("active", item === button));
-    applyFilters();
+    renderCoupons();
   });
 });
 
-searchInput.addEventListener("input", applyFilters);
+searchInput.addEventListener("input", () => {
+  if (searchInput.value.trim()) {
+    showAllCoupons = true;
+    renderCoupons();
+    return;
+  }
+  applyFilters();
+});
 
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
+  if (searchInput.value.trim()) {
+    showAllCoupons = true;
+    renderCoupons();
+    return;
+  }
   applyFilters();
 });
+
+if (viewAllCouponsButton) {
+  viewAllCouponsButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    showAllCoupons = !showAllCoupons;
+    renderCoupons();
+    viewAllCouponsButton.focus();
+  });
+}
+
+if (viewAllStoresButton) {
+  viewAllStoresButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    showAllStores = !showAllStores;
+    renderCoupons();
+    viewAllStoresButton.focus();
+  });
+}
+
+if (navToggle && mainNav) {
+  navToggle.addEventListener("click", () => {
+    const isOpen = navToggle.getAttribute("aria-expanded") === "true";
+    navToggle.setAttribute("aria-expanded", String(!isOpen));
+    document.body.classList.toggle("nav-open", !isOpen);
+  });
+
+  mainNav.addEventListener("click", (event) => {
+    if (!event.target.closest("a")) return;
+    navToggle.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("nav-open");
+  });
+}
+
+if (countrySelector) {
+  countrySelector.addEventListener("change", () => {
+    document.documentElement.dataset.country = storeSlug(countrySelector.value);
+  });
+}
 
 languageToggle.addEventListener("click", () => {
   currentLanguage = currentLanguage === "en" ? "ar" : "en";

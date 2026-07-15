@@ -39,31 +39,48 @@
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="#" aria-label="DealKhaleej home">
+    <a class="brand" href="/" aria-label="DealKhaleej home">
       <img class="brand-logo" src="assets/brand/dealkhaleej-logo.png" alt="DealKhaleej">
     </a>
 
-    <nav class="main-nav" aria-label="Primary navigation" data-i18n-aria-label="primaryNavigation">
-      <a href="#deals" data-i18n="topDeals">Top Deals</a>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open navigation" aria-controls="main-nav" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="main-nav" id="main-nav" aria-label="Primary navigation" data-i18n-aria-label="primaryNavigation">
+      <a href="/" data-i18n="home">Home</a>
       <a href="#stores" data-i18n="stores">Stores</a>
+      <a href="#deals" data-i18n="coupons">Coupons</a>
       <a href="/travel" data-i18n="travel">Travel</a>
-      <a href="#guide" data-i18n="howItWorks">How It Works</a>
-      <a href="#app" data-i18n="app">App</a>
+      <a href="/blog" data-i18n="blog">Blog</a>
     </nav>
 
     <div class="header-actions">
+      <label class="country-select" for="country-selector">
+        <span data-i18n="countryLabel">Country</span>
+        <select id="country-selector" aria-label="Select GCC country">
+          <option>GCC</option>
+          <option>Saudi Arabia</option>
+          <option>UAE</option>
+          <option>Kuwait</option>
+          <option>Qatar</option>
+          <option>Bahrain</option>
+          <option>Oman</option>
+        </select>
+      </label>
       <button class="icon-button" id="language-toggle" type="button" aria-label="Switch language">AR</button>
       <a class="primary-button" href="#deals" data-i18n="viewDeals">View Deals</a>
     </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="hero-media" aria-hidden="true"></div>
+    <section class="hero compact-hero">
       <div class="hero-content">
         <p class="eyebrow" data-i18n="verifiedSaudi">DealKhaleej | Verified across the GCC</p>
         <h1 data-i18n="heroTitle">Verified Coupon Codes &amp; Deals for GCC Shoppers</h1>
-        <p class="hero-copy" data-i18n-html="heroCopy"><strong>Find the code before checkout.</strong> Browse verified offers for Saudi Arabia, UAE, Kuwait, Qatar, Bahrain, and Oman.</p>
+        <p class="hero-copy" data-i18n="heroCopyPlain">Find verified coupons, store offers, travel deals, and shopping discounts for Saudi Arabia, UAE, Kuwait, Qatar, Bahrain, and Oman.</p>
 
         <form class="search-panel" role="search">
           <label for="deal-search" data-i18n="searchCoupons">Search coupons</label>
@@ -72,118 +89,199 @@
             <button class="primary-button" type="submit" data-i18n="search">Search</button>
           </div>
         </form>
+        <div class="hero-actions">
+          <a class="secondary-button hero-secondary" href="#deals" data-i18n="viewDeals">View Deals</a>
+          <span data-i18n="heroNote">Codes and offers are checked before they appear on DealKhaleej.</span>
+        </div>
+      </div>
+
+      <div class="hero-stats" aria-label="Savings summary" data-i18n-aria-label="savingsSummary">
+        <article>
+          <strong id="active-coupon-count">0</strong>
+          <span data-i18n="activeCoupons">Active coupons</span>
+        </article>
+        <article>
+          <strong id="verified-count">0</strong>
+          <span data-i18n="verifiedToday">Verified today</span>
+        </article>
+        <article>
+          <strong id="category-count">0</strong>
+          <span data-i18n="popularCategories">Popular categories</span>
+        </article>
+        <article>
+          <strong id="freshness-label">Live</strong>
+          <span data-i18n="freshOffers">Fresh GCC offers</span>
+        </article>
       </div>
     </section>
 
-    <section class="quick-strip" aria-label="Savings summary" data-i18n-aria-label="savingsSummary">
-      <article>
-        <strong id="active-coupon-count">0</strong>
-        <span data-i18n="activeCoupons">Active coupons</span>
-      </article>
-      <article>
-        <strong id="verified-count">0</strong>
-        <span data-i18n="verifiedToday">Verified today</span>
-      </article>
-      <article>
-        <strong id="category-count">0</strong>
-        <span data-i18n="popularCategories">Popular categories</span>
-      </article>
-      <article>
-        <strong id="freshness-label">Live</strong>
-        <span data-i18n="freshOffers">Fresh GCC offers</span>
-      </article>
-    </section>
-
-    <section class="category-section" aria-label="Coupon categories" data-i18n-aria-label="couponCategories">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="shopByCategory">Shop by category</p>
-        <h2 data-i18n="browseMenu">Browse the deal menu</h2>
-      </div>
-      <div class="category-rail" role="list">
-        <button class="category-chip active" type="button" data-filter="all" data-i18n="all">All</button>
-        <button class="category-chip favorites-chip" type="button" data-filter="favorites">
-          <span class="favorites-heart" aria-hidden="true">&#9825;</span>
-          <span data-i18n="favorites">Favorites</span>
-          <strong id="favorites-count">0</strong>
-        </button>
-        <button class="category-chip" type="button" data-filter="fashion" data-i18n="fashion">Fashion</button>
-        <button class="category-chip" type="button" data-filter="beauty" data-i18n="beauty">Beauty</button>
-        <button class="category-chip" type="button" data-filter="grocery" data-i18n="grocery">Grocery</button>
-        <button class="category-chip" type="button" data-filter="travel" data-i18n="travel">Travel</button>
-        <button class="category-chip" type="button" data-filter="electronics" data-i18n="electronics">Electronics</button>
-        <button class="category-chip" type="button" data-filter="food" data-i18n="food">Food</button>
-        <button class="category-chip" type="button" data-filter="sports" data-i18n="sportswear">Sportswear</button>
-        <button class="category-chip" type="button" data-filter="services" data-i18n="digitalServices">Digital Services</button>
-      </div>
-    </section>
-
-    <section class="trending-section" aria-labelledby="trending-title">
-      <div class="section-heading">
+    <section class="popular-strip-section" aria-labelledby="popular-strip-title">
+      <div class="section-heading tight">
         <div>
-          <p class="eyebrow" data-i18n="mostClicked">Most clicked today</p>
-          <h2 id="trending-title" data-i18n="trendingToday">Trending Today</h2>
+          <p class="eyebrow" data-i18n="popularStoreStrip">Popular stores</p>
+          <h2 id="popular-strip-title" data-i18n="trustedGccStores">Trusted GCC shopping brands</h2>
         </div>
       </div>
-      <div class="trending-grid" id="trending-grid" aria-live="polite">
-        <p class="empty-state">Loading trending coupons...</p>
+      <div class="logo-strip" id="popular-store-strip" aria-live="polite">
+        <article class="logo-strip-card skeleton-card"></article>
+        <article class="logo-strip-card skeleton-card"></article>
+        <article class="logo-strip-card skeleton-card"></article>
+        <article class="logo-strip-card skeleton-card"></article>
+        <article class="logo-strip-card skeleton-card"></article>
+        <article class="logo-strip-card skeleton-card"></article>
+        <article class="logo-strip-card skeleton-card"></article>
+        <article class="logo-strip-card skeleton-card"></article>
       </div>
     </section>
 
-    <section class="deals-layout" id="deals">
-      <aside class="spotlight">
-        <p class="eyebrow" data-i18n="editorPick">Editor pick</p>
-        <h2 data-i18n="nextFeatured">Your next featured deal</h2>
-        <p data-i18n="featuredCopy">Featured codes and offers for shoppers across the GCC are promoted here.</p>
-        <div class="spotlight-code">
-          <span data-i18n="comingSoon">COMING SOON</span>
-          <a class="secondary-button" href="#stores" data-i18n="browseStores">Browse Stores</a>
-        </div>
-        <img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?auto=format&fit=crop&w=900&q=80" alt="Online shopping parcels and bags">
-      </aside>
-
+    <section class="deals-layout coupon-section" id="deals" aria-labelledby="best-coupons-title">
       <div class="deal-board" aria-live="polite">
         <div class="section-heading compact">
-          <p class="eyebrow" data-i18n="liveBoard">Live board</p>
-          <h2 data-i18n="featuredCoupons">Featured coupon cards</h2>
+          <div>
+            <p class="eyebrow" data-i18n="verifiedCouponsEyebrow">Verified coupons</p>
+            <h2 id="best-coupons-title" data-i18n="bestVerifiedCoupons">Best verified coupons</h2>
+          </div>
+          <a class="section-link" href="#deals" id="view-all-coupons" data-i18n="viewAllCoupons">View All Coupons</a>
         </div>
 
         <div class="coupon-grid" id="coupon-grid">
-          <p class="empty-state">Loading coupons...</p>
+          <article class="coupon-card coupon-skeleton skeleton-card"></article>
+          <article class="coupon-card coupon-skeleton skeleton-card"></article>
+          <article class="coupon-card coupon-skeleton skeleton-card"></article>
+          <article class="coupon-card coupon-skeleton skeleton-card"></article>
+          <article class="coupon-card coupon-skeleton skeleton-card"></article>
+          <article class="coupon-card coupon-skeleton skeleton-card"></article>
         </div>
       </div>
     </section>
 
-    <section class="stores-section" id="stores">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="popularStores">Popular stores</p>
-        <h2 data-i18n="shopOfficialStores">Shop official stores</h2>
+    <section class="category-section" aria-label="Coupon categories" data-i18n-aria-label="couponCategories">
+      <div class="section-heading tight">
+        <div>
+        <p class="eyebrow" data-i18n="shopByCategory">Shop by category</p>
+        <h2 data-i18n="browseMenu">Browse the deal menu</h2>
+        </div>
+      </div>
+      <div class="category-grid" role="list">
+        <button class="category-chip category-card active" type="button" data-filter="all">
+          <span data-i18n="all">All</span>
+        </button>
+        <button class="category-chip category-card" type="button" data-filter="fashion">
+          <span data-i18n="fashion">Fashion</span>
+        </button>
+        <button class="category-chip category-card" type="button" data-filter="electronics">
+          <span data-i18n="electronics">Electronics</span>
+        </button>
+        <button class="category-chip category-card" type="button" data-filter="beauty">
+          <span data-i18n="beauty">Beauty</span>
+        </button>
+        <button class="category-chip category-card" type="button" data-filter="baby-and-kids">
+          <span data-i18n="babyKids">Baby &amp; Kids</span>
+        </button>
+        <button class="category-chip category-card" type="button" data-filter="sports">
+          <span data-i18n="sports">Sports</span>
+        </button>
+        <button class="category-chip category-card" type="button" data-filter="travel">
+          <span data-i18n="travel">Travel</span>
+        </button>
+        <button class="category-chip category-card" type="button" data-filter="food">
+          <span data-i18n="food">Food</span>
+        </button>
+        <button class="category-chip category-card" type="button" data-filter="services">
+          <span data-i18n="digitalServices">Digital Services</span>
+        </button>
+        <button class="category-chip category-card favorites-chip" type="button" data-filter="favorites">
+          <span data-i18n="favorites">Favorites</span>
+          <strong id="favorites-count">0</strong>
+        </button>
+      </div>
+    </section>
+
+    <section class="featured-travel-section" aria-labelledby="featured-travel-title">
+      <div class="section-heading tight">
+        <div>
+          <p class="eyebrow" data-i18n="travelDealsEyebrow">Travel deals</p>
+          <h2 id="featured-travel-title" data-i18n="featuredTravelDeals">Featured travel deals</h2>
+        </div>
+      </div>
+      <div class="travel-card-grid home-travel-grid">
+        <a href="/travel/flights">
+          <strong data-i18n="flights">Flights</strong>
+          <span data-i18n="flightsCopy">Compare routes and flight savings for GCC trips.</span>
+        </a>
+        <a href="/travel/hotels">
+          <strong data-i18n="hotels">Hotels</strong>
+          <span data-i18n="hotelsCopy">Find hotel offers for city breaks and family stays.</span>
+        </a>
+        <a href="/travel/activities">
+          <strong data-i18n="activities">Activities</strong>
+          <span data-i18n="activitiesCopy">Discover attractions, tours, and things to do.</span>
+        </a>
+        <a href="/travel/car-rentals">
+          <strong data-i18n="carRentals">Car Rentals</strong>
+          <span data-i18n="carRentalsCopy">Browse car rental options for airport and city travel.</span>
+        </a>
+        <a href="/travel/esim">
+          <strong data-i18n="esim">eSIM</strong>
+          <span data-i18n="esimCopy">Stay connected while traveling across the region.</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="stores-section" id="stores" aria-labelledby="store-directory-title">
+      <div class="section-heading compact">
+        <div>
+          <p class="eyebrow" data-i18n="popularStores">Popular stores</p>
+          <h2 id="store-directory-title" data-i18n="storeDirectory">Popular stores directory</h2>
+        </div>
+        <a class="section-link" href="#stores" id="view-all-stores" data-i18n="viewAllStores">View All Stores</a>
       </div>
       <div class="store-grid" id="store-grid">
-        <p class="empty-state">Loading stores...</p>
+        <article class="store-skeleton skeleton-card"></article>
+        <article class="store-skeleton skeleton-card"></article>
+        <article class="store-skeleton skeleton-card"></article>
+        <article class="store-skeleton skeleton-card"></article>
+        <article class="store-skeleton skeleton-card"></article>
+        <article class="store-skeleton skeleton-card"></article>
+        <article class="store-skeleton skeleton-card"></article>
+        <article class="store-skeleton skeleton-card"></article>
       </div>
     </section>
 
     <section class="guide-section" id="guide">
       <div class="guide-copy">
         <p class="eyebrow" data-i18n="checkoutFlow">Simple checkout flow</p>
-        <h2 data-i18n="howShoppersUse">How shoppers use DealKhaleej</h2>
-        <p data-i18n="guideCopy">Search for your store, copy a verified coupon, then paste it into the promo field at checkout. We separate coupon codes from regular offers so shoppers know what to expect before leaving the page.</p>
+        <h2 data-i18n="howShoppersUse">How DealKhaleej works</h2>
+        <p data-i18n="guideCopy">Search for your store, copy a verified coupon, then paste it into the promo field at checkout. Offer-only deals send you straight to the store page, so you always know whether a code is required.</p>
       </div>
       <ol class="steps">
         <li><span class="step-number">01</span> <span data-i18n="stepOne">Pick a store or category.</span></li>
-        <li><span class="step-number">02</span> <span data-i18n="stepTwo">Copy a code or save an offer.</span></li>
-        <li><span class="step-number">03</span> <span data-i18n="stepThree">Apply it before payment.</span></li>
+        <li><span class="step-number">02</span> <span data-i18n="stepTwo">Copy a code or open an offer.</span></li>
+        <li><span class="step-number">03</span> <span data-i18n="stepThree">Verify the discount before payment.</span></li>
       </ol>
     </section>
 
-    <section class="app-banner" id="app">
-      <div>
-        <p class="eyebrow" data-i18n="mobileReady">Mobile ready</p>
-        <h2 data-i18n="neverMiss">Never miss a checkout code.</h2>
-        <p data-i18n="alertsCopy">Turn on alerts for fashion drops, grocery weekends, travel deals, and new-user promos.</p>
-        <p class="push-alert-status" id="push-alert-status" role="status" aria-live="polite"></p>
+    <section class="seo-section" aria-labelledby="seo-title">
+      <div class="section-heading tight">
+        <div>
+          <p class="eyebrow" data-i18n="liveBoard">Live board</p>
+          <h2 id="seo-title" data-i18n="couponCodesAcrossGcc">Coupon Codes and Online Deals Across the GCC</h2>
+        </div>
       </div>
-      <button class="primary-button" id="push-alert-button" type="button" data-i18n="enableAlerts">Enable Deal Alerts</button>
+      <div class="seo-grid">
+        <article>
+          <h3 data-i18n="couponCodesAcrossGcc">Coupon Codes and Online Deals Across the GCC</h3>
+          <p data-i18n="seoGccCopy">DealKhaleej helps shoppers compare verified coupon codes and online promotions from brands serving Saudi Arabia, UAE, Kuwait, Qatar, Bahrain, and Oman. We keep the homepage focused on active offers so shoppers can move quickly from search to checkout.</p>
+        </article>
+        <article>
+          <h3 data-i18n="howUseCouponCode">How to Use a Coupon Code</h3>
+          <p data-i18n="seoUseCodeCopy">Choose a store, copy the code shown on the coupon card, open the deal link, and paste the code into the checkout promo field. For offer-only deals, use the Get Offer button and confirm the promotion on the store website before paying.</p>
+        </article>
+        <article>
+          <h3 data-i18n="howVerifiesOffers">How DealKhaleej Verifies Offers</h3>
+          <p data-i18n="seoVerifyCopy">We organize codes, expiry dates, store pages, and offer notes so shoppers can understand each deal before leaving DealKhaleej. Promotions may change, so always review the final price and terms on the advertiser website.</p>
+        </article>
+      </div>
     </section>
   </main>
 
@@ -193,6 +291,10 @@
         <p class="eyebrow" data-i18n="dealAlerts">Deal alerts</p>
         <h2 id="newsletter-title" data-i18n="newsletterTitle">Get fresh coupon codes by email.</h2>
         <p class="newsletter-copy" data-i18n="newsletterCopy">New GCC offers and popular savings, delivered when they matter.</p>
+        <div class="deal-alert-actions">
+          <button class="secondary-button" id="push-alert-button" type="button" data-i18n="enableAlerts">Enable Deal Alerts</button>
+          <p class="push-alert-status" id="push-alert-status" role="status" aria-live="polite"></p>
+        </div>
       </div>
       <form class="newsletter-form" id="newsletter-form">
         <label for="newsletter-email" data-i18n="emailAddress">Email address</label>
@@ -208,17 +310,47 @@
   <div class="toast" id="toast" role="status" aria-live="polite">Code copied</div>
 
   <footer class="site-footer">
-    <p data-i18n="footerBrand">DealKhaleej GCC</p>
-    <nav aria-label="Footer navigation">
-      <a href="#" data-i18n="saudiArabia">Saudi Arabia</a>
-      <a href="#" data-i18n="uae">UAE</a>
-      <a href="#" data-i18n="kuwait">Kuwait</a>
-      <a href="#" data-i18n="qatar">Qatar</a>
-      <a href="#" data-i18n="bahrain">Bahrain</a>
-      <a href="#" data-i18n="oman">Oman</a>
-      <a href="#" data-i18n="contact">Contact</a>
-      <a href="/blog" data-i18n="blog">Blog</a>
-    </nav>
+    <div class="footer-grid">
+      <section>
+        <h2 data-i18n="footerBrand">DealKhaleej GCC</h2>
+        <p data-i18n="footerDisclosure">DealKhaleej may earn a commission when shoppers use affiliate links. We keep coupons and offers organized so GCC shoppers can compare savings before checkout.</p>
+      </section>
+      <nav aria-label="Popular categories">
+        <h2 data-i18n="popularCategoriesFooter">Popular Categories</h2>
+        <a href="#deals" data-i18n="fashion">Fashion</a>
+        <a href="#deals" data-i18n="electronics">Electronics</a>
+        <a href="#deals" data-i18n="beauty">Beauty</a>
+        <a href="#deals" data-i18n="babyKids">Baby &amp; Kids</a>
+        <a href="#deals" data-i18n="digitalServices">Digital Services</a>
+      </nav>
+      <nav aria-label="Travel">
+        <h2 data-i18n="travel">Travel</h2>
+        <a href="/travel/flights" data-i18n="flights">Flights</a>
+        <a href="/travel/hotels" data-i18n="hotels">Hotels</a>
+        <a href="/travel/activities" data-i18n="activities">Activities</a>
+        <a href="/travel/car-rentals" data-i18n="carRentals">Car Rentals</a>
+        <a href="/travel/esim" data-i18n="esim">eSIM</a>
+      </nav>
+      <nav aria-label="GCC countries">
+        <h2 data-i18n="gccCountries">GCC Countries</h2>
+        <a href="#deals" data-i18n="saudiArabia">Saudi Arabia</a>
+        <a href="#deals" data-i18n="uae">UAE</a>
+        <a href="#deals" data-i18n="kuwait">Kuwait</a>
+        <a href="#deals" data-i18n="qatar">Qatar</a>
+        <a href="#deals" data-i18n="bahrain">Bahrain</a>
+        <a href="#deals" data-i18n="oman">Oman</a>
+      </nav>
+      <nav aria-label="Help and legal">
+        <h2 data-i18n="helpLegal">Help &amp; Legal</h2>
+        <a href="/about" data-i18n="about">About</a>
+        <a href="/contact" data-i18n="contact">Contact</a>
+        <a href="/privacy-policy" data-i18n="privacyPolicy">Privacy Policy</a>
+        <a href="/terms" data-i18n="terms">Terms</a>
+        <a href="/affiliate-disclosure" data-i18n="affiliateDisclosure">Affiliate Disclosure</a>
+        <a href="/blog" data-i18n="blog">Blog</a>
+        <a href="/sitemap.xml" data-i18n="sitemap">Sitemap</a>
+      </nav>
+    </div>
   </footer>
 
   <a class="telegram-float" href="https://t.me/dealkhaleej" target="_blank" rel="noopener noreferrer">
