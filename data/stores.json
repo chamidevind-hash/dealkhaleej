@@ -85,10 +85,10 @@
   },
   {
     "name": "Renty",
-    "category": "Travel",
-    "url": "https://renty.ae/",
+    "category": "Car Rentals & Travel",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1828&aff_id=70942",
     "logo": "assets/logos/renty.png",
-    "description": "Renty travel offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+    "description": "Renty car rentals & travel affiliate offers for UAE shoppers, available through verified DealKhaleej links."
   },
   {
     "name": "Yallamomz",
@@ -116,14 +116,14 @@
     "category": "Electronics",
     "url": "https://go.urtrackinglink.com/aff_c?offer_id=1961&aff_id=70942",
     "logo": "assets/logos/samsung-uae.png",
-    "description": "Samsung UAE electronics offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+    "description": "Samsung UAE electronics affiliate offers for UAE shoppers, available through verified DealKhaleej links."
   },
   {
     "name": "Samsung KSA",
     "category": "Electronics",
     "url": "https://go.urtrackinglink.com/aff_c?offer_id=1960&aff_id=70942",
     "logo": "assets/logos/samsung-ksa.png",
-    "description": "Samsung KSA electronics offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+    "description": "Samsung KSA electronics affiliate offers for Saudi Arabia shoppers, available through verified DealKhaleej links."
   },
   {
     "name": "Now Now UAE",
@@ -165,14 +165,14 @@
     "category": "Electronics",
     "url": "https://go.urtrackinglink.com/aff_c?offer_id=1953&aff_id=70942",
     "logo": "assets/logos/revibe.png",
-    "description": "Revibe GCC electronics offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+    "description": "Revibe GCC electronics affiliate offers for GCC shoppers, available through verified DealKhaleej links."
   },
   {
     "name": "YSL Beauty SA",
     "category": "Beauty",
     "url": "https://go.urtrackinglink.com/aff_c?offer_id=1952&aff_id=70942",
     "logo": "assets/logos/ysl-beauty.png",
-    "description": "YSL Beauty SA beauty offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+    "description": "YSL Beauty SA beauty affiliate offers for Saudi Arabia shoppers, available through verified DealKhaleej links."
   },
   {
     "name": "PUMA",
@@ -298,7 +298,7 @@
     "category": "Gifts",
     "url": "https://go.urtrackinglink.com/aff_c?offer_id=378&aff_id=70942",
     "logo": "assets/logos/spring-feeling.png",
-    "description": "Spring Feeling UAE gifts offers for GCC shoppers, available through verified DealKhaleej coupon and affiliate links."
+    "description": "Spring Feeling gifts affiliate offers for UAE shoppers, available through verified DealKhaleej links."
   },
   {
     "name": "Agoda Hotels GCC",
@@ -348,5 +348,180 @@
     "url": "https://temu.to/k/ecr4gunpxqi",
     "logo": "assets/logos/temu.png",
     "description": "Temu marketplace offers, coupon bundles, free shipping promotions, and shopping deals for GCC shoppers."
+  },
+  {
+    "name": "Backcomfort SA",
+    "category": "Home",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1949&aff_id=70942",
+    "logo": "assets/logos/backcomfort.png",
+    "description": "Backcomfort SA home affiliate offers for Saudi Arabia shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Sun & Sand Sports",
+    "category": "Sports & Fashion",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1948&aff_id=70942",
+    "logo": "assets/logos/sun-and-sand-sports.png",
+    "description": "Sun & Sand Sports sports & fashion affiliate offers for UAE, Saudi Arabia, Kuwait shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Under Armour",
+    "category": "Sports & Fashion",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1947&aff_id=70942",
+    "logo": "assets/logos/under-armour.png",
+    "description": "Under Armour sports & fashion affiliate offers for UAE, Saudi Arabia shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "H&M GCC",
+    "category": "Fashion",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1945&aff_id=70942",
+    "logo": "assets/logos/hm.png",
+    "description": "H&M GCC fashion affiliate offers for UAE, Bahrain, Jordan, Kuwait, Qatar, Saudi Arabia shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Plaud",
+    "category": "Electronics",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1944&aff_id=70942",
+    "logo": "assets/logos/plaud.png",
+    "description": "Plaud electronics affiliate offers for UAE, Saudi Arabia shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Adidas UAE",
+    "category": "Sports & Fashion",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1943&aff_id=70942",
+    "logo": "assets/logos/adidas.png",
+    "description": "Adidas UAE sports & fashion affiliate offers for UAE shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Nike Qatar App",
+    "category": "Sports & Fashion",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1930&aff_id=70942",
+    "logo": "assets/logos/nike.png",
+    "description": "Nike Qatar App sports & fashion affiliate offers for Qatar shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Nike KSA Web",
+    "category": "Sports & Fashion",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1924&aff_id=70942",
+    "logo": "assets/logos/nike.png",
+    "description": "Nike KSA Web sports & fashion affiliate offers for Saudi Arabia shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Klook Middle East & India",
+    "category": "Travel & Activities",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1872&aff_id=70942",
+    "logo": "assets/logos/klook.png",
+    "description": "Klook Middle East & India travel & activities affiliate offers for Middle East and India shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Nike Kuwait Web",
+    "category": "Sports & Fashion",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1926&aff_id=70942",
+    "logo": "assets/logos/nike.png",
+    "description": "Nike Kuwait Web sports & fashion affiliate offers for Kuwait shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Nike Qatar Web",
+    "category": "Sports & Fashion",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1925&aff_id=70942",
+    "logo": "assets/logos/nike.png",
+    "description": "Nike Qatar Web sports & fashion affiliate offers for Qatar shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Nike UAE Web",
+    "category": "Sports & Fashion",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1907&aff_id=70942",
+    "logo": "assets/logos/nike.png",
+    "description": "Nike UAE Web sports & fashion affiliate offers for UAE shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Nomad eSIM",
+    "category": "eSIM & Travel Essentials",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1904&aff_id=70942",
+    "logo": "assets/logos/nomad-esim.png",
+    "description": "Nomad eSIM esim & travel essentials affiliate offers for Global shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "ASOS GCC",
+    "category": "Fashion",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1903&aff_id=70942",
+    "logo": "assets/logos/asos.png",
+    "description": "ASOS GCC fashion affiliate offers for GCC shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Level Shoes",
+    "category": "Luxury Fashion",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1899&aff_id=70942",
+    "logo": "assets/logos/level-shoes.png",
+    "description": "Level Shoes luxury fashion affiliate offers for Global shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "SHEIN",
+    "category": "Fashion",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1882&aff_id=70942",
+    "logo": "assets/logos/shein.png",
+    "description": "SHEIN fashion affiliate offers for Saudi Arabia, UAE, Kuwait, Europe shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Expedia KSA",
+    "category": "Travel",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1868&aff_id=70942",
+    "logo": "assets/logos/expedia.png",
+    "description": "Expedia KSA travel affiliate offers for Saudi Arabia shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "carVertical UAE",
+    "category": "Automotive Services",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1850&aff_id=70942",
+    "logo": "assets/logos/carvertical.png",
+    "description": "carVertical UAE automotive services affiliate offers for UAE shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Gameseal",
+    "category": "Gaming & Digital Services",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1807&aff_id=70942",
+    "logo": "assets/logos/gameseal.png",
+    "description": "Gameseal gaming & digital services affiliate offers for Global shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Flynas",
+    "category": "Flights",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1799&aff_id=70942",
+    "logo": "assets/logos/flynas.png",
+    "description": "Flynas flights affiliate offers for Global shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Nazih UAE",
+    "category": "Beauty",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1790&aff_id=70942",
+    "logo": "assets/logos/nazih.png",
+    "description": "Nazih UAE beauty affiliate offers for UAE shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Air India",
+    "category": "Flights",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1777&aff_id=70942",
+    "logo": "assets/logos/air-india.png",
+    "description": "Air India flights affiliate offers for Australia, UK, USA, Canada, ASEAN, Europe, India shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Kaspersky",
+    "category": "Digital Services",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1734&aff_id=70942",
+    "logo": "assets/logos/kaspersky.png",
+    "description": "Kaspersky digital services affiliate offers for Global shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Shopify",
+    "category": "Digital Services",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1724&aff_id=70942",
+    "logo": "assets/logos/shopify.png",
+    "description": "Shopify digital services affiliate offers for Global shoppers, available through verified DealKhaleej links."
+  },
+  {
+    "name": "Foot Locker UAE",
+    "category": "Sports & Fashion",
+    "url": "https://go.urtrackinglink.com/aff_c?offer_id=1702&aff_id=70942",
+    "logo": "assets/logos/foot-locker.png",
+    "description": "Foot Locker UAE sports & fashion affiliate offers for UAE shoppers, available through verified DealKhaleej links."
   }
 ]
