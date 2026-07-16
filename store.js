@@ -1,50 +1,5 @@
-const storeLogo = document.querySelector("#store-logo");
-const storeInitials = document.querySelector("#store-initials");
-const storeCategory = document.querySelector("#store-category");
-const storeTitle = document.querySelector("#store-title");
-const couponTitle = document.querySelector("#coupon-title");
-const officialLink = document.querySelector("#official-link");
-const couponGrid = document.querySelector("#store-coupon-grid");
 const favoritesStorageKey = "dealkhaleejFavoriteCoupons";
 let favoriteCoupons = loadFavoriteCoupons();
-
-function getCurrentMonthYear() {
-  return new Date().toLocaleString("en-US", { month: "long", year: "numeric" });
-}
-
-function escapeHtml(value) {
-  return String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-function storeSlug(value) {
-  return String(value)
-    .toLowerCase()
-    .replace(/&/g, " ")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .replace(/-{2,}/g, "-");
-}
-
-function initials(name) {
-  return name
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0])
-    .join("")
-    .toUpperCase();
-}
-
-function assetPath(value) {
-  const path = String(value || "/assets/logos/placeholder.png").trim();
-  if (/^(?:https?:)?\/\//i.test(path) || path.startsWith("/")) return path;
-  return `/${path}`;
-}
 
 function loadFavoriteCoupons() {
   try {
@@ -59,92 +14,58 @@ function saveFavoriteCoupons() {
   try {
     localStorage.setItem(favoritesStorageKey, JSON.stringify(Array.from(favoriteCoupons)));
   } catch {
-    // Keep favorites usable for this page visit when storage is unavailable.
+    // Favorites still work for the current visit when storage is unavailable.
   }
-}
-
-function favoriteButton(coupon) {
-  const isFavorite = favoriteCoupons.has(String(coupon.id));
-  const label = isFavorite ? `Remove ${coupon.title} from favorites` : `Save ${coupon.title} to favorites`;
-
-  return `
-    <button class="favorite-button${isFavorite ? " active" : ""}" type="button" data-favorite-id="${escapeHtml(coupon.id)}" data-coupon-title="${escapeHtml(coupon.title)}" aria-label="${escapeHtml(label)}" aria-pressed="${isFavorite}">
-      <span aria-hidden="true">${isFavorite ? "&#9829;" : "&#9825;"}</span>
-    </button>
-  `;
-}
-
-function toggleFavorite(button) {
-  const id = String(button.dataset.favoriteId);
-  const isFavorite = !favoriteCoupons.has(id);
-
-  if (isFavorite) {
-    favoriteCoupons.add(id);
-  } else {
-    favoriteCoupons.delete(id);
-  }
-
-  saveFavoriteCoupons();
-  button.classList.toggle("active", isFavorite);
-  button.setAttribute("aria-pressed", String(isFavorite));
-  button.setAttribute("aria-label", `${isFavorite ? "Remove" : "Save"} ${button.dataset.couponTitle} ${isFavorite ? "from" : "to"} favorites`);
-  button.closest(".coupon-card").dataset.favorite = String(isFavorite);
-  button.querySelector("span").innerHTML = isFavorite ? "&#9829;" : "&#9825;";
 }
 
 function setupLogoFallback(image) {
   const tile = image.closest(".logo-tile");
+  if (!tile) return;
 
-  image.addEventListener("load", () => {
-    tile.classList.add("has-logo");
-    tile.classList.remove("logo-missing");
-  }, { once: true });
+  function syncState() {
+    const hasLogo = image.naturalWidth > 0;
+    tile.classList.toggle("has-logo", hasLogo);
+    tile.classList.toggle("logo-missing", !hasLogo);
+  }
 
+  image.addEventListener("load", syncState);
   image.addEventListener("error", () => {
     tile.classList.add("logo-missing");
     tile.classList.remove("has-logo");
-  }, { once: true });
+  });
 
-  if (image.complete) {
-    tile.classList.toggle("has-logo", image.naturalWidth > 0);
-    tile.classList.toggle("logo-missing", image.naturalWidth === 0);
+  if (image.complete) syncState();
+}
+
+function syncFavoriteButton(button) {
+  const id = String(button.dataset.favoriteId || "");
+  const isFavorite = favoriteCoupons.has(id);
+  const icon = button.querySelector("span");
+
+  button.classList.toggle("active", isFavorite);
+  button.setAttribute("aria-pressed", String(isFavorite));
+  button.setAttribute("aria-label", `${isFavorite ? "Remove" : "Save"} ${button.dataset.couponTitle || "coupon"} ${isFavorite ? "from" : "to"} favorites`);
+  if (icon) icon.innerHTML = isFavorite ? "&#9829;" : "&#9825;";
+
+  const card = button.closest(".coupon-card");
+  if (card) card.dataset.favorite = String(isFavorite);
+}
+
+function toggleFavorite(button) {
+  const id = String(button.dataset.favoriteId || "");
+  if (!id) return;
+
+  if (favoriteCoupons.has(id)) {
+    favoriteCoupons.delete(id);
+  } else {
+    favoriteCoupons.add(id);
   }
+
+  saveFavoriteCoupons();
+  syncFavoriteButton(button);
 }
 
-function couponCard(coupon) {
-  const couponCode = String(coupon.code || "").trim();
-  const isCode = couponCode && !["deal", "offer"].includes(couponCode.toLowerCase());
-  const actionMarkup = isCode
-    ? `
-        <span>${escapeHtml(couponCode)}</span>
-        <button type="button" data-copy="${escapeHtml(couponCode)}" data-coupon-id="${escapeHtml(coupon.id)}" data-store="${escapeHtml(coupon.store)}" data-code="${escapeHtml(couponCode)}" data-title="${escapeHtml(coupon.title)}">Copy code</button>
-        <a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}">Shop Deal</a>`
-    : `<a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}">Get Offer</a>`;
-
-  return `
-    <article class="coupon-card" data-category="${escapeHtml(coupon.category)}" data-keywords="${escapeHtml(coupon.keywords)}" data-favorite="${favoriteCoupons.has(String(coupon.id))}">
-      <div class="logo-tile">
-        <img src="${escapeHtml(assetPath(coupon.logo))}" alt="${escapeHtml(coupon.store)} logo">
-        <span>${escapeHtml(initials(coupon.store))}</span>
-      </div>
-      <div class="coupon-details">
-        <div class="coupon-store-row">
-          <p class="store-name">${escapeHtml(coupon.store)}</p>
-          ${favoriteButton(coupon)}
-        </div>
-        ${coupon.verified ? '<span class="trending-badge">Trending &#128293;</span>' : ""}
-        <h3>${escapeHtml(coupon.title)}</h3>
-        <p class="meta">${escapeHtml(coupon.meta)}</p>
-        ${coupon.expiry ? `<p class="expiry">Ends: ${escapeHtml(coupon.expiry)}</p>` : ""}
-      </div>
-      <div class="${isCode ? "coupon-action" : "coupon-action muted link-only"}">
-        ${actionMarkup}
-      </div>
-    </article>
-  `;
-}
-
-function trackCouponClick(button) {
+function trackCouponCopy(button) {
   fetch("/api/clicks", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -157,55 +78,69 @@ function trackCouponClick(button) {
   }).catch(() => {});
 }
 
-async function loadStore() {
-  const slug = decodeURIComponent(location.pathname.replace(/^\/store\//, "").replace(/\/$/, "")).toLowerCase();
-  const monthYear = getCurrentMonthYear();
-  const [storeResponse, couponResponse] = await Promise.all([
-    fetch("/api/stores"),
-    fetch("/api/coupons")
-  ]);
-  const stores = await storeResponse.json();
-  const coupons = await couponResponse.json();
-  const store = stores.find((item) => item.name.toLowerCase() === slug || storeSlug(item.name) === slug);
+async function copyCoupon(button) {
+  const originalText = button.textContent;
 
-  if (!store) {
-    storeTitle.textContent = "Store not found";
-    couponGrid.innerHTML = '<p class="empty-state">Return to the store directory to choose an available store.</p>';
-    return;
-  }
+  trackCouponCopy(button);
+  await navigator.clipboard.writeText(button.dataset.copy || "").catch(() => {});
+  button.textContent = "Copied";
+  button.disabled = true;
 
-  document.title = `${store.name} Coupon Codes Saudi Arabia - ${monthYear} | DealKhaleej`;
-  document.querySelector('meta[name="description"]').content = `Find verified ${store.name} coupon codes, promo codes, and deals for Saudi Arabia in ${monthYear}.`;
-  storeTitle.textContent = `${store.name} Coupon Codes Saudi Arabia`;
-  couponTitle.textContent = `${store.name} Coupon Codes`;
-  storeCategory.textContent = store.category;
-  storeInitials.textContent = initials(store.name);
-  storeLogo.src = assetPath(store.logo);
-  storeLogo.alt = `${store.name} logo`;
-  officialLink.href = store.url;
-  setupLogoFallback(storeLogo);
-
-  const available = coupons.filter((coupon) => coupon.active && coupon.store.toLowerCase() === store.name.toLowerCase());
-  couponGrid.innerHTML = available.length
-    ? available.map(couponCard).join("")
-    : '<p class="empty-state">No active coupons for this store yet.</p>';
-  couponGrid.querySelectorAll(".logo-tile img").forEach(setupLogoFallback);
+  setTimeout(() => {
+    button.textContent = originalText;
+    button.disabled = false;
+  }, 1600);
 }
 
-document.addEventListener("click", async (event) => {
+async function subscribeToNewsletter(form) {
+  const status = document.querySelector("#store-newsletter-status");
+  const button = form.querySelector("button[type='submit']");
+  const email = new FormData(form).get("email");
+
+  if (status) {
+    status.textContent = "";
+    status.classList.remove("error");
+  }
+  if (button) button.disabled = true;
+
+  try {
+    const response = await fetch("/api/newsletter", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email })
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error || "Unable to subscribe right now.");
+    form.reset();
+    if (status) status.textContent = result.message || "Thanks! You are subscribed for deal alerts.";
+  } catch (error) {
+    if (status) {
+      status.textContent = error.message || "Unable to subscribe right now.";
+      status.classList.add("error");
+    }
+  } finally {
+    if (button) button.disabled = false;
+  }
+}
+
+document.querySelectorAll(".logo-tile img").forEach(setupLogoFallback);
+document.querySelectorAll("[data-favorite-id]").forEach(syncFavoriteButton);
+
+document.addEventListener("click", (event) => {
   const favoriteButton = event.target.closest("[data-favorite-id]");
   if (favoriteButton) {
     toggleFavorite(favoriteButton);
     return;
   }
 
-  const button = event.target.closest("[data-copy]");
-  if (!button) return;
-  trackCouponClick(button);
-  await navigator.clipboard.writeText(button.dataset.copy).catch(() => {});
-  button.textContent = "Copied";
+  const copyButton = event.target.closest("[data-copy]");
+  if (copyButton) copyCoupon(copyButton);
 });
 
-loadStore().catch(() => {
-  couponGrid.innerHTML = '<p class="empty-state">Unable to load store offers right now.</p>';
+document.addEventListener("submit", (event) => {
+  const form = event.target.closest("#store-newsletter-form");
+  if (!form) return;
+
+  event.preventDefault();
+  subscribeToNewsletter(form);
 });

@@ -3,6 +3,7 @@ const fs = require("fs/promises");
 const path = require("path");
 const { randomUUID, timingSafeEqual } = require("crypto");
 const { availableSources, importFromSource } = require("./imports/providers");
+const { renderStorePage } = require("./store-page-renderer");
 
 const root = __dirname;
 const dataFile = path.join(root, "data", "coupons.json");
@@ -12,6 +13,7 @@ const outboundClicksFile = path.join(root, "data", "outbound-clicks.json");
 const importHistoryFile = path.join(root, "data", "import-history.json");
 const newsletterFile = path.join(root, "data", "newsletter.json");
 const articlesFile = path.join(root, "data", "articles.json");
+const storeContentFile = path.join(root, "data", "store-content.json");
 const port = Number(process.env.PORT || 5173);
 const adminPassword = process.env.ADMIN_PASSWORD;
 const adminSessions = new Set();
@@ -186,6 +188,26 @@ async function serveArticlePage(response, slug) {
   sendText(response, 200, "text/html", page);
 }
 
+async function serveStorePage(response, slug) {
+  const [stores, coupons, articles, contentEntries] = await Promise.all([
+    readStores(),
+    readCoupons(),
+    readArticles(),
+    readStoreContent()
+  ]);
+  const normalizedSlug = storeSlug(slug);
+  const store = stores.find((item) => storeSlug(item.slug || item.name) === normalizedSlug || storeSlug(item.name) === normalizedSlug);
+
+  if (!store) {
+    sendText(response, 404, "text/html", "<!DOCTYPE html><title>Store Not Found | DealKhaleej</title><p>Store not found. <a href=\"/\">Return to DealKhaleej.</a></p>");
+    return;
+  }
+
+  const content = contentEntries.find((item) => storeSlug(item.slug || item.displayName || "") === storeSlug(store.slug || store.name));
+  const page = renderStorePage({ store, stores, coupons, articles, content, siteUrl });
+  sendText(response, 200, "text/html", page);
+}
+
 function sitemapDate(values) {
   const dates = values
     .map((value) => new Date(value))
@@ -280,6 +302,16 @@ async function readNewsletter() {
 async function readArticles() {
   const text = await fs.readFile(articlesFile, "utf8");
   return JSON.parse(text);
+}
+
+async function readStoreContent() {
+  try {
+    const text = await fs.readFile(storeContentFile, "utf8");
+    return JSON.parse(text);
+  } catch (error) {
+    if (error.code === "ENOENT") return [];
+    throw error;
+  }
 }
 
 async function writeCoupons(coupons) {
@@ -604,6 +636,11 @@ async function serveStatic(request, response, url) {
   const isStoreRoute = /^\/store\/[^/]+\/?$/.test(url.pathname);
   const isBlogIndexRoute = /^\/blog\/?$/.test(url.pathname);
   const isArticleRoute = /^\/blog\/[^/]+\/?$/.test(url.pathname);
+  if (isStoreRoute) {
+    await serveStorePage(response, decodeURIComponent(url.pathname.replace(/^\/store\//, "").replace(/\/$/, "")));
+    return;
+  }
+
   if (isArticleRoute) {
     await serveArticlePage(response, decodeURIComponent(url.pathname.replace(/^\/blog\//, "").replace(/\/$/, "")));
     return;
@@ -611,9 +648,7 @@ async function serveStatic(request, response, url) {
 
   const requestedPath = url.pathname === "/"
     ? "/index.html"
-    : isStoreRoute
-      ? "/store.html"
-      : isBlogIndexRoute
+    : isBlogIndexRoute
         ? "/blog.html"
         : staticPageRoutes.get(url.pathname.replace(/\/$/, "")) || decodeURIComponent(url.pathname);
   const filePath = path.normalize(path.join(root, requestedPath));
