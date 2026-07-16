@@ -29,6 +29,7 @@ const countryContext = window.DealKhaleejCountry || {
   currency: "SAR",
   locale: "en"
 };
+const countrySubdomainsEnabled = Boolean(window.DealKhaleejCountrySubdomainsEnabled);
 
 let coupons = [];
 let stores = [];
@@ -362,6 +363,12 @@ function apiUrl(path) {
   return window.DealKhaleejCountryApiUrl ? window.DealKhaleejCountryApiUrl(path) : path;
 }
 
+function cleanSiteUrl() {
+  return countrySubdomainsEnabled && countryContext.hostname
+    ? `https://${countryContext.hostname}/`
+    : "https://dealkhaleej.com/";
+}
+
 function countryPageText() {
   if (countryContext.code === "gcc") {
     return {
@@ -385,7 +392,7 @@ function countryPageText() {
 }
 
 function updateStructuredData(monthYear) {
-  const currentUrl = `https://${countryContext.hostname}/`;
+  const currentUrl = cleanSiteUrl();
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -411,6 +418,12 @@ function updateStructuredData(monthYear) {
   }
 
   jsonLd.textContent = JSON.stringify(structuredData);
+}
+
+function noActiveOffersText() {
+  return countryContext.code === "gcc"
+    ? translate("noActive")
+    : `No active offers are currently available for ${countryContext.name}.`;
 }
 
 function updateMonthlyPageContent() {
@@ -802,7 +815,7 @@ function renderCoupons() {
 
   couponGrid.innerHTML = activeCoupons.length
     ? `${visibleCoupons.map(couponCard).join("")}<p class="empty-state filter-empty is-hidden">${escapeHtml(translate("noFavorites"))}</p>`
-    : `<p class="empty-state">${escapeHtml(translate("noActive"))}</p>`;
+    : `<p class="empty-state">${escapeHtml(noActiveOffersText())}</p>`;
 
   storeGrid.innerHTML = stores.length
     ? visibleStores.map(storeCard).join("")

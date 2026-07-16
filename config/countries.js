@@ -1,5 +1,7 @@
 const GCC_COUNTRY_CODES = ["sa", "ae", "kw", "qa", "bh", "om"];
 const COUNTRY_CODES = ["gcc", ...GCC_COUNTRY_CODES];
+const ROOT_HOSTNAME = "dealkhaleej.com";
+const COUNTRY_SUBDOMAINS_ENABLED = /^true$/i.test(String(process.env.COUNTRY_SUBDOMAINS_ENABLED || ""));
 
 const COUNTRIES = {
   gcc: {
@@ -90,24 +92,31 @@ function countryFromHostname(hostname) {
 
 function countryFromRequest(request, url) {
   const hostname = normalizeHost(request.headers.host || "");
-  const hostCountry = countryFromHostname(hostname);
   const queryCountry = normalizeCountryCode(url.searchParams.get("country"), "");
 
-  if (queryCountry && isLocalHostname(hostname)) {
+  if (queryCountry) {
     return COUNTRIES[queryCountry];
   }
 
-  return COUNTRIES[hostCountry] || COUNTRIES.gcc;
+  if (COUNTRY_SUBDOMAINS_ENABLED) {
+    return COUNTRIES[countryFromHostname(hostname)] || COUNTRIES.gcc;
+  }
+
+  return COUNTRIES.gcc;
 }
 
 function siteUrlForCountry(countryCode = "gcc") {
   const country = COUNTRIES[normalizeCountryCode(countryCode)];
-  return `https://${country.hostname}`;
+  return `https://${COUNTRY_SUBDOMAINS_ENABLED ? country.hostname : ROOT_HOSTNAME}`;
 }
 
 function routeUrlForCountry(countryCode, pathname = "/", search = "") {
   const normalizedPath = pathname.startsWith("/") ? pathname : `/${pathname}`;
-  return `${siteUrlForCountry(countryCode)}${normalizedPath}${search || ""}`;
+  const params = new URLSearchParams(String(search || "").replace(/^\?/, ""));
+  if (!COUNTRY_SUBDOMAINS_ENABLED) params.delete("country");
+  const normalizedSearch = params.toString();
+
+  return `${siteUrlForCountry(countryCode)}${normalizedPath}${normalizedSearch ? `?${normalizedSearch}` : ""}`;
 }
 
 function countrySelectorOptions(selectedCode = "gcc") {
@@ -130,10 +139,12 @@ function countrySelectorHtml(selectedCode = "gcc", id = "country-selector") {
 
 function clientCountryScript(countryCode = "gcc") {
   const selected = COUNTRIES[normalizeCountryCode(countryCode)];
-  return `<script>window.DealKhaleejCountry=${JSON.stringify(selected)};window.DealKhaleejCountries=${JSON.stringify(COUNTRY_CODES.map((code) => COUNTRIES[code]))};</script>`;
+  return `<script>window.DealKhaleejCountry=${JSON.stringify(selected)};window.DealKhaleejCountries=${JSON.stringify(COUNTRY_CODES.map((code) => COUNTRIES[code]))};window.DealKhaleejCountrySubdomainsEnabled=${JSON.stringify(COUNTRY_SUBDOMAINS_ENABLED)};</script>`;
 }
 
 function hreflangLinks(pathname, countryCodes = COUNTRY_CODES) {
+  if (!COUNTRY_SUBDOMAINS_ENABLED) return "";
+
   const codes = Array.from(new Set(countryCodes.map((code) => normalizeCountryCode(code)).filter(Boolean)));
   const links = [];
 
@@ -281,6 +292,7 @@ module.exports = {
   COUNTRIES,
   COUNTRY_CODES,
   GCC_COUNTRY_CODES,
+  COUNTRY_SUBDOMAINS_ENABLED,
   HOST_TO_COUNTRY,
   normalizeCountryCode,
   countryFromHostname,

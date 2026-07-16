@@ -8,6 +8,7 @@ const {
   COUNTRIES,
   COUNTRY_CODES,
   GCC_COUNTRY_CODES,
+  COUNTRY_SUBDOMAINS_ENABLED,
   HOST_TO_COUNTRY,
   filterCouponsByCountry,
   filterStoresByCountry,
@@ -89,7 +90,7 @@ function waitForServer() {
 async function withServer(run) {
   const child = spawn(process.execPath, ["server.js"], {
     cwd: `${__dirname}/..`,
-    env: { ...process.env, PORT: String(PORT) },
+    env: { ...process.env, PORT: String(PORT), COUNTRY_SUBDOMAINS_ENABLED: "false" },
     stdio: "ignore",
     windowsHide: true
   });
@@ -109,6 +110,9 @@ function validateData() {
   });
   assert(HOST_TO_COUNTRY["dealkhaleej.com"] === "gcc", "Root host should map to gcc");
   assert(HOST_TO_COUNTRY["www.dealkhaleej.com"] === "gcc", "www host should map to gcc");
+  assert(COUNTRY_SUBDOMAINS_ENABLED === false, "Country subdomains should default to disabled");
+  assert(siteUrlForCountry("sa") === "https://dealkhaleej.com", "Saudi temporary site URL should stay on root domain");
+  assert(siteUrlForCountry("ae") === "https://dealkhaleej.com", "UAE temporary site URL should stay on root domain");
   GCC_COUNTRY_CODES.forEach((code) => {
     assert(HOST_TO_COUNTRY[COUNTRIES[code].hostname] === code, `Hostname mapping missing for ${code}`);
   });
@@ -161,39 +165,62 @@ function validateFilters() {
 }
 
 async function validateServerRoutes() {
-  for (const code of COUNTRY_CODES) {
-    const host = COUNTRIES[code].hostname;
-    const robots = await requestPath(host, "/robots.txt");
-    assert(robots.body.includes(`Sitemap: ${siteUrlForCountry(code)}/sitemap.xml`), `robots.txt sitemap host mismatch for ${code}`);
+  const rootHost = COUNTRIES.gcc.hostname;
+  const robots = await requestPath(rootHost, "/robots.txt");
+  assert(robots.body.includes("Sitemap: https://dealkhaleej.com/sitemap.xml"), "robots.txt should keep the root-domain sitemap");
 
-    const sitemap = await requestPath(host, "/sitemap.xml");
-    assert(sitemap.statusCode === 200, `sitemap failed for ${code}`);
-    const locs = [...sitemap.body.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-    assert(locs.length > 0, `sitemap has no URLs for ${code}`);
-    locs.forEach((loc) => assert(loc.startsWith(siteUrlForCountry(code)), `Sitemap URL ${loc} uses wrong host for ${code}`));
+  const sitemap = await requestPath(rootHost, "/sitemap.xml?country=sa");
+  assert(sitemap.statusCode === 200, "sitemap failed");
+  const locs = [...sitemap.body.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+  assert(locs.length > 0, "sitemap has no URLs");
+  locs.forEach((loc) => {
+    assert(loc.startsWith("https://dealkhaleej.com"), `Sitemap URL ${loc} should stay on the root domain`);
+    assert(!loc.includes("?country="), `Sitemap URL ${loc} should not include country query variants`);
+  });
+  assert(locs.includes("https://dealkhaleej.com/store/samsung-ksa"), "Clean sitemap should include Samsung KSA");
+  assert(locs.includes("https://dealkhaleej.com/store/samsung-uae"), "Clean sitemap should include Samsung UAE");
 
-    if (code === "sa") {
-      assert(!locs.includes(`${siteUrlForCountry(code)}/store/samsung-uae`), "Saudi sitemap must exclude Samsung UAE");
-      assert(locs.includes(`${siteUrlForCountry(code)}/store/samsung-ksa`), "Saudi sitemap should include Samsung KSA");
-    }
-    if (code === "ae") {
-      assert(!locs.includes(`${siteUrlForCountry(code)}/store/samsung-ksa`), "UAE sitemap must exclude Samsung KSA");
-      assert(locs.includes(`${siteUrlForCountry(code)}/store/samsung-uae`), "UAE sitemap should include Samsung UAE");
-    }
-  }
-
-  const saHome = await requestPath(COUNTRIES.sa.hostname, "/");
+  const saHome = await requestPath(rootHost, "/?country=sa");
   assert(saHome.body.includes("<title>Coupon Codes and Deals in Saudi Arabia | DealKhaleej"), "Saudi homepage title mismatch");
-  assert(saHome.body.includes('href="https://sa.dealkhaleej.com/"'), "Saudi homepage canonical/hreflang host missing");
+  assert(saHome.body.includes('<link rel="canonical" href="https://dealkhaleej.com/">'), "Saudi homepage canonical should be clean");
+  assert(saHome.body.includes('<meta name="robots" content="noindex,follow">'), "Saudi query homepage should be noindex");
+  assert(!saHome.body.includes('rel="alternate" hreflang='), "Country query pages should not emit hreflang");
   assert(saHome.body.includes('value="sa" selected'), "Saudi country selector should be selected");
 
-  const aeStore = await requestPath(COUNTRIES.ae.hostname, "/store/samsung-uae");
-  assert(aeStore.body.includes('<link rel="canonical" href="https://ae.dealkhaleej.com/store/samsung-uae">'), "UAE store canonical mismatch");
+  const aeHome = await requestPath(rootHost, "/?country=ae");
+  assert(aeHome.body.includes("<title>Coupon Codes and Deals in United Arab Emirates | DealKhaleej"), "UAE homepage title mismatch");
+  assert(aeHome.body.includes('value="ae" selected'), "UAE country selector should be selected");
+
+  const aeStore = await requestPath(rootHost, "/store/samsung-uae?country=ae");
+  assert(aeStore.body.includes('<link rel="canonical" href="https://dealkhaleej.com/store/samsung-uae">'), "UAE store canonical should be clean");
+  assert(aeStore.body.includes('<meta name="robots" content="noindex,follow">'), "UAE query store should be noindex");
+  assert(!aeStore.body.includes('rel="alternate" hreflang='), "UAE query store should not emit hreflang");
   assert(!aeStore.body.includes("Shop Samsung KSA Offers"), "UAE Samsung page must not include Samsung KSA offer");
 
-  const saStore = await requestPath(COUNTRIES.sa.hostname, "/store/samsung-ksa");
-  assert(saStore.body.includes('<link rel="canonical" href="https://sa.dealkhaleej.com/store/samsung-ksa">'), "Saudi store canonical mismatch");
+  const saStore = await requestPath(rootHost, "/store/samsung-ksa?country=sa");
+  assert(saStore.body.includes('<link rel="canonical" href="https://dealkhaleej.com/store/samsung-ksa">'), "Saudi store canonical should be clean");
+  assert(saStore.body.includes('<meta name="robots" content="noindex,follow">'), "Saudi query store should be noindex");
   assert(!saStore.body.includes("Shop Samsung UAE Offers"), "Saudi Samsung page must not include Samsung UAE offer");
+
+  const saCoupons = JSON.parse((await requestPath(rootHost, "/api/coupons?country=sa")).body);
+  const aeCoupons = JSON.parse((await requestPath(rootHost, "/api/coupons?country=ae")).body);
+  assert(countrySet(saCoupons).has("samsung-ksa-affiliate-offer-1960"), "Saudi API should include Samsung KSA");
+  assert(!countrySet(saCoupons).has("samsung-uae-affiliate-offer-1961"), "Saudi API must exclude Samsung UAE");
+  assert(countrySet(aeCoupons).has("samsung-uae-affiliate-offer-1961"), "UAE API should include Samsung UAE");
+  assert(!countrySet(aeCoupons).has("samsung-ksa-affiliate-offer-1960"), "UAE API must exclude Samsung KSA");
+
+  const invalidCoupons = JSON.parse((await requestPath(rootHost, "/api/coupons?country=unsupported")).body);
+  assert(countrySet(invalidCoupons).has("samsung-ksa-affiliate-offer-1960"), "Unsupported country should fall back to GCC data");
+  assert(countrySet(invalidCoupons).has("samsung-uae-affiliate-offer-1961"), "Unsupported country should fall back to GCC data");
+
+  const saSearch = JSON.parse((await requestPath(rootHost, "/api/search?q=nike&country=sa")).body);
+  const aeSearch = JSON.parse((await requestPath(rootHost, "/api/search?q=nike&country=ae")).body);
+  assert(saSearch.country === "sa", "Saudi search should report selected country");
+  assert(aeSearch.country === "ae", "UAE search should report selected country");
+  assert(JSON.stringify(saSearch).includes("nike-ksa-web-affiliate-offer-1924"), "Saudi search should include Nike KSA");
+  assert(!JSON.stringify(saSearch).includes("nike-uae-web-affiliate-offer-1907"), "Saudi search must exclude Nike UAE");
+  assert(JSON.stringify(aeSearch).includes("nike-uae-web-affiliate-offer-1907"), "UAE search should include Nike UAE");
+  assert(!JSON.stringify(aeSearch).includes("nike-ksa-web-affiliate-offer-1924"), "UAE search must exclude Nike KSA");
 }
 
 async function main() {

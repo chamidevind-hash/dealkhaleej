@@ -8,6 +8,7 @@ const {
   COUNTRIES,
   COUNTRY_CODES,
   GCC_COUNTRY_CODES,
+  COUNTRY_SUBDOMAINS_ENABLED,
   countryFromRequest,
   siteUrlForCountry,
   routeUrlForCountry,
@@ -144,8 +145,12 @@ function injectHeadTags(page, country, pathname, options = {}) {
   const canonicalCountry = options.canonicalCountry || country.code;
   const canonical = routeUrlForCountry(canonicalCountry, pathname);
   const alternateCodes = options.alternateCodes || COUNTRY_CODES;
+  const robotsTag = !COUNTRY_SUBDOMAINS_ENABLED && country.code !== "gcc"
+    ? '<meta name="robots" content="noindex,follow">'
+    : "";
   const tags = [
     `<link rel="canonical" href="${xmlEscape(canonical)}">`,
+    robotsTag,
     hreflangLinks(pathname, alternateCodes),
     clientCountryScript(country.code)
   ].filter(Boolean).join("\n  ");
@@ -153,6 +158,9 @@ function injectHeadTags(page, country, pathname, options = {}) {
   let next = page
     .replace(/<link rel="canonical" href="[^"]*">\s*/g, "")
     .replace(/<link rel="alternate" hreflang="[^"]+" href="[^"]+">\s*/g, "");
+  if (!COUNTRY_SUBDOMAINS_ENABLED) {
+    next = next.replace(/<meta name="robots" content="[^"]*">\s*/g, "");
+  }
 
   if (next.includes("</head>")) {
     next = next.replace("</head>", `  ${tags}\n</head>`);
@@ -811,7 +819,8 @@ async function handleApi(request, response, url, country) {
 }
 
 async function handleSeoRoutes(response, url, country) {
-  const currentSiteUrl = siteUrlForCountry(country.code);
+  const seoCountry = COUNTRY_SUBDOMAINS_ENABLED ? country : COUNTRIES.gcc;
+  const currentSiteUrl = siteUrlForCountry(seoCountry.code);
 
   if (url.pathname === "/robots.txt") {
     sendText(response, 200, "text/plain", `User-agent: *\nAllow: /\nSitemap: ${currentSiteUrl}/sitemap.xml\n`);
@@ -821,9 +830,9 @@ async function handleSeoRoutes(response, url, country) {
   if (url.pathname !== "/sitemap.xml") return false;
 
   const [stores, coupons, articles] = await Promise.all([readStores(), readCoupons(), readArticles()]);
-  const visibleCoupons = filterCouponsByCountry(coupons, country.code);
-  const visibleStores = filterStoresByCountry(stores, coupons, country.code);
-  const visibleArticles = filterArticlesByCountry(articles, country.code);
+  const visibleCoupons = filterCouponsByCountry(coupons, seoCountry.code);
+  const visibleStores = filterStoresByCountry(stores, coupons, seoCountry.code);
+  const visibleArticles = filterArticlesByCountry(articles, seoCountry.code);
   const homepageLastmod = sitemapDate(visibleCoupons.map((coupon) => coupon.updatedAt));
   const entries = [
     { loc: `${currentSiteUrl}/`, lastmod: homepageLastmod },

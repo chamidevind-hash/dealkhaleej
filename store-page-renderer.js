@@ -5,6 +5,7 @@ const CURRENT_YEAR = new Intl.DateTimeFormat("en", {
 const {
   COUNTRIES,
   COUNTRY_CODES,
+  COUNTRY_SUBDOMAINS_ENABLED,
   countrySelectorHtml,
   clientCountryScript,
   hreflangLinks,
@@ -605,7 +606,8 @@ function renderStorePage({ store, stores, coupons, articles, content, siteUrl, c
   const remaining = featured ? activeCoupons.filter((coupon) => coupon.id !== featured.id) : activeCoupons;
   const region = storeRegion(store, activeCoupons, content);
   const lastUpdated = newestCouponDate(activeCoupons);
-  const pageUrl = `${siteUrl}/store/${storeSlug(store.name)}`;
+  const storePath = `/store/${storeSlug(store.name)}`;
+  const pageUrl = routeUrlForCountry(country.code, storePath);
   const countryPhrase = country.code === "gcc" ? "GCC Shoppers" : country.name;
   const title = country.code === "gcc"
     ? `${store.name} Coupon Codes and Deals for GCC Shoppers | DealKhaleej`
@@ -619,8 +621,10 @@ function renderStorePage({ store, stores, coupons, articles, content, siteUrl, c
   const hasOfferOnly = activeCoupons.some((coupon) => !isCodeOffer(coupon));
   const faqs = generatedFaqs(store, activeCoupons, content, region);
   const jsonLd = structuredData(siteUrl, store, activeCoupons, content, faqs, region, country);
-  const storePath = `/store/${storeSlug(store.name)}`;
   const alternateLinks = hreflangLinks(storePath, alternateCountryCodes);
+  const robotsMeta = !COUNTRY_SUBDOMAINS_ENABLED && country.code !== "gcc"
+    ? '  <meta name="robots" content="noindex,follow">\n'
+    : "";
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -631,7 +635,7 @@ function renderStorePage({ store, stores, coupons, articles, content, siteUrl, c
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}">
   <link rel="canonical" href="${escapeHtml(pageUrl)}">
-  <meta property="og:title" content="${escapeHtml(title)}">
+${robotsMeta}  <meta property="og:title" content="${escapeHtml(title)}">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${escapeHtml(pageUrl)}">
