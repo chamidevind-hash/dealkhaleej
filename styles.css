@@ -1,19 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap");
+
 :root {
-  --ink: #0d234c;
-  --muted: #62718a;
-  --line: #dbe3f0;
-  --paper: #f6f8fc;
-  --panel: #ffffff;
-  --leaf: #f2a516;
-  --leaf-dark: #102b64;
-  --mint: #eef4ff;
-  --amber: #f2a516;
-  --coral: #ef806c;
-  --blue: #2855a5;
-  --navy: #071a3e;
-  --gold: #f2a516;
-  --gold-deep: #b86d00;
-  --shadow: 0 22px 70px rgba(8, 26, 62, 0.12);
+  --font-primary: "Inter", Arial, sans-serif;
+  --font-arabic: "Tajawal", Arial, sans-serif;
+
+  --color-primary: #E63946;
+  --color-primary-dark: #C91F2C;
+  --color-primary-soft: #FFF1F2;
+
+  --color-orange: #FF7A00;
+  --color-orange-dark: #E56700;
+  --color-orange-soft: #FFF4E8;
+
+  --color-success: #159947;
+  --color-success-dark: #0E7A37;
+  --color-success-soft: #EAF8EF;
+
+  --color-text: #172033;
+  --color-text-secondary: #5E6675;
+  --color-heading: #111827;
+
+  --color-background: #F7F8FA;
+  --color-surface: #FFFFFF;
+  --color-border: #E5E7EB;
+  --color-border-strong: #D1D5DB;
+
+  --color-warning: #F59E0B;
+  --color-danger: #DC2626;
+
+  --ink: var(--color-text);
+  --muted: var(--color-text-secondary);
+  --line: var(--color-border);
+  --paper: var(--color-background);
+  --panel: var(--color-surface);
+  --leaf: var(--color-primary);
+  --leaf-dark: var(--color-heading);
+  --mint: var(--color-primary-soft);
+  --amber: var(--color-orange);
+  --coral: var(--color-primary);
+  --blue: var(--color-primary);
+  --navy: #111827;
+  --gold: var(--color-orange);
+  --gold-deep: var(--color-orange-dark);
+  --shadow: 0 18px 46px rgba(17, 24, 39, 0.1);
+  --shadow-soft: 0 10px 28px rgba(17, 24, 39, 0.07);
 }
 
 * {
@@ -28,12 +58,25 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--font-primary);
+  font-size: 16px;
+  line-height: 1.65;
 }
 
 a {
-  color: inherit;
+  color: var(--color-primary);
   text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+html[dir="rtl"] body,
+html[lang^="ar"] body,
+:lang(ar) {
+  font-family: var(--font-arabic);
 }
 
 .is-hidden {
@@ -55,8 +98,8 @@ input {
   gap: 24px;
   min-height: 76px;
   padding: 14px clamp(18px, 4vw, 56px);
-  background: rgba(7, 26, 62, 0.96);
-  border-bottom: 1px solid rgba(242, 165, 22, 0.22);
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid var(--color-border);
   backdrop-filter: blur(18px);
 }
 
@@ -184,7 +227,7 @@ input {
   border-radius: 999px;
   background: var(--gold);
   color: var(--navy);
-  box-shadow: 0 10px 26px rgba(242, 165, 22, 0.3);
+  box-shadow: 0 10px 26px rgba(230, 57, 70, 0.22);
 }
 
 .secondary-button,
@@ -217,7 +260,7 @@ input {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(7, 26, 62, 0.92) 0%, rgba(7, 26, 62, 0.6) 48%, rgba(7, 26, 62, 0.18) 100%),
+    linear-gradient(90deg, rgba(255, 241, 242, 0.94) 0%, rgba(255, 248, 237, 0.78) 48%, rgba(255, 255, 255, 0.72) 100%),
     url("https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1800&q=80") center / cover;
 }
 
@@ -501,7 +544,7 @@ h3 {
 }
 
 .favorites-chip.active strong {
-  background: rgba(7, 26, 62, 0.14);
+  background: rgba(230, 57, 70, 0.12);
 }
 
 .deals-layout {
@@ -536,8 +579,8 @@ h3 {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #fff4df;
-  color: var(--gold-deep);
+  background: var(--color-orange-soft);
+  color: var(--color-orange-dark);
   font-size: 0.8rem;
   font-weight: 900;
 }
@@ -570,7 +613,7 @@ h3 {
 .app-banner {
   border: 1px solid var(--line);
   background: var(--panel);
-  box-shadow: 0 14px 46px rgba(8, 26, 62, 0.08);
+  box-shadow: var(--shadow-soft);
 }
 
 .spotlight {
@@ -595,7 +638,7 @@ h3 {
   padding: 10px;
   border: 1px dashed var(--leaf);
   border-radius: 18px;
-  background: #fff8eb;
+  background: var(--color-orange-soft);
 }
 
 .spotlight-code span,
@@ -727,8 +770,8 @@ h3 {
   margin-bottom: 8px;
   padding: 6px 12px;
   border-radius: 999px;
-  background: #fff4df;
-  color: #b86d00;
+  background: var(--color-orange-soft);
+  color: var(--color-orange-dark);
   font-size: 0.76rem;
   font-weight: 900;
 }
@@ -755,7 +798,7 @@ h3 {
   padding: 0 14px;
   border: 1px dashed var(--leaf);
   border-radius: 999px;
-  background: #fff9ed;
+  background: var(--color-primary-soft);
 }
 
 .coupon-action.muted span {
@@ -942,7 +985,7 @@ html[dir="rtl"] .coupon-action {
   border: 1px solid var(--line);
   border-radius: 26px;
   background: #fff;
-  box-shadow: 0 14px 46px rgba(8, 26, 62, 0.08);
+  box-shadow: var(--shadow-soft);
 }
 
 .login-panel h1 {
@@ -1007,7 +1050,7 @@ html[dir="rtl"] .coupon-action {
   border: 1px solid var(--line);
   border-radius: 26px;
   background: #fff;
-  box-shadow: 0 14px 46px rgba(8, 26, 62, 0.08);
+  box-shadow: var(--shadow-soft);
 }
 
 .admin-form {
@@ -1160,7 +1203,7 @@ html[dir="rtl"] .coupon-action {
   border: 1px solid var(--line);
   border-radius: 28px;
   background: var(--panel);
-  box-shadow: 0 14px 46px rgba(8, 26, 62, 0.08);
+  box-shadow: var(--shadow-soft);
 }
 
 .store-hero h1 {
@@ -1211,7 +1254,7 @@ html[dir="rtl"] .coupon-action {
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(255, 248, 230, 0.94)),
     url("https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1400&q=80") center/cover;
-  box-shadow: 0 18px 54px rgba(8, 26, 62, 0.09);
+  box-shadow: var(--shadow-soft);
 }
 
 .travel-hero h1 {
@@ -1296,7 +1339,7 @@ html[dir="rtl"] .coupon-action {
   border: 1px solid var(--line);
   border-radius: 18px;
   background: #fff;
-  box-shadow: 0 14px 42px rgba(8, 26, 62, 0.08);
+  box-shadow: var(--shadow-soft);
 }
 
 .travel-widget-card h3 {
@@ -1498,7 +1541,7 @@ html[dir="rtl"] .coupon-action {
   padding: 0 16px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: #fff9ed;
+  background: var(--color-orange-soft);
   color: var(--navy);
   font-weight: 850;
 }
@@ -1746,12 +1789,12 @@ html[dir="rtl"] .coupon-action {
   min-height: auto;
   margin-top: 22px;
   padding: clamp(26px, 5vw, 46px);
-  border: 1px solid rgba(242, 165, 22, 0.16);
+  border: 1px solid rgba(230, 57, 70, 0.12);
   border-radius: 22px;
   background:
-    linear-gradient(135deg, rgba(7, 26, 62, 0.97), rgba(16, 43, 100, 0.94)),
-    radial-gradient(circle at 85% 20%, rgba(242, 165, 22, 0.22), transparent 38%);
-  box-shadow: 0 18px 54px rgba(8, 26, 62, 0.14);
+    linear-gradient(135deg, #FFF1F2 0%, #FFF8ED 100%),
+    radial-gradient(circle at 85% 20%, rgba(255, 122, 0, 0.16), transparent 38%);
+  box-shadow: var(--shadow-soft);
 }
 
 .compact-hero .hero-content {
@@ -1884,7 +1927,7 @@ html[dir="rtl"] .coupon-action {
   text-align: center;
   font-size: 0.78rem;
   font-weight: 900;
-  box-shadow: 0 8px 26px rgba(8, 26, 62, 0.05);
+  box-shadow: 0 8px 26px rgba(17, 24, 39, 0.05);
 }
 
 .logo-strip-card .logo-tile.small {
@@ -1959,7 +2002,7 @@ html[dir="rtl"] .coupon-action {
 }
 
 .coupon-region {
-  background: #eef4ff;
+  background: #EEF6FF;
   color: var(--leaf-dark);
 }
 
@@ -2022,7 +2065,7 @@ html[dir="rtl"] .coupon-action {
   border: 1px solid var(--line);
   border-radius: 16px;
   background: #fff;
-  box-shadow: 0 8px 28px rgba(8, 26, 62, 0.05);
+  box-shadow: 0 8px 28px rgba(17, 24, 39, 0.05);
 }
 
 .home-travel-grid strong {
@@ -2121,7 +2164,7 @@ html[dir="rtl"] .coupon-action {
 .site-footer {
   display: block;
   padding: 38px clamp(18px, 4vw, 56px);
-  background: #071a3e;
+  background: #111827;
   color: rgba(255, 255, 255, 0.72);
 }
 
@@ -2170,7 +2213,7 @@ html[dir="rtl"] .coupon-action {
   position: absolute;
   inset: 0;
   transform: translateX(-100%);
-  background: linear-gradient(90deg, transparent, rgba(242, 165, 22, 0.12), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 122, 0, 0.12), transparent);
   animation: skeleton-shimmer 1.35s infinite;
 }
 
@@ -2367,7 +2410,7 @@ html[dir="rtl"] .coupon-action {
 .store-newsletter {
   border: 1px solid var(--line);
   background: #fff;
-  box-shadow: 0 14px 46px rgba(8, 26, 62, 0.08);
+  box-shadow: var(--shadow-soft);
 }
 
 .store-seo-hero {
@@ -2437,7 +2480,7 @@ html[dir="rtl"] .coupon-action {
   min-height: 32px;
   padding: 0 11px;
   border-radius: 999px;
-  background: #eef4ff;
+  background: #EEF6FF;
   color: var(--leaf-dark);
   font-size: 0.78rem;
   font-weight: 900;
@@ -2505,7 +2548,7 @@ html[dir="rtl"] .coupon-action {
   grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
   gap: 24px;
   align-items: center;
-  border-color: rgba(242, 165, 22, 0.42);
+  border-color: rgba(255, 122, 0, 0.32);
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 249, 235, 0.96));
 }
@@ -2531,7 +2574,7 @@ html[dir="rtl"] .coupon-action {
   padding: 8px;
   border: 1px dashed var(--gold);
   border-radius: 14px;
-  background: #fff8eb;
+  background: var(--color-primary-soft);
 }
 
 .store-code-box span {
@@ -2687,7 +2730,7 @@ html[dir="rtl"] .coupon-action {
   margin: 18px 0 0;
   padding: 14px 16px;
   border-radius: 14px;
-  background: #fff8eb;
+  background: var(--color-orange-soft);
   color: var(--gold-deep) !important;
   font-weight: 800;
 }
@@ -2701,7 +2744,7 @@ html[dir="rtl"] .coupon-action {
 
 .store-seo-grid .store-panel {
   margin-top: 0;
-  box-shadow: 0 8px 28px rgba(8, 26, 62, 0.05);
+  box-shadow: 0 8px 28px rgba(17, 24, 39, 0.05);
 }
 
 .store-faq-list {
@@ -2932,5 +2975,762 @@ html[dir="rtl"] .coupon-action {
 
   .store-hero-main h1 {
     font-size: 1.9rem;
+  }
+}
+
+/* DealKhaleej typography and color refresh */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--color-heading);
+  font-family: inherit;
+  letter-spacing: 0;
+}
+
+h1,
+.hero h1,
+.compact-hero h1,
+.article-title h1,
+.blog-heading h1,
+.travel-hero h1,
+.store-hero-main h1 {
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+h2,
+.section-heading h2,
+.store-panel h2,
+.travel-section-heading h2,
+.newsletter-inner h2,
+.seo-grid h3 {
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+h3,
+.coupon-details h3,
+.travel-card h3,
+.travel-article-card h3,
+.store-article-card h3,
+.similar-store-card h3 {
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 700;
+}
+
+.brand,
+.main-nav,
+.primary-button,
+.secondary-button,
+.danger-button,
+.shop-deal-button,
+.coupon-action button,
+.store-code-box button,
+.category-chip,
+.store-grid a,
+.article-card,
+.travel-card,
+.travel-article-card,
+.store-panel,
+.site-footer,
+.admin-panel {
+  font-family: var(--font-primary);
+}
+
+html[dir="rtl"] .brand,
+html[dir="rtl"] .main-nav,
+html[dir="rtl"] .primary-button,
+html[dir="rtl"] .secondary-button,
+html[dir="rtl"] .danger-button,
+html[dir="rtl"] .shop-deal-button,
+html[dir="rtl"] .coupon-action button,
+html[dir="rtl"] .store-code-box button,
+html[dir="rtl"] .category-chip,
+html[dir="rtl"] .store-grid a,
+html[dir="rtl"] .article-card,
+html[dir="rtl"] .travel-card,
+html[dir="rtl"] .travel-article-card,
+html[dir="rtl"] .store-panel,
+html[dir="rtl"] .site-footer {
+  font-family: var(--font-arabic);
+}
+
+.eyebrow {
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.site-header,
+.article-header {
+  min-height: 68px;
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 8px 24px rgba(17, 24, 39, 0.06);
+  color: var(--color-text);
+  backdrop-filter: blur(16px);
+}
+
+.brand-logo {
+  height: 44px;
+  object-fit: contain;
+}
+
+.main-nav {
+  color: var(--color-text);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.main-nav a {
+  position: relative;
+  color: var(--color-text);
+}
+
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  opacity: 0;
+  transform: scaleX(0.6);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.main-nav a:hover,
+.main-nav a:focus-visible {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.main-nav a:hover::after,
+.main-nav a:focus-visible::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.icon-button,
+.nav-toggle {
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.nav-toggle span {
+  background: var(--color-text);
+}
+
+.country-select {
+  min-height: 42px;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: 0 4px 14px rgba(17, 24, 39, 0.04);
+}
+
+.country-select select {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.country-select:focus-within,
+.search-row input:focus,
+.newsletter-controls input:focus,
+.login-form input:focus,
+.admin-form input:focus,
+.admin-form select:focus,
+.store-newsletter-form input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.16);
+  outline: 0;
+}
+
+.btn-primary,
+.primary-button {
+  min-height: 44px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 0 10px 22px rgba(230, 57, 70, 0.22);
+  transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.btn-primary:hover,
+.primary-button:hover {
+  background: var(--color-primary-dark);
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-offer,
+.shop-deal-button,
+.coupon-action.link-only .shop-deal-button,
+.store-offer-action.link-only .shop-deal-button {
+  min-height: 44px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--color-orange);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 0 10px 22px rgba(255, 122, 0, 0.2);
+  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.btn-offer:hover,
+.shop-deal-button:hover {
+  background: var(--color-orange-dark);
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-success {
+  min-height: 44px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--color-success);
+  color: #fff;
+  font-weight: 700;
+}
+
+.btn-secondary,
+.secondary-button,
+.danger-button,
+.section-link,
+.travel-brand-link,
+.travel-quick-links a,
+.travel-link-grid a,
+.similar-store-card .secondary-button {
+  min-height: 44px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 10px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: none;
+}
+
+.btn-secondary:hover,
+.secondary-button:hover,
+.section-link:hover,
+.travel-brand-link:hover,
+.travel-quick-links a:hover,
+.travel-link-grid a:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(230, 57, 70, 0.32);
+  outline-offset: 3px;
+}
+
+.hero,
+.compact-hero,
+.travel-hero {
+  background: linear-gradient(135deg, #FFF1F2 0%, #FFF8ED 100%);
+  border: 1px solid rgba(230, 57, 70, 0.12);
+  color: var(--color-text);
+  box-shadow: var(--shadow-soft);
+}
+
+.hero-media {
+  background:
+    linear-gradient(135deg, rgba(255, 241, 242, 0.94), rgba(255, 248, 237, 0.88)),
+    url("https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1800&q=80") center / cover;
+}
+
+.hero-content,
+.compact-hero .hero-content {
+  color: var(--color-text);
+}
+
+.hero .eyebrow,
+.compact-hero .eyebrow,
+.travel-hero .eyebrow {
+  color: var(--color-primary);
+}
+
+.hero-copy,
+.compact-hero .hero-copy,
+.hero-actions,
+.hero-stats span {
+  color: var(--color-text-secondary);
+}
+
+.hero h1,
+.compact-hero h1 {
+  max-width: 780px;
+}
+
+.hero h1 strong,
+.compact-hero h1 strong {
+  color: var(--color-primary);
+}
+
+.search-panel {
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+  box-shadow: 0 18px 38px rgba(17, 24, 39, 0.1);
+}
+
+.search-row input,
+.newsletter-controls input,
+.login-form input,
+.admin-form input,
+.admin-form select {
+  border: 1px solid var(--color-border-strong);
+  border-radius: 10px;
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.search-row input::placeholder,
+.newsletter-controls input::placeholder,
+.login-form input::placeholder,
+.admin-form input::placeholder {
+  color: #8A93A3;
+}
+
+.hero-stats article,
+.quick-strip article,
+.spotlight,
+.deal-board,
+.guide-section,
+.seo-section,
+.travel-widget-card,
+.article-card,
+.related-stores,
+.store-seo-hero,
+.store-panel,
+.store-details-panel,
+.store-article-card,
+.similar-store-card {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.hero-stats article {
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.hero-stats strong {
+  color: var(--color-heading);
+}
+
+.category-chip,
+.category-card {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.category-chip.active,
+.category-card:hover,
+.category-card:focus-visible {
+  border-color: var(--color-orange);
+  background: var(--color-orange-soft);
+  color: var(--color-orange-dark);
+  text-decoration: none;
+}
+
+.category-card:nth-child(6n + 1) {
+  background: var(--color-primary-soft);
+}
+
+.category-card:nth-child(6n + 2) {
+  background: var(--color-orange-soft);
+}
+
+.category-card:nth-child(6n + 3) {
+  background: #EEF6FF;
+}
+
+.category-card:nth-child(6n + 4) {
+  background: #FDF2F8;
+}
+
+.category-card:nth-child(6n + 5) {
+  background: var(--color-success-soft);
+}
+
+.category-card:nth-child(6n + 6) {
+  background: #F8FAFC;
+}
+
+.coupon-card,
+.store-offer-card {
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-surface);
+  box-shadow: 0 8px 22px rgba(17, 24, 39, 0.06);
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.coupon-card:hover,
+.store-offer-card:hover,
+.store-grid a:hover,
+.logo-strip-card:hover,
+.home-travel-grid a:hover,
+.travel-card:hover,
+.travel-article-card:hover,
+.article-card:hover {
+  border-color: rgba(230, 57, 70, 0.34);
+  box-shadow: 0 14px 34px rgba(17, 24, 39, 0.1);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.coupon-details h3,
+.store-offer-card .coupon-details h3 {
+  color: var(--color-heading);
+  font-weight: 700;
+  line-height: 1.28;
+}
+
+.store-name {
+  color: var(--color-heading);
+  font-weight: 800;
+}
+
+.coupon-details .meta,
+.meta,
+.expiry,
+.store-grid small,
+.travel-card p,
+.travel-article-card p,
+.article-card p,
+.store-panel p,
+.store-details-panel dd {
+  color: var(--color-text-secondary);
+}
+
+.verified-badge {
+  background: var(--color-success-soft);
+  color: var(--color-success-dark);
+}
+
+.verified-badge::before {
+  content: "✓";
+  margin-inline-end: 6px;
+  font-weight: 800;
+}
+
+.coupon-region,
+.store-hero-meta span {
+  background: #F8FAFC;
+  color: var(--color-text-secondary);
+}
+
+.coupon-action span,
+.spotlight-code,
+.store-code-box {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+}
+
+.coupon-action span,
+.store-code-box span,
+.spotlight-code span {
+  color: var(--color-primary-dark);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.coupon-action button,
+.spotlight-code button,
+.store-code-box button {
+  min-height: 44px;
+  border-radius: 10px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.coupon-action button:hover,
+.spotlight-code button:hover,
+.store-code-box button:hover {
+  background: var(--color-primary-dark);
+}
+
+.coupon-action button:disabled,
+.store-code-box button:disabled {
+  background: var(--color-success);
+  color: #fff;
+  opacity: 1;
+}
+
+.expiry {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.logo-tile,
+.store-grid .logo-tile.small,
+.logo-strip-card .logo-tile.small {
+  border-color: var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface);
+  color: var(--color-heading);
+}
+
+.store-grid a,
+.logo-strip-card,
+.home-travel-grid a {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-heading);
+  box-shadow: 0 6px 18px rgba(17, 24, 39, 0.05);
+}
+
+.store-grid a::after,
+.logo-strip-card::after {
+  content: "View offers";
+  margin-top: 4px;
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.home-travel-grid a,
+.travel-card,
+.travel-article-card,
+.travel-link-grid a,
+.travel-widget-card {
+  border-top: 3px solid var(--color-orange);
+}
+
+.home-travel-grid strong,
+.travel-card h3,
+.travel-article-card h3,
+.travel-section-heading h2 {
+  color: var(--color-heading);
+}
+
+.home-travel-grid a:hover,
+.travel-card:hover,
+.travel-article-card:hover,
+.travel-link-grid a:hover {
+  border-color: rgba(255, 122, 0, 0.35);
+}
+
+.article-page,
+.article-body {
+  max-width: 820px;
+}
+
+.article-page {
+  font-size: 17px;
+}
+
+.article-content p {
+  color: var(--color-text);
+  font-size: clamp(17px, 1.35vw, 18px);
+  line-height: 1.75;
+}
+
+.article-link,
+.article-content .article-link,
+.article-back,
+.store-breadcrumbs a,
+.store-details-panel a,
+.store-article-card a,
+.related-store-link {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.article-link:hover,
+.article-content .article-link:hover,
+.store-breadcrumbs a:hover,
+.store-details-panel a:hover,
+.store-article-card a:hover,
+.related-store-link:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+.related-stores,
+.store-note,
+.store-tip-list li {
+  background: var(--color-orange-soft);
+}
+
+.store-faq-list details {
+  border-color: var(--color-border);
+  background: var(--color-surface);
+}
+
+.store-faq-list summary {
+  color: var(--color-heading);
+}
+
+.best-offer-panel {
+  border-color: rgba(255, 122, 0, 0.32);
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF4E8 100%);
+}
+
+.store-details-panel,
+.empty-state,
+.steps li,
+.store-steps li,
+.store-summary-table th {
+  background: #F8FAFC;
+}
+
+.store-steps span {
+  background: var(--color-orange);
+  color: #fff;
+}
+
+.newsletter-section,
+.app-banner,
+.store-newsletter {
+  background: linear-gradient(135deg, var(--color-heading) 0%, #1F2937 100%);
+  color: #fff;
+}
+
+.newsletter-copy,
+.app-banner p:not(.eyebrow),
+.store-newsletter p:not(.eyebrow),
+.store-newsletter-form label {
+  color: #CBD5E1;
+}
+
+.newsletter-status,
+.push-alert-status {
+  color: var(--color-success-soft);
+}
+
+.newsletter-status.error,
+.login-status {
+  color: #FCA5A5;
+}
+
+.site-footer {
+  background: #111827;
+  color: #CBD5E1;
+}
+
+.site-footer h2 {
+  color: #F9FAFB;
+}
+
+.site-footer p,
+.site-footer a {
+  color: #CBD5E1;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  color: var(--color-orange);
+}
+
+.toast {
+  background: var(--color-success);
+  color: #fff;
+}
+
+.danger-button {
+  border-color: rgba(220, 38, 38, 0.32);
+  color: var(--color-danger);
+}
+
+.telegram-float {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 18px 40px rgba(230, 57, 70, 0.28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 920px) {
+  .site-header {
+    align-items: center;
+    min-height: 64px;
+  }
+
+  .main-nav {
+    background: #fff;
+    color: var(--color-text);
+  }
+
+  .main-nav a {
+    color: var(--color-text);
+  }
+
+  .header-actions .primary-button {
+    min-height: 42px;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 16px;
+  }
+
+  .primary-button,
+  .secondary-button,
+  .shop-deal-button,
+  .coupon-action button,
+  .store-code-box button,
+  .newsletter-controls button {
+    width: 100%;
+  }
+
+  .coupon-action,
+  .store-offer-action:not(.link-only),
+  .store-code-box,
+  .newsletter-controls,
+  .search-row {
+    grid-template-columns: 1fr;
+  }
+
+  .search-row {
+    display: grid;
+  }
+
+  .country-select {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .country-select select {
+    flex: 1;
   }
 }
