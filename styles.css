@@ -3893,9 +3893,11 @@ button,
   align-items: center;
   justify-content: center;
   margin-bottom: 8px;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  background: #fff;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   color: var(--color-heading);
   flex: 0 0 auto;
 }
@@ -3927,7 +3929,8 @@ button,
 }
 
 .trusted-store-logo-wrap.logo-missing {
-  background: #f5f6f8;
+  border-radius: 8px;
+  background: #f3f4f6;
 }
 
 .trusted-store-name {
@@ -3994,6 +3997,30 @@ button,
 .trusted-store-logo-wrap.logo-missing {
   background: #f3f4f6;
   color: var(--color-heading);
+}
+
+.similar-store-card .logo-tile.small,
+.similar-store-card .logo-tile.small.has-logo {
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.similar-store-card .logo-tile.small img {
+  max-width: 44px;
+  max-height: 34px;
+  width: auto;
+  height: auto;
+  padding: 0;
+  object-fit: contain;
+}
+
+.similar-store-card .logo-tile.small.logo-missing {
+  border-radius: 8px;
+  background: #f3f4f6;
 }
 
 .logo-tile span,
@@ -4094,6 +4121,13 @@ button,
 .logo-shein,
 .logo-nike {
   background: #f7f7f7;
+}
+
+.trusted-store-logo-wrap.logo-shein,
+.trusted-store-logo-wrap.logo-nike,
+.similar-store-card .logo-tile.logo-shein,
+.similar-store-card .logo-tile.logo-nike {
+  background: transparent;
 }
 
 @media (max-width: 640px) {
