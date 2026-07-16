@@ -44,7 +44,7 @@
     return normalizeCode(url.searchParams.get("country"));
   }
 
-  function activeCountryCode() {
+  function getActiveCountry() {
     return countryFromUrl()
       || readStoredCountry()
       || normalizeCode(window.DealKhaleejCountry && window.DealKhaleejCountry.code)
@@ -62,7 +62,7 @@
     }
   }
 
-  const currentCountry = countryForCode(activeCountryCode());
+  const currentCountry = countryForCode(getActiveCountry());
   if (countryFromUrl()) saveCountry(currentCountry.code);
   cleanCountryParam();
 
@@ -96,7 +96,7 @@
   }
 
   function countryUrl(path) {
-    const next = subdomainCountryUrl(currentCountry.code, new URL(path, window.location.origin).toString());
+    const next = subdomainCountryUrl(getActiveCountry(), new URL(path, window.location.origin).toString());
     return subdomainsEnabled && !isLocalHost(window.location.hostname)
       ? next.toString()
       : `${next.pathname}${next.search}${next.hash}`;
@@ -111,7 +111,20 @@
   }
 
   function countryApiUrl(path) {
-    return countryUrl(path);
+    return withCountry(path);
+  }
+
+  function withCountry(url) {
+    const apiUrl = new URL(url, window.location.origin);
+    const country = getActiveCountry();
+
+    if (country === "gcc") {
+      apiUrl.searchParams.delete("country");
+    } else {
+      apiUrl.searchParams.set("country", country);
+    }
+
+    return `${apiUrl.pathname}${apiUrl.search}`;
   }
 
   function shouldSkipLink(anchor, rawHref) {
@@ -159,6 +172,8 @@
   window.DealKhaleejCountryRedirect = redirectToCountry;
   window.DealKhaleejCountryApiUrl = countryApiUrl;
   window.DealKhaleejCountryUrl = countryUrl;
+  window.getActiveCountry = getActiveCountry;
+  window.withCountry = withCountry;
   document.querySelectorAll("[data-country-selector]").forEach(syncSelector);
 
   if (document.readyState === "loading") {

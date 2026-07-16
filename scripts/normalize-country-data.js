@@ -3,6 +3,7 @@ const path = require("path");
 const {
   GCC_COUNTRY_CODES,
   countriesFromText,
+  normalizeExplicitCountryList,
   normalizeCountryList
 } = require("../config/countries");
 
@@ -62,6 +63,9 @@ function specificCountriesFromText(text) {
 }
 
 function normalizeOfferCountries(offer) {
+  const explicit = normalizeExplicitCountryList(offer.countries);
+  if (explicit.length) return explicit;
+
   if (/\bgcc\b/i.test(String(offer.store || ""))) {
     return [...GCC_COUNTRY_CODES];
   }
@@ -74,10 +78,13 @@ function normalizeOfferCountries(offer) {
   if (primaryDetected.length) return normalizeCountryList(primaryDetected);
 
   const detected = countriesFromText(countryTextForOffer(offer));
-  return normalizeCountryList(detected.length ? detected : GCC_COUNTRY_CODES);
+  return detected.length ? normalizeCountryList(detected) : [];
 }
 
 function normalizeStoreCountries(store, coupons) {
+  const explicit = normalizeExplicitCountryList(store.countries);
+  if (explicit.length) return explicit;
+
   if (/\bgcc\b/i.test(String(store.name || ""))) {
     return [...GCC_COUNTRY_CODES];
   }
@@ -88,7 +95,7 @@ function normalizeStoreCountries(store, coupons) {
     ...storeOffers.flatMap((coupon) => coupon.countries || normalizeOfferCountries(coupon))
   ];
 
-  return normalizeCountryList(detected.length ? detected : GCC_COUNTRY_CODES);
+  return detected.length ? normalizeCountryList(detected) : [];
 }
 
 function normalizeArticleCountries(article) {

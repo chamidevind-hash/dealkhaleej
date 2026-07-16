@@ -9,7 +9,8 @@ const {
   COUNTRY_CODES,
   GCC_COUNTRY_CODES,
   COUNTRY_SUBDOMAINS_ENABLED,
-  countryFromRequest,
+  normalizeCountryCode,
+  countryFromHostname,
   siteUrlForCountry,
   routeUrlForCountry,
   countrySelectorHtml,
@@ -18,6 +19,7 @@ const {
   filterCouponsByCountry,
   filterStoresByCountry,
   filterArticlesByCountry,
+  offerMatchesCountry,
   isArticleVisibleInCountry,
   countryCodesForStore,
   itemCountries
@@ -74,7 +76,11 @@ const mimeTypes = {
 };
 
 function sendJson(response, status, payload) {
-  response.writeHead(status, { "Content-Type": "application/json; charset=utf-8" });
+  response.writeHead(status, {
+    "Content-Type": "application/json; charset=utf-8",
+    "Cache-Control": "no-store, max-age=0",
+    "Vary": "Host"
+  });
   response.end(JSON.stringify(payload));
 }
 
@@ -103,6 +109,18 @@ function storeSlug(value) {
 
 function escapeRegExp(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function getRequestCountry(request, requestUrl) {
+  const queryCountry = normalizeCountryCode(requestUrl.searchParams.get("country"), "");
+  if (queryCountry) return COUNTRIES[queryCountry];
+
+  if (COUNTRY_SUBDOMAINS_ENABLED) {
+    const hostCountry = normalizeCountryCode(countryFromHostname(request.headers.host || ""), "");
+    if (hostCountry) return COUNTRIES[hostCountry];
+  }
+
+  return COUNTRIES.gcc;
 }
 
 function countryPageText(country) {
@@ -624,6 +642,15 @@ function cleanCoupon(input, existing = {}) {
   };
 }
 
+function debugCouponSample(coupon) {
+  return {
+    id: coupon.id,
+    store: coupon.store,
+    title: coupon.title,
+    countries: Array.isArray(coupon.countries) ? coupon.countries : []
+  };
+}
+
 async function handleApi(request, response, url, country) {
   const idMatch = url.pathname.match(/^\/api\/coupons\/([^/]+)$/);
 
@@ -695,6 +722,23 @@ async function handleApi(request, response, url, country) {
       .slice(0, 5);
 
     sendJson(response, 200, trending);
+    return true;
+  }
+
+  if (url.pathname === "/api/debug/country" && request.method === "GET") {
+    const coupons = await readCoupons();
+    const requestedCountry = String(url.searchParams.get("country") || "").trim().toLowerCase() || "gcc";
+    const matchingOffers = coupons.filter((coupon) => offerMatchesCountry(coupon, country.code));
+    const excludedOffers = coupons.filter((coupon) => !offerMatchesCountry(coupon, country.code));
+
+    sendJson(response, 200, {
+      requestedCountry,
+      resolvedCountry: country.code,
+      totalOffers: coupons.length,
+      matchingOffers: matchingOffers.length,
+      sampleMatches: matchingOffers.slice(0, 8).map(debugCouponSample),
+      sampleExcluded: excludedOffers.slice(0, 8).map(debugCouponSample)
+    });
     return true;
   }
 
@@ -943,7 +987,7 @@ async function handleOutboundRedirect(response, url, country) {
 
 const server = http.createServer(async (request, response) => {
   const url = new URL(request.url, `http://${request.headers.host}`);
-  const country = countryFromRequest(request, url);
+  const country = getRequestCountry(request, url);
 
   try {
     if (url.pathname.startsWith("/api/") && await handleApi(request, response, url, country)) return;

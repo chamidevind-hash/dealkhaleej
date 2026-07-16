@@ -15,6 +15,7 @@ const {
   countrySubdomainsEnabledFromEnv,
   filterCouponsByCountry,
   filterStoresByCountry,
+  offerMatchesCountry,
   siteUrlForCountry
 } = require("../config/countries");
 
@@ -207,6 +208,8 @@ function validateCountryClient() {
     assert(links[5].attrs.href === "mailto:hello@dealkhaleej.com", "Mail links should stay clean");
     assert(links[6].attrs.href === "/assets/logos/nike.png", "Static files should stay clean");
     assert(links[7].attrs.href === "#faq", "Hash-only links should stay clean");
+    assert(context.window.getActiveCountry() === "sa", "getActiveCountry should read country from URL");
+    assert(context.window.withCountry("/api/coupons") === "/api/coupons?country=sa", "withCountry should add country to coupon API");
     assert(context.window.DealKhaleejCountryApiUrl("/api/search?q=nike") === "/api/search?q=nike&country=sa", "API URLs should include active country");
 
     context.window.DealKhaleejCountryRedirect("ae");
@@ -221,6 +224,7 @@ function validateCountryClient() {
     storedCountry: "ae"
   });
   assert(stored.context.window.DealKhaleejCountry.code === "ae", "Saved country should be used when query is missing");
+  assert(stored.context.window.getActiveCountry() === "ae", "getActiveCountry should use saved country when query is missing");
   assert(stored.context.window.DealKhaleejCountryApiUrl("/api/stores") === "/api/stores?country=ae", "Saved country should be sent to store API");
   stored.context.window.DealKhaleejCountryRedirect("kw");
   assert(stored.assigned[0] === "http://localhost:5173/store/nike?ref=home&country=kw#faq", "Selecting Kuwait should keep path, ref, and hash");
@@ -296,9 +300,16 @@ function validateData() {
 function validateFilters() {
   const saCoupons = filterCouponsByCountry(coupons, "sa");
   const aeCoupons = filterCouponsByCountry(coupons, "ae");
+  const kwCoupons = filterCouponsByCountry(coupons, "kw");
+  const qaCoupons = filterCouponsByCountry(coupons, "qa");
+  const gccCoupons = filterCouponsByCountry(coupons, "gcc");
   const saIds = countrySet(saCoupons);
   const aeIds = countrySet(aeCoupons);
+  const kwIds = countrySet(kwCoupons);
+  const qaIds = countrySet(qaCoupons);
+  const gccIds = countrySet(gccCoupons);
 
+  assert(coupons.every((coupon) => offerMatchesCountry(coupon, "gcc")), "GCC root should contain every regional or global offer");
   assert(saIds.has("samsung-ksa-affiliate-offer-1960"), "Saudi results should include Samsung KSA");
   assert(!saIds.has("samsung-uae-affiliate-offer-1961"), "Saudi results must exclude Samsung UAE");
   assert(aeIds.has("samsung-uae-affiliate-offer-1961"), "UAE results should include Samsung UAE");
@@ -307,6 +318,14 @@ function validateFilters() {
   assert(!saIds.has("nike-uae-web-affiliate-offer-1907"), "Saudi results must exclude Nike UAE");
   assert(aeIds.has("nike-uae-web-affiliate-offer-1907"), "UAE results should include Nike UAE");
   assert(!aeIds.has("nike-ksa-web-affiliate-offer-1924"), "UAE results must exclude Nike KSA");
+  assert(kwIds.has("nike-kuwait-web-affiliate-offer-1926"), "Kuwait results should include Nike Kuwait");
+  assert(!kwIds.has("nike-ksa-web-affiliate-offer-1924"), "Kuwait results must exclude Nike KSA");
+  assert(qaIds.has("nike-qatar-web-affiliate-offer-1925"), "Qatar results should include Nike Qatar");
+  assert(!qaIds.has("nike-uae-web-affiliate-offer-1907"), "Qatar results must exclude Nike UAE");
+  assert(GCC_COUNTRY_CODES.every((code) => countrySet(filterCouponsByCountry(coupons, code)).has("nomad-esim-affiliate-offer-1904")), "Nomad eSIM global should appear in every country");
+  assert(GCC_COUNTRY_CODES.every((code) => countrySet(filterCouponsByCountry(coupons, code)).has("h-and-m-gcc-affiliate-offer-1945")), "H&M GCC should appear in every GCC country");
+  assert(gccIds.has("samsung-ksa-affiliate-offer-1960") && gccIds.has("samsung-uae-affiliate-offer-1961"), "GCC root should include Saudi and UAE regional offers");
+  assert(saCoupons.length !== aeCoupons.length, "Saudi and UAE offer counts should differ for the current data set");
 
   coupons.filter((coupon) => coupon.countries.includes("global")).forEach((coupon) => {
     GCC_COUNTRY_CODES.forEach((code) => {
@@ -375,10 +394,16 @@ async function validateServerRoutes() {
 
   const saCoupons = JSON.parse((await requestPath(rootHost, "/api/coupons?country=sa")).body);
   const aeCoupons = JSON.parse((await requestPath(rootHost, "/api/coupons?country=ae")).body);
+  const kwCoupons = JSON.parse((await requestPath(rootHost, "/api/coupons?country=kw")).body);
+  const qaCoupons = JSON.parse((await requestPath(rootHost, "/api/coupons?country=qa")).body);
   assert(countrySet(saCoupons).has("samsung-ksa-affiliate-offer-1960"), "Saudi API should include Samsung KSA");
   assert(!countrySet(saCoupons).has("samsung-uae-affiliate-offer-1961"), "Saudi API must exclude Samsung UAE");
   assert(countrySet(aeCoupons).has("samsung-uae-affiliate-offer-1961"), "UAE API should include Samsung UAE");
   assert(!countrySet(aeCoupons).has("samsung-ksa-affiliate-offer-1960"), "UAE API must exclude Samsung KSA");
+  assert(countrySet(kwCoupons).has("nike-kuwait-web-affiliate-offer-1926"), "Kuwait API should include Nike Kuwait");
+  assert(countrySet(qaCoupons).has("nike-qatar-web-affiliate-offer-1925"), "Qatar API should include Nike Qatar");
+  assert(countrySet(saCoupons).has("nomad-esim-affiliate-offer-1904") && countrySet(aeCoupons).has("nomad-esim-affiliate-offer-1904"), "Global offers should appear in country APIs");
+  assert(saCoupons.length !== aeCoupons.length, "Saudi and UAE API offer counts should differ");
 
   const invalidCoupons = JSON.parse((await requestPath(rootHost, "/api/coupons?country=unsupported")).body);
   assert(countrySet(invalidCoupons).has("samsung-ksa-affiliate-offer-1960"), "Unsupported country should fall back to GCC data");
@@ -392,6 +417,13 @@ async function validateServerRoutes() {
   assert(!JSON.stringify(saSearch).includes("nike-uae-web-affiliate-offer-1907"), "Saudi search must exclude Nike UAE");
   assert(JSON.stringify(aeSearch).includes("nike-uae-web-affiliate-offer-1907"), "UAE search should include Nike UAE");
   assert(!JSON.stringify(aeSearch).includes("nike-ksa-web-affiliate-offer-1924"), "UAE search must exclude Nike KSA");
+
+  const debugSa = JSON.parse((await requestPath(rootHost, "/api/debug/country?country=sa")).body);
+  assert(debugSa.requestedCountry === "sa" && debugSa.resolvedCountry === "sa", "Debug endpoint should resolve Saudi country");
+  assert(debugSa.totalOffers === coupons.length, "Debug endpoint total offers mismatch");
+  assert(debugSa.matchingOffers === saCoupons.length, "Debug endpoint matching count mismatch");
+  assert(!JSON.stringify(debugSa).includes("go.urtrackinglink.com"), "Debug endpoint must not expose affiliate URLs");
+  assert(!JSON.stringify(debugSa).includes("aff_id"), "Debug endpoint must not expose affiliate identifiers");
 }
 
 async function main() {

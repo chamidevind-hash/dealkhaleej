@@ -90,6 +90,26 @@ function normalizeCountryCode(value, fallback = "gcc") {
   return COUNTRY_CODES.includes(code) ? code : fallback;
 }
 
+function normalizeExplicitCountryList(values) {
+  if (!Array.isArray(values)) return [];
+
+  const normalized = new Set();
+  values.forEach((value) => {
+    const code = String(value || "").trim().toLowerCase();
+    if (code === "gcc") {
+      GCC_COUNTRY_CODES.forEach((countryCode) => normalized.add(countryCode));
+      return;
+    }
+    if (code === "global") {
+      normalized.add("global");
+      return;
+    }
+    if (GCC_COUNTRY_CODES.includes(code)) normalized.add(code);
+  });
+
+  return ["global", ...GCC_COUNTRY_CODES].filter((code) => normalized.has(code));
+}
+
 function countryFromHostname(hostname) {
   return HOST_TO_COUNTRY[normalizeHost(hostname)] || "gcc";
 }
@@ -251,9 +271,7 @@ function articleCountries(article) {
 }
 
 function isItemVisibleInCountry(item, countryCode) {
-  if (countryCode === "gcc") return true;
-  const countries = itemCountries(item);
-  return countries.includes("global") || countries.includes(countryCode);
+  return offerMatchesCountry(item, countryCode);
 }
 
 function isArticleVisibleInCountry(article, countryCode) {
@@ -263,7 +281,8 @@ function isArticleVisibleInCountry(article, countryCode) {
 }
 
 function filterCouponsByCountry(coupons, countryCode) {
-  return countryCode === "gcc" ? coupons : coupons.filter((coupon) => isItemVisibleInCountry(coupon, countryCode));
+  const country = normalizeCountryCode(countryCode);
+  return coupons.filter((coupon) => offerMatchesCountry(coupon, country));
 }
 
 function filterArticlesByCountry(articles, countryCode) {
@@ -271,10 +290,32 @@ function filterArticlesByCountry(articles, countryCode) {
 }
 
 function filterStoresByCountry(stores, coupons, countryCode) {
-  if (countryCode === "gcc") return stores;
-  const visibleStoreNames = new Set(filterCouponsByCountry(coupons, countryCode).map((coupon) => String(coupon.store || "").toLowerCase()));
+  const country = normalizeCountryCode(countryCode);
+  const visibleStoreNames = new Set(filterCouponsByCountry(coupons, country).map((coupon) => String(coupon.store || "").toLowerCase()));
 
-  return stores.filter((store) => visibleStoreNames.has(String(store.name || "").toLowerCase()) || isItemVisibleInCountry(store, countryCode));
+  return stores.filter((store) => visibleStoreNames.has(String(store.name || "").toLowerCase()) || entityMatchesCountry(store, country));
+}
+
+function offerMatchesCountry(offer, countryCode) {
+  const country = normalizeCountryCode(countryCode);
+  const countries = normalizeExplicitCountryList(offer?.countries);
+
+  if (country === "gcc") {
+    return countries.includes("global") || countries.some((code) => GCC_COUNTRY_CODES.includes(code));
+  }
+
+  return countries.includes("global") || countries.includes(country);
+}
+
+function entityMatchesCountry(entity, countryCode) {
+  const country = normalizeCountryCode(countryCode);
+  const countries = normalizeExplicitCountryList(entity?.countries);
+
+  if (country === "gcc") {
+    return countries.includes("global") || countries.includes("gcc") || countries.some((code) => GCC_COUNTRY_CODES.includes(code));
+  }
+
+  return countries.includes("global") || countries.includes("gcc") || countries.includes(country);
 }
 
 function countryCodesForStore(store, coupons) {
@@ -300,6 +341,7 @@ module.exports = {
   countrySubdomainsEnabledFromEnv,
   HOST_TO_COUNTRY,
   normalizeCountryCode,
+  normalizeExplicitCountryList,
   countryFromHostname,
   countryFromRequest,
   siteUrlForCountry,
@@ -313,6 +355,8 @@ module.exports = {
   articleCountries,
   isItemVisibleInCountry,
   isArticleVisibleInCountry,
+  offerMatchesCountry,
+  entityMatchesCountry,
   filterCouponsByCountry,
   filterStoresByCountry,
   filterArticlesByCountry,

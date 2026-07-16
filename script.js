@@ -360,6 +360,7 @@ function getCurrentMonthYear() {
 }
 
 function apiUrl(path) {
+  if (window.withCountry) return window.withCountry(path);
   return window.DealKhaleejCountryApiUrl ? window.DealKhaleejCountryApiUrl(path) : path;
 }
 
