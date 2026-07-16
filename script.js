@@ -29,7 +29,7 @@ const countryContext = window.DealKhaleejCountry || {
   currency: "SAR",
   locale: "en"
 };
-const countrySubdomainsEnabled = Boolean(window.DealKhaleejCountrySubdomainsEnabled);
+const countrySubdomainsEnabled = window.DealKhaleejCountrySubdomainsEnabled === true;
 
 let coupons = [];
 let stores = [];
@@ -936,16 +936,6 @@ if (navToggle && mainNav) {
     if (!event.target.closest("a")) return;
     navToggle.setAttribute("aria-expanded", "false");
     document.body.classList.remove("nav-open");
-  });
-}
-
-if (countrySelector) {
-  countrySelector.addEventListener("change", () => {
-    if (window.DealKhaleejCountryRedirect) {
-      window.DealKhaleejCountryRedirect(countrySelector.value);
-      return;
-    }
-    document.documentElement.dataset.country = storeSlug(countrySelector.value);
   });
 }
 

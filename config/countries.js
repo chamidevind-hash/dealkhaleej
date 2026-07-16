@@ -1,7 +1,11 @@
 const GCC_COUNTRY_CODES = ["sa", "ae", "kw", "qa", "bh", "om"];
 const COUNTRY_CODES = ["gcc", ...GCC_COUNTRY_CODES];
 const ROOT_HOSTNAME = "dealkhaleej.com";
-const COUNTRY_SUBDOMAINS_ENABLED = /^true$/i.test(String(process.env.COUNTRY_SUBDOMAINS_ENABLED || ""));
+const COUNTRY_SUBDOMAINS_ENABLED = countrySubdomainsEnabledFromEnv(process.env.COUNTRY_SUBDOMAINS_ENABLED);
+
+function countrySubdomainsEnabledFromEnv(value) {
+  return String(value || "").trim().toLowerCase() === "true";
+}
 
 const COUNTRIES = {
   gcc: {
@@ -293,6 +297,7 @@ module.exports = {
   COUNTRY_CODES,
   GCC_COUNTRY_CODES,
   COUNTRY_SUBDOMAINS_ENABLED,
+  countrySubdomainsEnabledFromEnv,
   HOST_TO_COUNTRY,
   normalizeCountryCode,
   countryFromHostname,

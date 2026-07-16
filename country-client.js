@@ -1,7 +1,7 @@
 (function () {
   const storageKey = "dealkhaleej_country";
   const countries = Array.isArray(window.DealKhaleejCountries) ? window.DealKhaleejCountries : [];
-  const subdomainsEnabled = Boolean(window.DealKhaleejCountrySubdomainsEnabled);
+  const subdomainsEnabled = window.DealKhaleejCountrySubdomainsEnabled === true;
   const localHosts = new Set(["localhost", "127.0.0.1", "0.0.0.0", "::1"]);
   const countryCodes = new Set(countries.map((country) => country.code));
   const fallbackCountry = countries.find((country) => country.code === "gcc") || { code: "gcc", name: "GCC", shortName: "GCC", hostname: "dealkhaleej.com" };
@@ -69,42 +69,44 @@
   window.DealKhaleejCountry = currentCountry;
   document.documentElement.dataset.country = currentCountry.code;
 
-  function countryUrl(path) {
-    const next = new URL(path, window.location.origin);
+  function sameOriginCountryUrl(code, value = window.location.href) {
+    const next = new URL(value, window.location.origin);
+    const normalized = normalizeCode(code) || "gcc";
+
+    if (normalized === "gcc") {
+      next.searchParams.delete("country");
+    } else {
+      next.searchParams.set("country", normalized);
+    }
+
+    return next;
+  }
+
+  function subdomainCountryUrl(code, value = window.location.href) {
+    const target = countryForCode(code);
+    const next = sameOriginCountryUrl(code, value);
 
     if (subdomainsEnabled && !isLocalHost(window.location.hostname)) {
-      const target = countryForCode(currentCountry.code);
       next.protocol = "https:";
       next.hostname = target.hostname;
       next.searchParams.delete("country");
-      return next.toString();
     }
 
-    if (currentCountry.code === "gcc") {
-      next.searchParams.delete("country");
-    } else {
-      next.searchParams.set("country", currentCountry.code);
-    }
+    return next;
+  }
 
-    return `${next.pathname}${next.search}${next.hash}`;
+  function countryUrl(path) {
+    const next = subdomainCountryUrl(currentCountry.code, new URL(path, window.location.origin).toString());
+    return subdomainsEnabled && !isLocalHost(window.location.hostname)
+      ? next.toString()
+      : `${next.pathname}${next.search}${next.hash}`;
   }
 
   function redirectToCountry(code) {
     const target = countryForCode(normalizeCode(code) || "gcc");
-    const next = new URL(window.location.href);
+    const next = subdomainCountryUrl(target.code);
 
     saveCountry(target.code);
-
-    if (subdomainsEnabled && !isLocalHost(next.hostname)) {
-      next.protocol = "https:";
-      next.hostname = target.hostname;
-      next.searchParams.delete("country");
-    } else if (target.code === "gcc") {
-      next.searchParams.delete("country");
-    } else {
-      next.searchParams.set("country", target.code);
-    }
-
     window.location.assign(next.toString());
   }
 

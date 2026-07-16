@@ -1,5 +1,7 @@
 const http = require("http");
-const { spawn } = require("child_process");
+const fs = require("fs");
+const vm = require("vm");
+const { spawn, spawnSync } = require("child_process");
 const coupons = require("../data/coupons.json");
 const stores = require("../data/stores.json");
 const articles = require("../data/articles.json");
@@ -10,6 +12,7 @@ const {
   GCC_COUNTRY_CODES,
   COUNTRY_SUBDOMAINS_ENABLED,
   HOST_TO_COUNTRY,
+  countrySubdomainsEnabledFromEnv,
   filterCouponsByCountry,
   filterStoresByCountry,
   siteUrlForCountry
@@ -51,6 +54,7 @@ function requestPath(hostname, path) {
       response.on("data", (chunk) => chunks.push(chunk));
       response.on("end", () => resolve({
         statusCode: response.statusCode,
+        headers: response.headers,
         body: Buffer.concat(chunks).toString("utf8")
       }));
     });
@@ -60,6 +64,166 @@ function requestPath(hostname, path) {
       request.destroy(new Error(`Timed out requesting ${hostname}${path}`));
     });
   });
+}
+
+function anchor(href) {
+  return {
+    attrs: { href },
+    getAttribute(name) {
+      return this.attrs[name];
+    },
+    setAttribute(name, value) {
+      this.attrs[name] = value;
+    },
+    hasAttribute(name) {
+      return Object.prototype.hasOwnProperty.call(this.attrs, name);
+    },
+    matches(selector) {
+      return selector === "a[href]";
+    },
+    querySelectorAll() {
+      return [];
+    },
+    nodeType: 1
+  };
+}
+
+function runCountryClientScenario({ href, subdomainsEnabled = false, storedCountry = "" }) {
+  const script = fs.readFileSync(`${__dirname}/../country-client.js`, "utf8");
+  const countries = COUNTRY_CODES.map((code) => COUNTRIES[code]);
+  const selector = {
+    value: "",
+    addEventListener(event, handler) {
+      if (event === "change") this.handler = handler;
+    }
+  };
+  const links = [
+    anchor("/store/nike"),
+    anchor("/travel"),
+    anchor("/blog/example?ref=home#faq"),
+    anchor("/go/nike-ksa-web-affiliate-offer-1924"),
+    anchor("https://t.me/dealkhaleej"),
+    anchor("mailto:hello@dealkhaleej.com"),
+    anchor("/assets/logos/nike.png"),
+    anchor("#faq")
+  ];
+  const assigned = [];
+  const storage = new Map(storedCountry ? [["dealkhaleej_country", storedCountry]] : []);
+  const currentUrl = new URL(href);
+  const context = {
+    URL,
+    Node: { ELEMENT_NODE: 1 },
+    MutationObserver: class {
+      observe() {}
+    },
+    localStorage: {
+      getItem(key) {
+        return storage.has(key) ? storage.get(key) : null;
+      },
+      setItem(key, value) {
+        storage.set(key, String(value));
+      }
+    },
+    window: {
+      location: {
+        href: currentUrl.href,
+        origin: currentUrl.origin,
+        hostname: currentUrl.hostname,
+        assign(value) {
+          assigned.push(value);
+        }
+      },
+      history: {
+        state: null,
+        replaceState(state, title, value) {
+          this.lastReplace = value;
+        }
+      },
+      DealKhaleejCountries: countries,
+      DealKhaleejCountry: COUNTRIES.gcc,
+      DealKhaleejCountrySubdomainsEnabled: subdomainsEnabled
+    },
+    document: {
+      readyState: "complete",
+      documentElement: { dataset: {} },
+      querySelectorAll(selectorText) {
+        if (selectorText === "[data-country-selector]") return [selector];
+        if (selectorText === "a[href]") return links;
+        return [];
+      },
+      addEventListener() {}
+    }
+  };
+
+  context.window.window = context.window;
+  context.window.document = context.document;
+  context.window.localStorage = context.localStorage;
+  context.window.MutationObserver = context.MutationObserver;
+  context.window.Node = context.Node;
+  vm.createContext(context);
+  vm.runInContext(script, context);
+  return { context, selector, links, assigned, storage };
+}
+
+function validateEnvFlagParsing() {
+  [undefined, "", "false", "False", "0", "off", " OFF "].forEach((value) => {
+    assert(countrySubdomainsEnabledFromEnv(value) === false, `COUNTRY_SUBDOMAINS_ENABLED=${value} should be disabled`);
+  });
+  assert(countrySubdomainsEnabledFromEnv("true") === true, "COUNTRY_SUBDOMAINS_ENABLED=true should be enabled");
+
+  [
+    ["", "false"],
+    ["false", "false"],
+    ["0", "false"],
+    ["off", "false"],
+    ["true", "true"]
+  ].forEach(([value, expected]) => {
+    const child = spawnSync(process.execPath, ["-e", "console.log(require('./config/countries').COUNTRY_SUBDOMAINS_ENABLED)"], {
+      cwd: `${__dirname}/..`,
+      env: value ? { ...process.env, COUNTRY_SUBDOMAINS_ENABLED: value } : { ...process.env, COUNTRY_SUBDOMAINS_ENABLED: "" },
+      encoding: "utf8",
+      windowsHide: true
+    });
+    assert(child.status === 0, `Flag subprocess failed for ${value || "missing"}`);
+    assert(child.stdout.trim() === expected, `Flag subprocess mismatch for ${value || "missing"}`);
+  });
+}
+
+function validateCountryClient() {
+  ["false", "0", "off", false, undefined].forEach((disabledValue) => {
+    const { context, selector, links, assigned, storage } = runCountryClientScenario({
+      href: "http://localhost:5173/blog/example?ref=home&country=sa#faq",
+      subdomainsEnabled: disabledValue
+    });
+
+    assert(context.window.DealKhaleejCountry.code === "sa", "Query country should be the active browser country");
+    assert(storage.get("dealkhaleej_country") === "sa", "Query country should be saved to localStorage");
+    assert(selector.value === "sa", "Selector should show Saudi Arabia");
+    assert(links[0].attrs.href === "/store/nike?country=sa", "Store links should keep selected country");
+    assert(links[1].attrs.href === "/travel?country=sa", "Travel links should keep selected country");
+    assert(links[2].attrs.href === "/blog/example?ref=home&country=sa#faq", "Blog links should preserve query and hash");
+    assert(links[3].attrs.href === "/go/nike-ksa-web-affiliate-offer-1924", "Tracking links should stay clean");
+    assert(links[4].attrs.href === "https://t.me/dealkhaleej", "External links should stay clean");
+    assert(links[5].attrs.href === "mailto:hello@dealkhaleej.com", "Mail links should stay clean");
+    assert(links[6].attrs.href === "/assets/logos/nike.png", "Static files should stay clean");
+    assert(links[7].attrs.href === "#faq", "Hash-only links should stay clean");
+    assert(context.window.DealKhaleejCountryApiUrl("/api/search?q=nike") === "/api/search?q=nike&country=sa", "API URLs should include active country");
+
+    context.window.DealKhaleejCountryRedirect("ae");
+    assert(assigned[0] === "http://localhost:5173/blog/example?ref=home&country=ae#faq", "Selecting UAE should preserve localhost, path, ref, and hash");
+    context.window.DealKhaleejCountryRedirect("gcc");
+    assert(assigned[1] === "http://localhost:5173/blog/example?ref=home#faq", "Selecting GCC should remove country");
+    assigned.forEach((value) => assert(!/https:\/\/(?:sa|ae|kw|qa|bh|om)\.dealkhaleej\.com/.test(value), `Disabled selector produced subdomain URL ${value}`));
+  });
+
+  const stored = runCountryClientScenario({
+    href: "http://localhost:5173/store/nike?ref=home#faq",
+    storedCountry: "ae"
+  });
+  assert(stored.context.window.DealKhaleejCountry.code === "ae", "Saved country should be used when query is missing");
+  assert(stored.context.window.DealKhaleejCountryApiUrl("/api/stores") === "/api/stores?country=ae", "Saved country should be sent to store API");
+  stored.context.window.DealKhaleejCountryRedirect("kw");
+  assert(stored.assigned[0] === "http://localhost:5173/store/nike?ref=home&country=kw#faq", "Selecting Kuwait should keep path, ref, and hash");
 }
 
 function waitForServer() {
@@ -169,6 +333,13 @@ async function validateServerRoutes() {
   const robots = await requestPath(rootHost, "/robots.txt");
   assert(robots.body.includes("Sitemap: https://dealkhaleej.com/sitemap.xml"), "robots.txt should keep the root-domain sitemap");
 
+  for (const code of GCC_COUNTRY_CODES) {
+    const subdomainResponse = await requestPath(COUNTRIES[code].hostname, "/store/nike?country=sa");
+    assert(subdomainResponse.statusCode === 200, `${code} subdomain host should render without redirect while disabled`);
+    assert(![301, 302, 307, 308].includes(subdomainResponse.statusCode), `${code} subdomain host must not redirect while disabled`);
+    assert(!subdomainResponse.headers.location, `${code} subdomain host must not set a redirect location while disabled`);
+  }
+
   const sitemap = await requestPath(rootHost, "/sitemap.xml?country=sa");
   assert(sitemap.statusCode === 200, "sitemap failed");
   const locs = [...sitemap.body.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
@@ -224,8 +395,10 @@ async function validateServerRoutes() {
 }
 
 async function main() {
+  validateEnvFlagParsing();
   validateData();
   validateFilters();
+  validateCountryClient();
   await withServer(validateServerRoutes);
   console.log("Country routing check passed.");
 }
