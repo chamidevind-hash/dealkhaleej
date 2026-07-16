@@ -19,7 +19,7 @@ function saveFavoriteCoupons() {
 }
 
 function setupLogoFallback(image) {
-  const tile = image.closest(".logo-tile");
+  const tile = image.closest(".logo-tile, .trusted-store-logo-wrap");
   if (!tile) return;
 
   function syncState() {
@@ -123,7 +123,7 @@ async function subscribeToNewsletter(form) {
   }
 }
 
-document.querySelectorAll(".logo-tile img").forEach(setupLogoFallback);
+document.querySelectorAll(".logo-tile img, .trusted-store-logo-wrap img").forEach(setupLogoFallback);
 document.querySelectorAll("[data-favorite-id]").forEach(syncFavoriteButton);
 
 document.addEventListener("click", (event) => {

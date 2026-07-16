@@ -56,6 +56,32 @@ function initials(name) {
     .toUpperCase();
 }
 
+function logoClass(name) {
+  const normalized = String(name || "")
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  const aliases = [
+    ["mamas-and-papas", "mamas-papas"],
+    ["mamas-papas", "mamas-papas"],
+    ["agoda-hotels", "agoda"],
+    ["trip-com", "trip"],
+    ["trip-global", "trip"],
+    ["samsung", "samsung"],
+    ["nike", "nike"],
+    ["noon", "noon"],
+    ["temu", "temu"],
+    ["shein", "shein"],
+    ["puma", "puma"],
+    ["mumzworld", "mumzworld"],
+    ["ubuy", "ubuy"],
+    ["airalo", "airalo"]
+  ];
+  const match = aliases.find(([key]) => normalized.includes(key));
+  return match ? `logo-${match[1]}` : "";
+}
+
 function formatDate(value) {
   if (!value) return "";
   const date = new Date(value);
@@ -168,7 +194,7 @@ function couponCard(coupon, store, content) {
   const description = coupon.description || coupon.meta || "Review this offer on DealKhaleej, then confirm eligibility with the store before checkout.";
   return `
     <article class="store-offer-card coupon-card" data-coupon-id="${escapeHtml(coupon.id)}">
-      <div class="logo-tile">
+      <div class="logo-tile coupon-logo-wrap ${escapeHtml(logoClass(coupon.store))}">
         <img src="${escapeHtml(assetPath(coupon.logo || store.logo))}" alt="${escapeHtml(coupon.store)} logo">
         <span>${escapeHtml(initials(coupon.store))}</span>
       </div>
@@ -460,7 +486,7 @@ function similarStoresMarkup(store, stores) {
       <div class="similar-store-grid">
         ${related.map((item) => `
           <article class="similar-store-card">
-            <span class="logo-tile small">
+            <span class="logo-tile small ${escapeHtml(logoClass(item.name))}">
               <img src="${escapeHtml(assetPath(item.logo))}" alt="${escapeHtml(item.name)} logo">
               <strong>${escapeHtml(initials(item.name))}</strong>
             </span>
@@ -679,7 +705,7 @@ ${robotsMeta}  <meta property="og:title" content="${escapeHtml(title)}">
 
     <section class="store-seo-hero">
       <div class="store-hero-main">
-        <span class="logo-tile store-logo">
+        <span class="logo-tile store-logo ${escapeHtml(logoClass(store.name))}">
           <img src="${escapeHtml(assetPath(store.logo))}" alt="${escapeHtml(store.name)} logo">
           <span>${escapeHtml(initials(store.name))}</span>
         </span>

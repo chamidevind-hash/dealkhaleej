@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700&display=swap");
 
 :root {
-  --font-primary: "Inter", Arial, sans-serif;
+  --font-primary: Arial, Helvetica, sans-serif;
   --font-arabic: "Tajawal", Arial, sans-serif;
 
   --color-primary: #E63946;
@@ -60,7 +60,7 @@ body {
   color: var(--ink);
   font-family: var(--font-primary);
   font-size: 16px;
-  line-height: 1.65;
+  line-height: 1.55;
 }
 
 a {
@@ -127,7 +127,7 @@ input {
   border-radius: 14px;
   background: var(--ink);
   color: #fff;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .logo-tile {
@@ -141,7 +141,7 @@ input {
   border-radius: 16px;
   background: #fff;
   color: var(--leaf-dark);
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .logo-tile.small {
@@ -207,7 +207,7 @@ input {
 .primary-button {
   border: 0;
   cursor: pointer;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .icon-button {
@@ -239,7 +239,7 @@ input {
   background: #fff;
   color: var(--ink);
   cursor: pointer;
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .danger-button {
@@ -274,7 +274,7 @@ input {
   margin: 0 0 10px;
   color: var(--gold-deep);
   font-size: 0.78rem;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0;
   text-transform: uppercase;
 }
@@ -338,7 +338,7 @@ h3 {
   padding: 4px 10px 8px;
   color: var(--muted);
   font-size: 0.84rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .search-row {
@@ -405,7 +405,7 @@ h3 {
   margin-bottom: 8px;
   color: rgba(255, 255, 255, 0.82);
   font-size: 0.84rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .newsletter-controls {
@@ -435,7 +435,7 @@ h3 {
   margin: 10px 0 0;
   color: #ffcf70;
   font-size: 0.88rem;
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .newsletter-status.error {
@@ -510,7 +510,7 @@ h3 {
   background: #fff;
   color: #2f3a36;
   cursor: pointer;
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .category-chip.active {
@@ -582,7 +582,7 @@ h3 {
   background: var(--color-orange-soft);
   color: var(--color-orange-dark);
   font-size: 0.8rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .trending-details {
@@ -599,7 +599,7 @@ h3 {
   margin: 0;
   color: var(--muted);
   font-size: 0.8rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .trending-card .shop-deal-button {
@@ -643,7 +643,7 @@ h3 {
 
 .spotlight-code span,
 .coupon-action span {
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .spotlight-code button,
@@ -654,7 +654,7 @@ h3 {
   background: var(--navy);
   color: #fff;
   cursor: pointer;
-  font-weight: 850;
+  font-weight: 700;
   padding: 0 14px;
 }
 
@@ -666,7 +666,7 @@ h3 {
   border-radius: 999px;
   background: var(--gold);
   color: var(--navy);
-  font-weight: 850;
+  font-weight: 700;
   width: 100%;
 }
 
@@ -710,13 +710,13 @@ h3 {
   border-radius: 18px;
   background: #f7f9fd;
   color: var(--muted);
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .store-name {
   margin: 0 0 6px;
   color: var(--leaf-dark);
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .coupon-details {
@@ -773,14 +773,14 @@ h3 {
   background: var(--color-orange-soft);
   color: var(--color-orange-dark);
   font-size: 0.76rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .expiry {
   margin-top: 8px;
   color: #a73728;
   font-size: 0.82rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .coupon-action {
@@ -826,7 +826,7 @@ h3 {
   border: 1px solid var(--line);
   border-radius: 20px;
   background: #fff;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .store-grid .logo-tile.small {
@@ -850,7 +850,7 @@ h3 {
 
 .guide-copy p:not(.eyebrow) {
   color: var(--muted);
-  line-height: 1.65;
+  line-height: 1.55;
 }
 
 .steps {
@@ -870,12 +870,12 @@ h3 {
   border: 1px solid var(--line);
   border-radius: 18px;
   background: #f7f9fd;
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .steps .step-number {
   color: var(--leaf);
-  font-weight: 950;
+  font-weight: 700;
 }
 
 .app-banner {
@@ -899,7 +899,7 @@ h3 {
   margin: 12px 0 0;
   color: #ffcf70;
   font-size: 0.88rem;
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .app-banner .primary-button:disabled {
@@ -914,7 +914,7 @@ h3 {
   gap: 18px;
   padding: 34px clamp(18px, 4vw, 56px);
   color: var(--muted);
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .site-footer nav {
@@ -936,7 +936,7 @@ h3 {
   box-shadow: var(--shadow);
   opacity: 0;
   transition: transform 180ms ease, opacity 180ms ease;
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .toast.show {
@@ -958,7 +958,7 @@ h3 {
   border-radius: 999px;
   background: #229ed9;
   color: #fff;
-  font-weight: 900;
+  font-weight: 700;
   box-shadow: 0 18px 40px rgba(34, 158, 217, 0.35);
 }
 
@@ -1008,7 +1008,7 @@ html[dir="rtl"] .coupon-action {
   display: grid;
   gap: 8px;
   color: #34413c;
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .login-form input {
@@ -1024,7 +1024,7 @@ html[dir="rtl"] .coupon-action {
   margin: 0;
   color: #a73728;
   font-size: 0.9rem;
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .admin-logout {
@@ -1063,7 +1063,7 @@ html[dir="rtl"] .coupon-action {
   display: grid;
   gap: 8px;
   color: #34413c;
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .admin-form input,
@@ -1104,7 +1104,7 @@ html[dir="rtl"] .coupon-action {
 
 #form-status {
   color: var(--leaf-dark);
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .admin-list {
@@ -1136,7 +1136,7 @@ html[dir="rtl"] .coupon-action {
 
 .stat-tile span {
   color: var(--muted);
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .admin-subheading {
@@ -1268,7 +1268,7 @@ html[dir="rtl"] .coupon-action {
 .travel-card p,
 .travel-article-card p {
   color: var(--muted);
-  line-height: 1.65;
+  line-height: 1.55;
 }
 
 .travel-hero p:not(.eyebrow) {
@@ -1297,7 +1297,7 @@ html[dir="rtl"] .coupon-action {
   border-radius: 999px;
   background: #fff;
   color: var(--navy);
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .travel-section {
@@ -1375,7 +1375,7 @@ html[dir="rtl"] .coupon-action {
   border-radius: 16px;
   background: var(--panel);
   color: var(--navy);
-  font-weight: 850;
+  font-weight: 700;
   line-height: 1.25;
 }
 
@@ -1417,7 +1417,7 @@ html[dir="rtl"] .coupon-action {
   margin: 18px 0 0;
   color: var(--muted);
   font-size: 1.12rem;
-  line-height: 1.65;
+  line-height: 1.55;
 }
 
 .article-grid {
@@ -1440,7 +1440,7 @@ html[dir="rtl"] .coupon-action {
 .article-title time {
   color: var(--gold-deep);
   font-size: 0.82rem;
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .article-card h2 {
@@ -1458,7 +1458,7 @@ html[dir="rtl"] .coupon-action {
 
 .article-link {
   color: var(--blue);
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .article-content .article-link {
@@ -1475,7 +1475,7 @@ html[dir="rtl"] .coupon-action {
   display: inline-block;
   margin-bottom: 34px;
   color: var(--blue);
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .article-title {
@@ -1543,7 +1543,7 @@ html[dir="rtl"] .coupon-action {
   border-radius: 999px;
   background: var(--color-orange-soft);
   color: var(--navy);
-  font-weight: 850;
+  font-weight: 700;
 }
 
 @media (max-width: 920px) {
@@ -1755,7 +1755,7 @@ html[dir="rtl"] .coupon-action {
   background: rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.82);
   font-size: 0.82rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .country-select select {
@@ -1765,7 +1765,7 @@ html[dir="rtl"] .coupon-action {
   border-radius: 999px;
   background: #fff;
   color: var(--navy);
-  font-weight: 850;
+  font-weight: 700;
   outline: 0;
 }
 
@@ -1873,7 +1873,7 @@ html[dir="rtl"] .coupon-action {
   margin-top: 8px;
   color: rgba(255, 255, 255, 0.72);
   font-size: 0.84rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .popular-strip-section,
@@ -1906,7 +1906,7 @@ html[dir="rtl"] .coupon-action {
   background: #fff;
   color: var(--navy);
   font-size: 0.86rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .logo-strip {
@@ -1926,7 +1926,7 @@ html[dir="rtl"] .coupon-action {
   color: var(--navy);
   text-align: center;
   font-size: 0.78rem;
-  font-weight: 900;
+  font-weight: 700;
   box-shadow: 0 8px 26px rgba(17, 24, 39, 0.05);
 }
 
@@ -1993,7 +1993,7 @@ html[dir="rtl"] .coupon-action {
   padding: 0 9px;
   border-radius: 999px;
   font-size: 0.74rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .verified-badge {
@@ -2136,7 +2136,7 @@ html[dir="rtl"] .coupon-action {
 .seo-grid p {
   margin: 0;
   color: var(--muted);
-  line-height: 1.65;
+  line-height: 1.55;
 }
 
 .deal-alert-actions {
@@ -2158,7 +2158,7 @@ html[dir="rtl"] .coupon-action {
   margin: 0;
   color: #ffcf70;
   font-size: 0.88rem;
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .site-footer {
@@ -2398,7 +2398,7 @@ html[dir="rtl"] .coupon-action {
   margin-bottom: 16px;
   color: var(--muted);
   font-size: 0.88rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .store-breadcrumbs a {
@@ -2483,7 +2483,7 @@ html[dir="rtl"] .coupon-action {
   background: #EEF6FF;
   color: var(--leaf-dark);
   font-size: 0.78rem;
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1.3;
   white-space: normal;
 }
@@ -2517,14 +2517,14 @@ html[dir="rtl"] .coupon-action {
 .store-details-panel dt {
   color: var(--ink);
   font-size: 0.84rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .store-details-panel dd {
   margin: 0;
   text-align: right;
   font-size: 0.88rem;
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .store-details-panel a {
@@ -2580,7 +2580,7 @@ html[dir="rtl"] .coupon-action {
 .store-code-box span {
   overflow: hidden;
   color: var(--navy);
-  font-weight: 950;
+  font-weight: 700;
   text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -2594,7 +2594,7 @@ html[dir="rtl"] .coupon-action {
   background: var(--navy);
   color: #fff;
   cursor: pointer;
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .store-code-box button:disabled {
@@ -2672,7 +2672,7 @@ html[dir="rtl"] .coupon-action {
   background: #f7f9fd;
   color: var(--ink);
   font-size: 0.82rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .store-summary-table td {
@@ -2715,14 +2715,14 @@ html[dir="rtl"] .coupon-action {
   background: var(--gold);
   color: var(--navy);
   font-size: 0.82rem;
-  font-weight: 950;
+  font-weight: 700;
 }
 
 .store-steps p,
 .store-tip-list li {
   margin: 0;
   color: #33445f;
-  font-weight: 720;
+  font-weight: 600;
   line-height: 1.55;
 }
 
@@ -2732,7 +2732,7 @@ html[dir="rtl"] .coupon-action {
   border-radius: 14px;
   background: var(--color-orange-soft);
   color: var(--gold-deep) !important;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .store-seo-grid {
@@ -2763,7 +2763,7 @@ html[dir="rtl"] .coupon-action {
   cursor: pointer;
   padding: 15px 16px;
   color: var(--ink);
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .store-faq-list p {
@@ -2795,7 +2795,7 @@ html[dir="rtl"] .coupon-action {
 .store-article-card time {
   color: var(--gold-deep);
   font-size: 0.8rem;
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .store-article-card h3 {
@@ -3002,7 +3002,7 @@ h1,
 .travel-hero h1,
 .store-hero-main h1 {
   font-size: clamp(30px, 4vw, 48px);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.15;
 }
 
@@ -3013,7 +3013,7 @@ h2,
 .newsletter-inner h2,
 .seo-grid h3 {
   font-size: clamp(24px, 3vw, 34px);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.2;
 }
 
@@ -3067,7 +3067,7 @@ html[dir="rtl"] .site-footer {
 .eyebrow {
   color: var(--color-primary);
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .site-header,
@@ -3414,7 +3414,7 @@ textarea:focus-visible {
 
 .store-name {
   color: var(--color-heading);
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .coupon-details .meta,
@@ -3437,7 +3437,7 @@ textarea:focus-visible {
 .verified-badge::before {
   content: "✓";
   margin-inline-end: 6px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .coupon-region,
@@ -3458,7 +3458,7 @@ textarea:focus-visible {
 .store-code-box span,
 .spotlight-code span {
   color: var(--color-primary-dark);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.04em;
 }
 
@@ -3732,5 +3732,388 @@ textarea:focus-visible {
 
   .country-select select {
     flex: 1;
+  }
+}
+
+/* Typography and logo consistency refinements */
+html,
+body {
+  font-family: var(--font-primary);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+body,
+p,
+li,
+dd,
+.meta,
+.store-intro,
+.article-content,
+.article-body,
+.travel-page,
+.store-panel,
+.coupon-details .meta {
+  font-weight: 400;
+}
+
+h1,
+.hero-copy h1,
+.blog-heading h1,
+.travel-hero h1,
+.store-hero-main h1 {
+  font-family: var(--font-primary);
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 700;
+  line-height: 1.16;
+  letter-spacing: 0;
+}
+
+h2,
+.section-heading h2,
+.store-panel h2,
+.travel-section-heading h2,
+.newsletter-inner h2,
+.seo-grid h3 {
+  font-family: var(--font-primary);
+  font-size: clamp(23px, 2.8vw, 32px);
+  font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: 0;
+}
+
+h3,
+.coupon-details h3,
+.travel-card h3,
+.travel-article-card h3,
+.store-article-card h3,
+.similar-store-card h3 {
+  font-family: var(--font-primary);
+  font-size: clamp(18px, 2vw, 21px);
+  font-weight: 700;
+  line-height: 1.28;
+  letter-spacing: 0;
+}
+
+.article-content,
+.article-body,
+.article-page article,
+.blog-article {
+  font-size: clamp(16px, 1.4vw, 17px);
+  line-height: 1.65;
+}
+
+.main-nav,
+.country-select,
+.store-name,
+.trusted-store-name,
+.store-grid a,
+.similar-store-card h3 {
+  font-weight: 600;
+}
+
+button,
+.primary-button,
+.secondary-button,
+.danger-button,
+.shop-deal-button,
+.coupon-action button,
+.store-code-box button,
+.trusted-store-link,
+.section-link {
+  font-size: clamp(14px, 1.5vw, 15px);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.eyebrow,
+.coupon-region,
+.expiry,
+.store-grid small,
+.trusted-store-link,
+.category-chip {
+  font-size: 12px;
+  letter-spacing: 0;
+}
+
+.coupon-details h3,
+.store-offer-card .coupon-details h3 {
+  font-weight: 700;
+}
+
+.coupon-details .meta,
+.store-panel p,
+.travel-card p,
+.article-card p,
+.store-details-panel dd {
+  font-weight: 400;
+}
+
+.coupon-action span,
+.store-code-box span,
+.spotlight-code span {
+  letter-spacing: 0.04em;
+}
+
+.popular-strip-section .section-heading h2 {
+  font-weight: 700;
+}
+
+.logo-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(112px, 112px));
+  justify-content: center;
+  gap: 12px;
+}
+
+.trusted-store-card,
+.logo-strip-card.trusted-store-card {
+  width: 112px;
+  min-height: 132px;
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.logo-strip-card.trusted-store-card::after {
+  content: none;
+}
+
+.trusted-store-logo-wrap {
+  position: relative;
+  width: 64px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--color-heading);
+  flex: 0 0 auto;
+}
+
+.trusted-store-logo {
+  display: block;
+  max-width: 58px;
+  max-height: 38px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.trusted-store-logo-wrap strong {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 4px;
+  color: var(--color-heading);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.trusted-store-logo-wrap.has-logo strong,
+.trusted-store-logo-wrap.logo-missing img {
+  display: none;
+}
+
+.trusted-store-logo-wrap.logo-missing {
+  background: #f5f6f8;
+}
+
+.trusted-store-name {
+  min-height: 34px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  align-content: center;
+  justify-content: center;
+  color: var(--color-heading);
+  font-size: 13px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.trusted-store-link {
+  margin-top: auto;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.logo-tile,
+.coupon-logo-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.coupon-logo-wrap,
+.coupon-card > .logo-tile,
+.store-offer-card > .logo-tile {
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.coupon-logo-wrap img,
+.coupon-card > .logo-tile img,
+.store-offer-card > .logo-tile img {
+  max-width: 36px;
+  max-height: 30px;
+  width: auto;
+  height: auto;
+  padding: 0;
+  object-fit: contain;
+}
+
+.logo-tile img {
+  max-width: 72%;
+  max-height: 68%;
+  width: auto;
+  height: auto;
+  padding: 0;
+  object-fit: contain;
+}
+
+.logo-tile.logo-missing,
+.trusted-store-logo-wrap.logo-missing {
+  background: #f3f4f6;
+  color: var(--color-heading);
+}
+
+.logo-tile span,
+.logo-tile strong {
+  color: var(--color-heading);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.store-grid a {
+  min-height: 128px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.store-card-name {
+  display: -webkit-box;
+  max-width: 100%;
+  min-height: 34px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.store-grid small,
+.similar-store-card p {
+  font-weight: 400;
+}
+
+.similar-store-card h3 {
+  display: -webkit-box;
+  max-width: 100%;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.2;
+}
+
+.logo-noon img,
+.logo-mumzworld img,
+.logo-mamas-papas img,
+.logo-trip img {
+  max-width: 62px;
+  max-height: 28px;
+}
+
+.coupon-logo-wrap.logo-noon img,
+.coupon-logo-wrap.logo-mumzworld img,
+.coupon-logo-wrap.logo-mamas-papas img,
+.coupon-logo-wrap.logo-trip img {
+  max-width: 38px;
+  max-height: 24px;
+}
+
+.logo-noon img {
+  max-width: 50px;
+  max-height: 38px;
+}
+
+.logo-samsung img,
+.logo-agoda img {
+  max-width: 42px;
+  max-height: 38px;
+}
+
+.coupon-logo-wrap.logo-samsung img,
+.coupon-logo-wrap.logo-agoda img,
+.coupon-logo-wrap.logo-noon img {
+  max-width: 34px;
+  max-height: 30px;
+}
+
+.logo-temu img,
+.logo-shein img,
+.logo-puma img,
+.logo-nike img,
+.logo-ubuy img,
+.logo-airalo img {
+  max-width: 46px;
+  max-height: 38px;
+}
+
+.coupon-logo-wrap.logo-temu img,
+.coupon-logo-wrap.logo-shein img,
+.coupon-logo-wrap.logo-puma img,
+.coupon-logo-wrap.logo-nike img,
+.coupon-logo-wrap.logo-ubuy img,
+.coupon-logo-wrap.logo-airalo img {
+  max-width: 34px;
+  max-height: 30px;
+}
+
+.logo-shein,
+.logo-nike {
+  background: #f7f7f7;
+}
+
+@media (max-width: 640px) {
+  .logo-strip {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 112px;
+    grid-template-columns: none;
+    justify-content: start;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .logo-strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .trusted-store-card {
+    scroll-snap-align: start;
   }
 }

@@ -127,6 +127,7 @@ const translations = {
     storeDirectory: "Popular stores directory",
     viewAllStores: "View All Stores",
     showFewerStores: "Show Fewer Stores",
+    viewOffers: "View offers",
     popularStores: "Popular stores",
     shopOfficialStores: "Shop official stores",
     checkoutFlow: "Simple checkout flow",
@@ -252,6 +253,7 @@ const translations = {
     liveBoard: "العروض المباشرة",
     featuredCoupons: "بطاقات الكوبونات المميزة",
     popularStores: "متاجر شائعة",
+    viewOffers: "عرض العروض",
     shopOfficialStores: "تسوق من المتاجر الرسمية",
     checkoutFlow: "خطوات دفع بسيطة",
     howShoppersUse: "كيف يستخدم المتسوقون DealKhaleej",
@@ -548,6 +550,36 @@ function initials(name) {
     .toUpperCase();
 }
 
+function logoClass(name) {
+  const normalized = String(name || "")
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  const aliases = [
+    ["mamas-and-papas", "mamas-papas"],
+    ["mamas-papas", "mamas-papas"],
+    ["agoda-hotels", "agoda"],
+    ["trip-com", "trip"],
+    ["trip-global", "trip"],
+    ["samsung", "samsung"],
+    ["nike", "nike"],
+    ["noon", "noon"],
+    ["temu", "temu"],
+    ["shein", "shein"],
+    ["puma", "puma"],
+    ["mumzworld", "mumzworld"],
+    ["ubuy", "ubuy"],
+    ["airalo", "airalo"]
+  ];
+  const match = aliases.find(([key]) => normalized.includes(key));
+  return match ? `logo-${match[1]}` : "";
+}
+
+function shortStoreName(name) {
+  return String(name || "").replace(/\s+(UAE|KSA|Global|GCC|Web|App)$/i, "");
+}
+
 function escapeHtml(value) {
   return String(value ?? "")
     .replace(/&/g, "&amp;")
@@ -620,10 +652,11 @@ function toggleFavorite(button) {
 }
 
 function setupLogoFallbacks(scope = document) {
-  const images = Array.from(scope.querySelectorAll(".logo-tile img"));
+  const images = Array.from(scope.querySelectorAll(".logo-tile img, .trusted-store-logo-wrap img"));
 
   images.forEach((image) => {
-    const tile = image.closest(".logo-tile");
+    const tile = image.closest(".logo-tile, .trusted-store-logo-wrap");
+    if (!tile) return;
 
     function markLoaded() {
       tile.classList.add("has-logo");
@@ -657,7 +690,7 @@ function couponCard(coupon) {
 
   return `
     <article class="coupon-card" data-category="${escapeHtml(categoryFilterValue(coupon.category))}" data-keywords="${escapeHtml(coupon.keywords)}" data-favorite="${favoriteCoupons.has(String(coupon.id))}">
-      <div class="logo-tile">
+      <div class="logo-tile coupon-logo-wrap ${escapeHtml(logoClass(coupon.store))}">
         <img src="${escapeHtml(coupon.logo || "assets/logos/placeholder.png")}" alt="${escapeHtml(coupon.store)} logo">
         <span>${escapeHtml(initials(coupon.store))}</span>
       </div>
@@ -697,24 +730,26 @@ function trackCouponClick(button) {
 function storeCard(store) {
   return `
     <a href="/store/${storeSlug(store.name)}">
-      <span class="logo-tile small">
+      <span class="logo-tile small ${escapeHtml(logoClass(store.name))}">
         <img src="${escapeHtml(store.logo || "assets/logos/placeholder.png")}" alt="${escapeHtml(store.name)} logo">
         <strong>${escapeHtml(initials(store.name))}</strong>
       </span>
-      ${escapeHtml(store.name)}
+      <span class="store-card-name">${escapeHtml(store.name)}</span>
       <small>${escapeHtml(categoryLabel(store.category))}</small>
     </a>
   `;
 }
 
 function popularStoreCard(store) {
+  const displayName = shortStoreName(store.name);
   return `
-    <a class="logo-strip-card" href="/store/${storeSlug(store.name)}" aria-label="${escapeHtml(store.name)} coupons">
-      <span class="logo-tile small">
-        <img src="${escapeHtml(store.logo || "assets/logos/placeholder.png")}" alt="${escapeHtml(store.name)} logo">
+    <a class="trusted-store-card logo-strip-card" href="/store/${storeSlug(store.name)}" aria-label="${escapeHtml(store.name)} coupons">
+      <span class="trusted-store-logo-wrap ${escapeHtml(logoClass(store.name))}">
+        <img class="trusted-store-logo" src="${escapeHtml(store.logo || "assets/logos/placeholder.png")}" alt="${escapeHtml(store.name)} logo">
         <strong>${escapeHtml(initials(store.name))}</strong>
       </span>
-      <span>${escapeHtml(store.name.replace(/\s+(UAE|KSA|Global|GCC|Web|App)$/i, ""))}</span>
+      <span class="trusted-store-name">${escapeHtml(displayName)}</span>
+      <span class="trusted-store-link">${escapeHtml(translate("viewOffers") || "View offers")}</span>
     </a>
   `;
 }
@@ -766,7 +801,7 @@ function trendingCard(coupon, index) {
   return `
     <article class="trending-card">
       <span class="trending-rank" aria-label="${escapeHtml(translate("rank", { number: index + 1 }))}">${index + 1}</span>
-      <span class="logo-tile small">
+      <span class="logo-tile small ${escapeHtml(logoClass(coupon.store))}">
         <img src="${escapeHtml(coupon.logo || "assets/logos/placeholder.png")}" alt="${escapeHtml(coupon.store)} logo">
         <strong>${escapeHtml(initials(coupon.store))}</strong>
       </span>
