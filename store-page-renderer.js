@@ -2,6 +2,14 @@ const CURRENT_YEAR = new Intl.DateTimeFormat("en", {
   year: "numeric",
   timeZone: "Asia/Riyadh"
 }).format(new Date());
+const {
+  COUNTRIES,
+  COUNTRY_CODES,
+  countrySelectorHtml,
+  clientCountryScript,
+  hreflangLinks,
+  routeUrlForCountry
+} = require("./config/countries");
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -183,13 +191,13 @@ function couponCard(coupon, store, content) {
   `;
 }
 
-function featuredOfferMarkup(coupon, store, content) {
+function featuredOfferMarkup(coupon, store, content, country) {
   if (!coupon) {
     return `
       <section class="store-panel best-offer-panel">
         <p class="eyebrow">Best available offer</p>
-        <h2>No active offers listed yet</h2>
-        <p>DealKhaleej does not currently show an active offer for this store. Browse similar stores below or check back later.</p>
+        <h2>No active ${escapeHtml(store.name)} offers are currently available for ${escapeHtml(country.name)}.</h2>
+        <p>DealKhaleej is not showing a country-matching offer for this store right now. Browse similar stores available for ${escapeHtml(country.name)} below or check back later.</p>
       </section>
     `;
   }
@@ -528,7 +536,7 @@ function trackingSnippets() {
   </script>`;
 }
 
-function structuredData(siteUrl, store, coupons, content, faqs, region) {
+function structuredData(siteUrl, store, coupons, content, faqs, region, country) {
   const pageUrl = `${siteUrl}/store/${storeSlug(store.name)}`;
   const logo = absoluteUrl(siteUrl, assetPath(store.logo));
   const graph = [
@@ -544,7 +552,8 @@ function structuredData(siteUrl, store, coupons, content, faqs, region) {
       "@type": "Organization",
       name: store.name,
       url: pageUrl,
-      logo
+      logo,
+      areaServed: country.name
     },
     {
       "@type": "FAQPage",
@@ -565,7 +574,7 @@ function structuredData(siteUrl, store, coupons, content, faqs, region) {
       name: coupon.title,
       url: `${siteUrl}/go/${encodeURIComponent(coupon.id)}`,
       seller: { "@type": "Organization", name: store.name },
-      areaServed: region
+      areaServed: country.code === "gcc" ? region : country.name
     };
     const validThrough = isoDate(coupon.expiry);
     if (validThrough) offer.validThrough = validThrough;
@@ -588,7 +597,7 @@ function structuredData(siteUrl, store, coupons, content, faqs, region) {
   return JSON.stringify({ "@context": "https://schema.org", "@graph": graph }).replace(/</g, "\\u003c");
 }
 
-function renderStorePage({ store, stores, coupons, articles, content, siteUrl }) {
+function renderStorePage({ store, stores, coupons, articles, content, siteUrl, country = COUNTRIES.gcc, alternateCountryCodes = COUNTRY_CODES }) {
   const activeCoupons = coupons
     .filter((coupon) => coupon.active && coupon.store.toLowerCase() === store.name.toLowerCase())
     .sort((left, right) => String(right.updatedAt || "").localeCompare(String(left.updatedAt || "")));
@@ -597,14 +606,21 @@ function renderStorePage({ store, stores, coupons, articles, content, siteUrl })
   const region = storeRegion(store, activeCoupons, content);
   const lastUpdated = newestCouponDate(activeCoupons);
   const pageUrl = `${siteUrl}/store/${storeSlug(store.name)}`;
-  const title = `${store.name} Coupon Codes and Deals for GCC Shoppers | DealKhaleej`;
-  const description = `Browse verified ${store.name} offers for GCC shoppers. View current coupon codes, shopping deals, expiry details, and check terms before checkout.`;
-  const h1 = `${store.name} Coupons, Deals and Offers for GCC Shoppers - ${CURRENT_YEAR}`;
-  const intro = content?.intro || `${store.name} offers listed on DealKhaleej are organized for GCC shoppers who want to check current coupon data before checkout.`;
+  const countryPhrase = country.code === "gcc" ? "GCC Shoppers" : country.name;
+  const title = country.code === "gcc"
+    ? `${store.name} Coupon Codes and Deals for GCC Shoppers | DealKhaleej`
+    : `${store.name} ${country.name} Coupon Codes and Offers | DealKhaleej`;
+  const description = country.code === "gcc"
+    ? `Browse verified ${store.name} offers for GCC shoppers. View current coupon codes, shopping deals, expiry details, and check terms before checkout.`
+    : `Browse verified ${store.name} offers available for ${country.name}. View country-matching coupon codes, shopping deals, expiry details, and check terms before checkout.`;
+  const h1 = `${store.name} Coupons, Deals and Offers for ${countryPhrase} - ${CURRENT_YEAR}`;
+  const intro = content?.intro || `${store.name} offers listed on DealKhaleej are organized for ${countryPhrase} who want to check current coupon data before checkout.`;
   const hasCodeOffers = activeCoupons.some(isCodeOffer);
   const hasOfferOnly = activeCoupons.some((coupon) => !isCodeOffer(coupon));
   const faqs = generatedFaqs(store, activeCoupons, content, region);
-  const jsonLd = structuredData(siteUrl, store, activeCoupons, content, faqs, region);
+  const jsonLd = structuredData(siteUrl, store, activeCoupons, content, faqs, region, country);
+  const storePath = `/store/${storeSlug(store.name)}`;
+  const alternateLinks = hreflangLinks(storePath, alternateCountryCodes);
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -624,6 +640,8 @@ function renderStorePage({ store, stores, coupons, articles, content, siteUrl })
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
   <meta name="twitter:image" content="${escapeHtml(absoluteUrl(siteUrl, assetPath(store.logo)))}">
+  ${alternateLinks}
+  ${clientCountryScript(country.code)}
   ${trackingSnippets()}
   <script type="application/ld+json">${jsonLd}</script>
   <link rel="stylesheet" href="/styles.css">
@@ -641,6 +659,7 @@ function renderStorePage({ store, stores, coupons, articles, content, siteUrl })
       <a href="/blog">Blog</a>
     </nav>
     <div class="header-actions">
+      ${countrySelectorHtml(country.code)}
       <a class="primary-button" href="/#deals">View Deals</a>
     </div>
   </header>
@@ -675,7 +694,7 @@ function renderStorePage({ store, stores, coupons, articles, content, siteUrl })
       ${detailsPanel(store, activeCoupons, region, lastUpdated, featured)}
     </section>
 
-    ${featuredOfferMarkup(featured, store, content)}
+    ${featuredOfferMarkup(featured, store, content, country)}
 
     <section class="store-panel store-coupons-panel">
       <div class="section-heading compact">
@@ -687,7 +706,9 @@ function renderStorePage({ store, stores, coupons, articles, content, siteUrl })
       <div class="store-coupon-grid">
         ${remaining.length
           ? remaining.map((coupon) => couponCard(coupon, store, content)).join("")
-          : '<p class="empty-state">The highlighted offer above is the only active offer currently listed for this store.</p>'}
+          : activeCoupons.length
+            ? '<p class="empty-state">The highlighted offer above is the only active offer currently listed for this store.</p>'
+            : `<p class="empty-state">No active ${escapeHtml(store.name)} offers are currently available for ${escapeHtml(country.name)}.</p>`}
       </div>
     </section>
 
@@ -703,6 +724,7 @@ function renderStorePage({ store, stores, coupons, articles, content, siteUrl })
   <a class="telegram-float" href="https://t.me/dealkhaleej" target="_blank" rel="noopener noreferrer">
     Telegram Deals
   </a>
+  <script src="/country-client.js"></script>
   <script src="/store.js"></script>
 </body>
 </html>`;

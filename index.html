@@ -60,14 +60,14 @@
     <div class="header-actions">
       <label class="country-select" for="country-selector">
         <span data-i18n="countryLabel">Country</span>
-        <select id="country-selector" aria-label="Select GCC country">
-          <option>GCC</option>
-          <option>Saudi Arabia</option>
-          <option>UAE</option>
-          <option>Kuwait</option>
-          <option>Qatar</option>
-          <option>Bahrain</option>
-          <option>Oman</option>
+        <select id="country-selector" data-country-selector aria-label="Select GCC country">
+          <option value="gcc">GCC</option>
+          <option value="sa">Saudi Arabia</option>
+          <option value="ae">UAE</option>
+          <option value="kw">Kuwait</option>
+          <option value="qa">Qatar</option>
+          <option value="bh">Bahrain</option>
+          <option value="om">Oman</option>
         </select>
       </label>
       <button class="icon-button" id="language-toggle" type="button" aria-label="Switch language">AR</button>
@@ -357,6 +357,7 @@
     <span data-i18n="telegramDeals">Telegram Deals</span>
   </a>
 
+  <script src="/country-client.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

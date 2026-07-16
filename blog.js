@@ -28,9 +28,13 @@ function articleCard(article) {
   `;
 }
 
+function apiUrl(path) {
+  return window.DealKhaleejCountryApiUrl ? window.DealKhaleejCountryApiUrl(path) : path;
+}
+
 async function loadArticles() {
   try {
-    const response = await fetch("/api/articles");
+    const response = await fetch(apiUrl("/api/articles"));
     if (!response.ok) throw new Error("Unable to load articles");
     const articles = await response.json();
     articleGrid.innerHTML = articles.length

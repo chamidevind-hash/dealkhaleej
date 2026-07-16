@@ -21,6 +21,14 @@ const mainNav = document.querySelector("#main-nav");
 const countrySelector = document.querySelector("#country-selector");
 const viewAllCouponsButton = document.querySelector("#view-all-coupons");
 const viewAllStoresButton = document.querySelector("#view-all-stores");
+const countryContext = window.DealKhaleejCountry || {
+  code: "gcc",
+  name: "GCC",
+  shortName: "GCC",
+  hostname: "dealkhaleej.com",
+  currency: "SAR",
+  locale: "en"
+};
 
 let coupons = [];
 let stores = [];
@@ -350,18 +358,45 @@ function getCurrentMonthYear() {
   return new Date().toLocaleString(currentLanguage === "ar" ? "ar-SA" : "en-US", { month: "long", year: "numeric" });
 }
 
+function apiUrl(path) {
+  return window.DealKhaleejCountryApiUrl ? window.DealKhaleejCountryApiUrl(path) : path;
+}
+
+function countryPageText() {
+  if (countryContext.code === "gcc") {
+    return {
+      title: "Coupon Codes and Deals Across the GCC | DealKhaleej",
+      description: "Find verified coupon codes, promo codes, shopping offers, and travel deals for GCC shoppers in Saudi Arabia, UAE, Kuwait, Qatar, Bahrain, and Oman.",
+      heroTitle: translate("heroTitle"),
+      heroCopy: translate("heroCopyPlain"),
+      eyebrow: translate("verifiedSaudi"),
+      freshLabel: "Fresh GCC offers"
+    };
+  }
+
+  return {
+    title: `Coupon Codes and Deals in ${countryContext.name} | DealKhaleej`,
+    description: `Find verified coupon codes, promo codes, shopping offers, and travel deals for shoppers in ${countryContext.name} on DealKhaleej.`,
+    heroTitle: `Verified Coupon Codes & Deals in ${countryContext.name}`,
+    heroCopy: `Find verified coupons, store offers, travel deals, and shopping discounts available for shoppers in ${countryContext.name}.`,
+    eyebrow: `DealKhaleej | Verified in ${countryContext.name}`,
+    freshLabel: `Fresh ${countryContext.shortName} offers`
+  };
+}
+
 function updateStructuredData(monthYear) {
+  const currentUrl = `https://${countryContext.hostname}/`;
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "DealKhaleej",
-    description: `Verified coupon codes and deals for GCC shoppers in Saudi Arabia, UAE, Kuwait, Qatar, Bahrain, and Oman for ${monthYear}.`,
-    url: "https://dealkhaleej.com",
+    description: `${countryPageText().description} Updated for ${monthYear}.`,
+    url: currentUrl,
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: "https://dealkhaleej.com/?search={search_term_string}"
+        urlTemplate: `${currentUrl}?search={search_term_string}`
       },
       "query-input": "required name=search_term_string"
     }
@@ -380,12 +415,13 @@ function updateStructuredData(monthYear) {
 
 function updateMonthlyPageContent() {
   const monthYear = getCurrentMonthYear();
+  const countryText = countryPageText();
   const title = currentLanguage === "ar"
     ? `DealKhaleej | \u0623\u0643\u0648\u0627\u062f \u062e\u0635\u0645 \u0648\u0639\u0631\u0648\u0636 \u0645\u0648\u062b\u0642\u0629 \u0644\u0645\u062a\u0633\u0648\u0642\u064a \u0627\u0644\u062e\u0644\u064a\u062c - ${monthYear}`
-    : `DealKhaleej | Verified Coupon Codes & Deals for GCC Shoppers - ${monthYear}`;
+    : `${countryText.title} - ${monthYear}`;
   const description = currentLanguage === "ar"
     ? `\u0627\u0639\u062b\u0631 \u0639\u0644\u0649 \u0623\u0643\u0648\u0627\u062f \u062e\u0635\u0645 \u0648\u0639\u0631\u0648\u0636 \u0645\u0648\u062b\u0642\u0629 \u0644\u0645\u062a\u0633\u0648\u0642\u064a \u0627\u0644\u062e\u0644\u064a\u062c \u0641\u064a \u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 \u0648\u0627\u0644\u0625\u0645\u0627\u0631\u0627\u062a \u0648\u0627\u0644\u0643\u0648\u064a\u062a \u0648\u0642\u0637\u0631 \u0648\u0627\u0644\u0628\u062d\u0631\u064a\u0646 \u0648\u0639\u0645\u0627\u0646 \u0644\u0634\u0647\u0631 ${monthYear} \u0639\u0644\u0649 DealKhaleej.`
-    : `Find verified coupon codes, promo codes, and deals for GCC shoppers in Saudi Arabia, UAE, Kuwait, Qatar, Bahrain, and Oman for ${monthYear} on DealKhaleej.`;
+    : `${countryText.description} Updated for ${monthYear}.`;
 
   document.title = title;
   document.querySelector('meta[name="description"]').content = description;
@@ -393,6 +429,11 @@ function updateMonthlyPageContent() {
   document.querySelector('meta[property="og:description"]').content = description;
   document.querySelector('meta[name="twitter:title"]').content = title;
   document.querySelector('meta[name="twitter:description"]').content = description;
+  document.querySelector('[data-i18n="heroTitle"]').textContent = countryText.heroTitle;
+  document.querySelector('[data-i18n="heroCopyPlain"]').textContent = countryText.heroCopy;
+  document.querySelector('[data-i18n="verifiedSaudi"]').textContent = countryText.eyebrow;
+  document.querySelector('[data-i18n="freshOffers"]').textContent = countryText.freshLabel;
+  if (countrySelector) countrySelector.value = countryContext.code;
   freshnessLabel.textContent = monthYear;
   updateStructuredData(monthYear);
 }
@@ -729,7 +770,7 @@ async function loadTrendingCoupons() {
   if (!trendingGrid) return;
 
   try {
-    const response = await fetch("/api/trending");
+    const response = await fetch(apiUrl("/api/trending"));
     if (!response.ok) throw new Error("Unable to load trending coupons");
     trendingCoupons = await response.json();
     trendingUnavailable = false;
@@ -812,8 +853,8 @@ function applyFilters() {
 async function loadCoupons() {
   try {
     const [couponResponse, storeResponse] = await Promise.all([
-      fetch("/api/coupons"),
-      fetch("/api/stores")
+      fetch(apiUrl("/api/coupons")),
+      fetch(apiUrl("/api/stores"))
     ]);
     if (!couponResponse.ok || !storeResponse.ok) throw new Error("Unable to load data");
     coupons = await couponResponse.json();
@@ -887,6 +928,10 @@ if (navToggle && mainNav) {
 
 if (countrySelector) {
   countrySelector.addEventListener("change", () => {
+    if (window.DealKhaleejCountryRedirect) {
+      window.DealKhaleejCountryRedirect(countrySelector.value);
+      return;
+    }
     document.documentElement.dataset.country = storeSlug(countrySelector.value);
   });
 }

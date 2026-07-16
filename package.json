@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "check:article-links": "node scripts/check-article-link-content.js",
+    "check:countries": "node scripts/check-country-routing.js",
     "start": "node server.js"
   }
 }
