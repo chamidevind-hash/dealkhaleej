@@ -34,6 +34,7 @@ const importHistoryFile = path.join(root, "data", "import-history.json");
 const newsletterFile = path.join(root, "data", "newsletter.json");
 const articlesFile = path.join(root, "data", "articles.json");
 const storeContentFile = path.join(root, "data", "store-content.json");
+const prioritySitemapFile = path.join(root, "data", "priority-sitemap.json");
 const port = Number(process.env.PORT || 5173);
 const adminPassword = process.env.ADMIN_PASSWORD;
 const adminSessions = new Set();
@@ -44,6 +45,8 @@ const staticPageRoutes = new Map([
   ["/privacy-policy", "/privacy-policy.html"],
   ["/terms", "/terms.html"],
   ["/affiliate-disclosure", "/affiliate-disclosure.html"],
+  ["/stores", null],
+  ["/coupons", null],
   ["/travel", "/travel.html"],
   ["/travel/hotels", "/travel-hotels.html"],
   ["/travel/flights", "/travel-flights.html"],
@@ -352,6 +355,116 @@ function articleMarkup(article) {
       </aside>`;
 }
 
+function pageShell({ title, description, canonicalPath, body }) {
+  const canonicalUrl = `${siteUrl}${canonicalPath}`;
+  return `<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${xmlEscape(title)}</title>
+  <meta name="description" content="${xmlEscape(description)}">
+  <meta property="og:title" content="${xmlEscape(title)}">
+  <meta property="og:description" content="${xmlEscape(description)}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="${xmlEscape(canonicalUrl)}">
+  <link rel="canonical" href="${xmlEscape(canonicalUrl)}">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header article-header">
+    <a class="brand" href="/" aria-label="DealKhaleej home">
+      <img class="brand-logo" src="/assets/brand/dealkhaleej-logo.png" alt="DealKhaleej">
+    </a>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="/">Home</a>
+      <a href="/stores">Stores</a>
+      <a href="/coupons">Coupons</a>
+      <a href="/travel">Travel</a>
+      <a href="/blog">Blog</a>
+    </nav>
+    <div class="header-actions">
+      <a class="primary-button" href="/#deals">View Deals</a>
+    </div>
+  </header>
+  ${body}
+  <footer class="site-footer">
+    <p>DealKhaleej GCC</p>
+    <nav aria-label="Footer navigation">
+      <a href="/">Home</a>
+      <a href="/stores">Stores</a>
+      <a href="/coupons">Coupons</a>
+      <a href="/blog">Blog</a>
+    </nav>
+  </footer>
+</body>
+</html>`;
+}
+
+async function serveStoresDirectoryPage(response, country) {
+  const [stores, coupons] = await Promise.all([readStores(), readCoupons()]);
+  const visibleStores = filterStoresByCountry(stores, coupons, country.code);
+  const activeStoreNames = new Set(filterCouponsByCountry(coupons, country.code)
+    .filter((coupon) => coupon.active)
+    .map((coupon) => coupon.store.toLowerCase()));
+  const sortedStores = [...visibleStores].sort((left, right) => {
+    const activeDelta = Number(activeStoreNames.has(right.name.toLowerCase())) - Number(activeStoreNames.has(left.name.toLowerCase()));
+    return activeDelta || left.name.localeCompare(right.name);
+  });
+  const cards = sortedStores.map((store) => {
+    const activeCount = coupons.filter((coupon) => coupon.active && coupon.store.toLowerCase() === store.name.toLowerCase()).length;
+    return `
+      <article class="article-card">
+        <h2><a href="/store/${storeSlug(store.slug || store.name)}">${xmlEscape(store.name)}</a></h2>
+        <p>${xmlEscape(store.category || "Store")} offers for GCC shoppers. ${activeCount ? `${activeCount} active offer${activeCount === 1 ? "" : "s"} currently listed.` : "Check the store page for current availability."}</p>
+        <a class="article-link" href="/store/${storeSlug(store.slug || store.name)}">View store offers</a>
+      </article>`;
+  }).join("");
+
+  sendText(response, 200, "text/html", pageShell({
+    title: "DealKhaleej Stores Directory | GCC Coupon Stores",
+    description: "Browse DealKhaleej store pages with coupon codes, offers, and shopping guides for GCC shoppers.",
+    canonicalPath: "/stores",
+    body: `
+      <main class="blog-page">
+        <header class="blog-heading">
+          <p class="eyebrow">Stores directory</p>
+          <h1>DealKhaleej stores</h1>
+          <p>Browse crawlable store pages for active GCC shopping, travel, electronics, fashion, beauty, marketplace, and service offers.</p>
+        </header>
+        <section class="article-grid" aria-label="Store pages">${cards}</section>
+      </main>`
+  }));
+}
+
+async function serveCouponsDirectoryPage(response, country) {
+  const coupons = filterCouponsByCountry(await readCoupons(), country.code)
+    .filter((coupon) => coupon.active)
+    .sort((left, right) => Number(right.verified) - Number(left.verified) || String(right.updatedAt || "").localeCompare(String(left.updatedAt || "")));
+  const cards = coupons.map((coupon) => `
+      <article class="article-card">
+        <time datetime="${xmlEscape(coupon.updatedAt || "")}">${xmlEscape(coupon.expiry ? `Expires ${coupon.expiry}` : "Active offer")}</time>
+        <h2><a href="/store/${storeSlug(coupon.store)}">${xmlEscape(coupon.store)}: ${xmlEscape(coupon.title)}</a></h2>
+        <p>${xmlEscape(coupon.meta || coupon.keywords || "Review this DealKhaleej offer, then verify the final checkout terms on the merchant site.")}</p>
+        <a class="article-link" href="/store/${storeSlug(coupon.store)}">View ${xmlEscape(coupon.store)} coupon page</a>
+      </article>`).join("");
+
+  sendText(response, 200, "text/html", pageShell({
+    title: "Active GCC Coupon Codes and Offers | DealKhaleej",
+    description: "Browse active DealKhaleej coupon pages and store offers for GCC shoppers.",
+    canonicalPath: "/coupons",
+    body: `
+      <main class="blog-page">
+        <header class="blog-heading">
+          <p class="eyebrow">Active coupons</p>
+          <h1>GCC coupon pages</h1>
+          <p>Use this crawlable index to reach active store offer pages directly. Affiliate redirect URLs are not included here.</p>
+        </header>
+        <section class="article-grid" aria-label="Active coupon pages">${cards}</section>
+      </main>`
+  }));
+}
+
 async function serveArticlePage(response, slug, country) {
   const articles = await readArticles();
   const article = articles.find((item) => item.slug === slug);
@@ -527,6 +640,22 @@ async function readStoreContent() {
     return JSON.parse(text);
   } catch (error) {
     if (error.code === "ENOENT") return [];
+    throw error;
+  }
+}
+
+async function readPrioritySitemapPaths() {
+  if (process.env.DEALKHALEEJ_FULL_SITEMAP === "1") return null;
+
+  try {
+    const text = await fs.readFile(prioritySitemapFile, "utf8");
+    const data = JSON.parse(text);
+    const paths = Array.isArray(data.paths) ? data.paths : [];
+    return paths
+      .map((item) => String(item || "").trim())
+      .filter((item) => item.startsWith("/") && !item.includes("?") && !item.startsWith("/go/"));
+  } catch (error) {
+    if (error.code === "ENOENT") return null;
     throw error;
   }
 }
@@ -878,7 +1007,7 @@ async function handleSeoRoutes(response, url, country) {
   const visibleStores = filterStoresByCountry(stores, coupons, seoCountry.code);
   const visibleArticles = filterArticlesByCountry(articles, seoCountry.code);
   const homepageLastmod = sitemapDate(visibleCoupons.map((coupon) => coupon.updatedAt));
-  const entries = [
+  const allEntries = [
     { loc: `${currentSiteUrl}/`, lastmod: homepageLastmod },
     { loc: `${currentSiteUrl}/blog`, lastmod: sitemapDate(visibleArticles.map((article) => article.publishedAt)) },
     ...[...staticPageRoutes.keys()].map((route) => ({
@@ -897,6 +1026,14 @@ async function handleSeoRoutes(response, url, country) {
       lastmod: sitemapDate([article.publishedAt])
     }))
   ];
+  const priorityPaths = await readPrioritySitemapPaths();
+  const prioritySet = priorityPaths ? new Set(priorityPaths.map((item) => item.replace(/\/$/, "") || "/")) : null;
+  const entries = prioritySet
+    ? allEntries.filter((entry) => {
+        const entryPath = new URL(entry.loc).pathname.replace(/\/$/, "") || "/";
+        return prioritySet.has(entryPath);
+      })
+    : allEntries;
   const urls = entries
     .map((entry) => `  <url>\n    <loc>${xmlEscape(entry.loc)}</loc>\n    <lastmod>${entry.lastmod}</lastmod>\n  </url>`)
     .join("\n");
@@ -912,6 +1049,16 @@ async function serveStatic(request, response, url, country) {
   const isArticleRoute = /^\/blog\/[^/]+\/?$/.test(url.pathname);
   if (url.pathname === "/") {
     await serveHomePage(response, country, url);
+    return;
+  }
+
+  if (url.pathname.replace(/\/$/, "") === "/stores") {
+    await serveStoresDirectoryPage(response, country);
+    return;
+  }
+
+  if (url.pathname.replace(/\/$/, "") === "/coupons") {
+    await serveCouponsDirectoryPage(response, country);
     return;
   }
 
