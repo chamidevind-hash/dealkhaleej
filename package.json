@@ -7,6 +7,7 @@
     "build:priority-sitemap": "node scripts/build-priority-sitemap.js",
     "check:article-links": "node scripts/check-article-link-content.js",
     "check:countries": "node scripts/check-country-routing.js",
+    "check:favicon": "node scripts/check-favicon.js",
     "start": "node server.js"
   }
 }

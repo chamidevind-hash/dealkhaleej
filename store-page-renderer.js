@@ -21,6 +21,15 @@ function escapeHtml(value) {
     .replace(/'/g, "&#039;");
 }
 
+function faviconTags() {
+  return [
+    '<link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">',
+    '<link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96x96.png">',
+    '<link rel="shortcut icon" href="/favicon.ico">',
+    '<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">'
+  ].join("\n  ");
+}
+
 function storeSlug(value) {
   return String(value)
     .toLowerCase()
@@ -670,6 +679,7 @@ ${robotsMeta}  <meta property="og:title" content="${escapeHtml(title)}">
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
   <meta name="twitter:image" content="${escapeHtml(absoluteUrl(siteUrl, assetPath(store.logo)))}">
+  ${faviconTags()}
   ${alternateLinks}
   ${clientCountryScript(country.code)}
   ${trackingSnippets()}

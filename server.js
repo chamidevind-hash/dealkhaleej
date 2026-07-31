@@ -101,6 +101,21 @@ function xmlEscape(value) {
     .replace(/'/g, "&apos;");
 }
 
+function faviconTags() {
+  return [
+    '<link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">',
+    '<link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96x96.png">',
+    '<link rel="shortcut icon" href="/favicon.ico">',
+    '<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">'
+  ].join("\n  ");
+}
+
+function removeFaviconTags(page) {
+  return page
+    .replace(/<link\s+[^>]*rel=["'][^"']*(?:icon|apple-touch-icon)[^"']*["'][^>]*>\s*/gi, "")
+    .replace(/<link\s+[^>]*href=["'][^"']*favicon[^"']*["'][^>]*>\s*/gi, "");
+}
+
 function storeSlug(value) {
   return String(value)
     .toLowerCase()
@@ -171,12 +186,13 @@ function injectHeadTags(page, country, pathname, options = {}) {
     : "";
   const tags = [
     `<link rel="canonical" href="${xmlEscape(canonical)}">`,
+    faviconTags(),
     robotsTag,
     hreflangLinks(pathname, alternateCodes),
     clientCountryScript(country.code)
   ].filter(Boolean).join("\n  ");
 
-  let next = page
+  let next = removeFaviconTags(page)
     .replace(/<link rel="canonical" href="[^"]*">\s*/g, "")
     .replace(/<link rel="alternate" hreflang="[^"]+" href="[^"]+">\s*/g, "");
   if (!COUNTRY_SUBDOMAINS_ENABLED) {
@@ -369,6 +385,7 @@ function pageShell({ title, description, canonicalPath, body }) {
   <meta property="og:type" content="website">
   <meta property="og:url" content="${xmlEscape(canonicalUrl)}">
   <link rel="canonical" href="${xmlEscape(canonicalUrl)}">
+  ${faviconTags()}
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
