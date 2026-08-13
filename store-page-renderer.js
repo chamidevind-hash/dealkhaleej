@@ -191,11 +191,11 @@ function actionMarkup(coupon, featured = false) {
         <span>${escapeHtml(code)}</span>
         <button type="button" data-copy="${escapeHtml(code)}" data-coupon-id="${escapeHtml(coupon.id)}" data-store="${escapeHtml(coupon.store)}" data-code="${escapeHtml(code)}" data-title="${escapeHtml(coupon.title)}">Copy Code</button>
       </div>
-      <a class="shop-deal-button${featured ? " featured-action" : ""}" href="/go/${encodeURIComponent(coupon.id)}">Shop Deal</a>
+      <a class="shop-deal-button${featured ? " featured-action" : ""}" href="/go/${encodeURIComponent(coupon.id)}" rel="sponsored nofollow">Shop Deal</a>
     `;
   }
 
-  return `<a class="shop-deal-button${featured ? " featured-action" : ""}" href="/go/${encodeURIComponent(coupon.id)}">Get Offer</a>`;
+  return `<a class="shop-deal-button${featured ? " featured-action" : ""}" href="/go/${encodeURIComponent(coupon.id)}" rel="sponsored nofollow">Get Offer</a>`;
 }
 
 function couponCard(coupon, store, content) {
@@ -521,7 +521,7 @@ function detailsPanel(store, coupons, region, lastUpdated, featured) {
       <dl>
         <div><dt>Category</dt><dd>${escapeHtml(store.category || "Store")}</dd></div>
         <div><dt>Supported region</dt><dd>${escapeHtml(region)}</dd></div>
-        <div><dt>Shopping link</dt><dd>${featured ? `<a href="/go/${encodeURIComponent(featured.id)}">Open through DealKhaleej</a>` : "Not listed"}</dd></div>
+        <div><dt>Shopping link</dt><dd>${featured ? `<a href="/go/${encodeURIComponent(featured.id)}" rel="sponsored nofollow">Open through DealKhaleej</a>` : "Not listed"}</dd></div>
         <div><dt>Active offers</dt><dd>${coupons.length}</dd></div>
         <div><dt>Last updated</dt><dd>${lastUpdated ? escapeHtml(formatDate(lastUpdated)) : "Not available"}</dd></div>
         <div><dt>Code deals</dt><dd>${hasCodeOffers ? "Available" : "Not listed"}</dd></div>

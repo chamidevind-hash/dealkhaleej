@@ -685,8 +685,8 @@ function couponCard(coupon) {
     ? `
         <span>${escapeHtml(couponCode)}</span>
         <button type="button" data-copy="${escapeHtml(couponCode)}" data-coupon-id="${escapeHtml(coupon.id)}" data-store="${escapeHtml(coupon.store)}" data-code="${escapeHtml(couponCode)}" data-title="${escapeHtml(coupon.title)}">${escapeHtml(translate("copyCode"))}</button>
-        <a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}">${escapeHtml(translate("shopDeal"))}</a>`
-    : `<a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}">${escapeHtml(translate("getOffer"))}</a>`;
+        <a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}" rel="sponsored nofollow">${escapeHtml(translate("shopDeal"))}</a>`
+    : `<a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}" rel="sponsored nofollow">${escapeHtml(translate("getOffer"))}</a>`;
 
   return `
     <article class="coupon-card" data-category="${escapeHtml(categoryFilterValue(coupon.category))}" data-keywords="${escapeHtml(coupon.keywords)}" data-favorite="${favoriteCoupons.has(String(coupon.id))}">
@@ -810,7 +810,7 @@ function trendingCard(coupon, index) {
         <h3>${escapeHtml(coupon.title)}</h3>
         <p class="trending-clicks">${escapeHtml(translate(coupon.outboundCount === 1 ? "dealVisit" : "dealVisits", { count: coupon.outboundCount }))}</p>
       </div>
-      <a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}">${escapeHtml(translate("shopDeal"))}</a>
+      <a class="shop-deal-button" href="/go/${encodeURIComponent(coupon.id)}" rel="sponsored nofollow">${escapeHtml(translate("shopDeal"))}</a>
     </article>
   `;
 }

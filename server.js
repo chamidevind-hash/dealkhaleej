@@ -723,6 +723,13 @@ function affiliateUrl(value) {
   }
 }
 
+function goRedirectHeaders(location) {
+  return {
+    Location: location,
+    "X-Robots-Tag": "noindex, nofollow"
+  };
+}
+
 function cleanClick(input) {
   const couponId = String(input.couponId || "").trim();
   const storeName = String(input.storeName || "").trim();
@@ -1129,7 +1136,7 @@ async function handleOutboundRedirect(response, url, country) {
   const targetUrl = coupon && affiliateUrl(preferredUrl);
 
   if (!coupon || !targetUrl) {
-    response.writeHead(302, { Location: "/" });
+    response.writeHead(302, goRedirectHeaders("/"));
     response.end();
     return true;
   }
@@ -1144,7 +1151,7 @@ async function handleOutboundRedirect(response, url, country) {
   });
   await writeOutboundClicks(outboundClicks);
 
-  response.writeHead(302, { Location: targetUrl });
+  response.writeHead(302, goRedirectHeaders(targetUrl));
   response.end();
   return true;
 }
