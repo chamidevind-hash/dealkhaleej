@@ -9,6 +9,7 @@
     "check:article-links": "node scripts/check-article-link-content.js",
     "check:countries": "node scripts/check-country-routing.js",
     "check:favicon": "node scripts/check-favicon.js",
+    "indexnow:submit": "node scripts/submit-indexnow.js",
     "start": "node server.js"
   }
 }

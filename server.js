@@ -39,6 +39,8 @@ const port = Number(process.env.PORT || 5173);
 const adminPassword = process.env.ADMIN_PASSWORD;
 const adminSessions = new Set();
 const siteUrl = siteUrlForCountry("gcc");
+const indexNowKey = "3e952bc2e94f4afab8fd05ec4205ce42";
+const indexNowKeyPath = `/${indexNowKey}.txt`;
 const staticPageRoutes = new Map([
   ["/about", "/about.html"],
   ["/contact", "/contact.html"],
@@ -1018,6 +1020,11 @@ async function handleApi(request, response, url, country) {
 async function handleSeoRoutes(response, url, country) {
   const seoCountry = COUNTRY_SUBDOMAINS_ENABLED ? country : COUNTRIES.gcc;
   const currentSiteUrl = siteUrlForCountry(seoCountry.code);
+
+  if (url.pathname === indexNowKeyPath) {
+    sendText(response, 200, "text/plain", indexNowKey);
+    return true;
+  }
 
   if (url.pathname === "/robots.txt") {
     sendText(response, 200, "text/plain", `User-agent: *\nAllow: /\nSitemap: ${currentSiteUrl}/sitemap.xml\n`);
