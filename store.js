@@ -1,6 +1,23 @@
 const favoritesStorageKey = "dealkhaleejFavoriteCoupons";
 let favoriteCoupons = loadFavoriteCoupons();
 
+const navToggle = document.querySelector("#nav-toggle");
+const mainNav = document.querySelector("#main-nav");
+
+if (navToggle && mainNav) {
+  navToggle.addEventListener("click", () => {
+    const isOpen = navToggle.getAttribute("aria-expanded") === "true";
+    navToggle.setAttribute("aria-expanded", String(!isOpen));
+    document.body.classList.toggle("nav-open", !isOpen);
+  });
+
+  mainNav.addEventListener("click", (event) => {
+    if (!event.target.closest("a")) return;
+    navToggle.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("nav-open");
+  });
+}
+
 function loadFavoriteCoupons() {
   try {
     const saved = JSON.parse(localStorage.getItem(favoritesStorageKey) || "[]");

@@ -1,8 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700&display=swap");
-
 :root {
-  --font-primary: Arial, Helvetica, sans-serif;
-  --font-arabic: "Tajawal", Arial, sans-serif;
+  --font-primary: var(--bs-font-sans-serif);
+  --font-arabic: var(--bs-font-sans-serif);
 
   --color-primary: #E63946;
   --color-primary-dark: #C91F2C;
@@ -4589,6 +4587,1155 @@ textarea:focus,
   .guide-section,
   .seo-section,
   .newsletter {
+    padding: 14px;
+  }
+}
+
+/* Public UI refinement: lighter surfaces, native type, mobile-first spacing */
+:root {
+  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  --page-bg: #f7f7f8;
+  --surface: #fff;
+  --border: #e5e7eb;
+  --border-soft: #eeeeef;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --primary: #d63b3b;
+  --primary-hover: #bc2d2d;
+  --offer: #f97316;
+  --offer-hover: #ea580c;
+  --success: #15803d;
+  --success-soft: #ecfdf3;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-hover);
+  --color-orange: var(--offer);
+  --color-orange-dark: var(--offer-hover);
+  --color-success: var(--success);
+  --color-text: var(--text);
+  --color-text-secondary: var(--muted);
+  --color-heading: #111827;
+  --color-background: var(--page-bg);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --classic-border: var(--border);
+  --classic-border-dark: #d1d5db;
+  --classic-muted-bg: #f9fafb;
+  --paper: var(--page-bg);
+  --panel: var(--surface);
+  --ink: var(--text);
+  --muted: #6b7280;
+  --line: var(--border);
+  --shadow: none;
+  --shadow-soft: none;
+}
+
+html,
+body,
+button,
+input,
+select,
+textarea {
+  font-family: var(--bs-font-sans-serif) !important;
+}
+
+code,
+pre,
+kbd {
+  font-family: var(--bs-font-monospace) !important;
+}
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+body {
+  background: var(--page-bg) !important;
+  color: var(--text) !important;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+body,
+p,
+li,
+dd,
+.meta,
+.article-content,
+.article-body,
+.store-panel,
+.travel-page {
+  font-weight: 400;
+}
+
+h1,
+.hero-copy h1,
+.blog-heading h1,
+.travel-hero h1,
+.store-hero-main h1 {
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+h2,
+.section-heading h2,
+.store-panel h2,
+.travel-section-heading h2,
+.newsletter-inner h2,
+.seo-grid h3 {
+  font-size: clamp(23px, 3vw, 30px);
+  font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: 0;
+}
+
+h3,
+.coupon-details h3,
+.travel-card h3,
+.travel-article-card h3,
+.store-article-card h3,
+.similar-store-card h3 {
+  font-size: clamp(19px, 2vw, 22px);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+a {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+a:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.site-header,
+.article-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  min-height: 66px;
+  padding: 12px clamp(16px, 4vw, 48px);
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  backdrop-filter: blur(14px);
+}
+
+.brand {
+  min-width: 0;
+}
+
+.brand-logo {
+  width: clamp(154px, 18vw, 220px);
+  height: 42px;
+  object-fit: contain;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: center;
+  gap: clamp(10px, 2vw, 22px);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.main-nav a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 4px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.main-nav a::after {
+  content: none;
+}
+
+.main-nav a:hover,
+.main-nav a:focus-visible {
+  background: transparent;
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 8px;
+}
+
+.nav-toggle,
+.icon-button,
+.country-select,
+.primary-button,
+.secondary-button,
+.danger-button,
+.shop-deal-button,
+.coupon-action button,
+.store-code-box button,
+.newsletter-controls button,
+.section-link {
+  border-radius: var(--radius-sm) !important;
+  box-shadow: none !important;
+}
+
+.nav-toggle,
+.icon-button {
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.nav-toggle {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  margin: 0;
+  border-radius: 2px !important;
+  background: var(--text);
+}
+
+.country-select {
+  min-height: 44px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.country-select select {
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.primary-button,
+.coupon-action button,
+.store-code-box button,
+.newsletter-controls button {
+  min-height: 44px;
+  border: 1px solid transparent;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.primary-button:hover,
+.coupon-action button:hover,
+.store-code-box button:hover,
+.newsletter-controls button:hover {
+  background: var(--primary-hover);
+  color: #fff;
+  text-decoration: none;
+}
+
+.shop-deal-button,
+.btn-offer,
+.coupon-action.link-only .shop-deal-button,
+.store-offer-action.link-only .shop-deal-button {
+  min-height: 44px;
+  border: 1px solid transparent;
+  background: var(--offer);
+  color: #fff;
+  font-weight: 600;
+}
+
+.shop-deal-button:hover,
+.btn-offer:hover {
+  background: var(--offer-hover);
+  color: #fff;
+  text-decoration: none;
+}
+
+.secondary-button,
+.danger-button,
+.section-link,
+.travel-brand-link,
+.travel-quick-links a,
+.travel-link-grid a {
+  min-height: 44px;
+  border: 1px solid #d1d5db;
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.secondary-button:hover,
+.section-link:hover,
+.travel-brand-link:hover,
+.travel-quick-links a:hover,
+.travel-link-grid a:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  text-decoration: none;
+}
+
+input,
+select,
+textarea,
+.search-row input,
+.newsletter-controls input,
+.login-form input,
+.admin-form input,
+.admin-form select,
+.store-newsletter-form input {
+  min-height: 44px;
+  border: 1px solid #d1d5db;
+  border-radius: var(--radius-sm) !important;
+  background: var(--surface);
+  color: var(--text);
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.country-select:focus-within,
+.search-row input:focus,
+.newsletter-controls input:focus,
+.store-newsletter-form input:focus {
+  border-color: var(--primary);
+  outline: 3px solid rgba(214, 59, 59, 0.16);
+  outline-offset: 0;
+}
+
+main,
+.store-landing-page,
+.blog-page,
+.article-page,
+.travel-page {
+  width: min(1180px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+main > section,
+.travel-section,
+.store-panel,
+.store-newsletter,
+.store-seo-hero,
+.blog-heading {
+  margin-top: clamp(32px, 5vw, 48px);
+}
+
+.hero,
+.compact-hero {
+  min-height: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(220px, 0.55fr);
+  align-items: center;
+  gap: clamp(24px, 5vw, 54px);
+  padding: clamp(32px, 6vw, 72px) 0;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+.hero-media {
+  display: none;
+}
+
+.hero-content,
+.compact-hero .hero-content {
+  max-width: 760px;
+  padding: 0;
+  background: transparent;
+  color: var(--text);
+}
+
+.hero-copy,
+.compact-hero .hero-copy {
+  max-width: 680px;
+  color: var(--muted);
+  font-size: clamp(17px, 2vw, 19px);
+  line-height: 1.65;
+}
+
+.hero-stats {
+  display: grid;
+  gap: 12px;
+}
+
+.hero-stats article {
+  padding: 10px 0;
+  border: 0 !important;
+  border-top: 1px solid var(--border-soft) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.hero-stats article:first-child {
+  border-top: 0 !important;
+}
+
+.hero-stats strong {
+  color: #111827;
+  font-size: clamp(24px, 4vw, 34px);
+  font-weight: 700;
+}
+
+.hero-stats span {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.search-panel {
+  max-width: 680px;
+  padding: 16px;
+  border: 0 !important;
+  border-radius: var(--radius-md) !important;
+  background: var(--surface);
+}
+
+.search-panel label {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.search-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.popular-strip-section,
+.category-section,
+.featured-travel-section,
+.stores-section,
+.guide-section,
+.seo-section,
+.blog-heading,
+.travel-hero,
+.store-panel,
+.store-details-panel,
+.related-stores,
+.article-content {
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.section-heading,
+.section-heading.tight,
+.section-heading.compact,
+.travel-section-heading {
+  margin-bottom: 18px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  padding: 0;
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.coupon-grid,
+.store-coupon-grid {
+  gap: 16px;
+}
+
+.coupon-card,
+.store-offer-card,
+.store-grid a,
+.article-card,
+.travel-card,
+.travel-article-card,
+.home-travel-grid a,
+.similar-store-card,
+.store-article-card,
+.newsletter-section,
+.store-newsletter,
+.best-offer-panel,
+.travel-widget-card {
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-md) !important;
+  background: var(--surface) !important;
+  box-shadow: none !important;
+}
+
+.coupon-card,
+.store-offer-card {
+  gap: 18px;
+  padding: clamp(16px, 2vw, 22px);
+  align-items: start;
+}
+
+.coupon-badges,
+.store-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+}
+
+.verified-badge,
+.coupon-region,
+.expiry,
+.store-hero-meta span {
+  padding: 0;
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.verified-badge {
+  color: var(--success);
+  font-weight: 500;
+}
+
+.verified-badge::before {
+  color: var(--success);
+}
+
+.coupon-details h3,
+.store-offer-card .coupon-details h3 {
+  margin: 6px 0;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+.coupon-details .meta {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.coupon-action,
+.store-offer-action,
+.store-code-box,
+.best-offer-actions {
+  gap: 10px;
+}
+
+.coupon-card > .coupon-action,
+.store-offer-card > .coupon-action,
+.store-offer-action {
+  width: 100%;
+  justify-self: stretch;
+}
+
+.coupon-action span,
+.store-code-box span,
+.spotlight-code span {
+  min-height: 44px;
+  border: 1px solid #fed7aa;
+  border-radius: var(--radius-sm) !important;
+  background: #fff7ed;
+  color: #9a3412;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.category-grid {
+  gap: 10px;
+}
+
+.category-chip,
+.category-card {
+  min-height: 44px;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm) !important;
+  background: var(--surface) !important;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.category-chip.active,
+.category-card:hover,
+.category-card:focus-visible {
+  border-color: var(--offer) !important;
+  background: #fff7ed !important;
+  color: #9a3412;
+}
+
+.logo-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+  justify-content: stretch;
+  gap: 10px;
+}
+
+.trusted-store-card,
+.logo-strip-card.trusted-store-card {
+  width: auto;
+  min-height: 118px;
+  padding: 12px 8px;
+  border: 1px solid #f0f0f0 !important;
+  border-radius: var(--radius-md) !important;
+  background: var(--surface) !important;
+}
+
+.trusted-store-logo-wrap,
+.store-logo-wrap,
+.coupon-logo-wrap,
+.sidebar-store-logo-wrap,
+.logo-tile,
+.logo-tile.small,
+.store-grid .logo-tile.small,
+.logo-strip-card .logo-tile.small,
+.similar-store-card .logo-tile.small,
+.coupon-card > .logo-tile,
+.store-offer-card > .logo-tile,
+.store-logo {
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.logo-tile img,
+.trusted-store-logo,
+.trusted-store-logo-wrap img,
+.coupon-logo-wrap img,
+.coupon-card > .logo-tile img,
+.store-offer-card > .logo-tile img {
+  padding: 0 !important;
+  background: transparent !important;
+  object-fit: contain;
+}
+
+.logo-tile.logo-missing,
+.trusted-store-logo-wrap.logo-missing,
+.similar-store-card .logo-tile.small.logo-missing {
+  border: 0 !important;
+  border-radius: var(--radius-sm) !important;
+  background: #f3f4f6 !important;
+}
+
+.home-travel-grid a,
+.travel-card,
+.travel-article-card,
+.travel-widget-card {
+  border-top-width: 1px !important;
+}
+
+.guide-section,
+.seo-section {
+  padding: 0;
+}
+
+.seo-grid article,
+.steps li,
+.store-tip-list li,
+.store-note {
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.steps {
+  gap: 12px;
+}
+
+.steps li {
+  padding: 0;
+}
+
+.step-number,
+.store-steps span {
+  border-radius: var(--radius-sm) !important;
+  background: var(--offer);
+  color: #fff;
+}
+
+.store-landing-page {
+  width: min(1180px, calc(100% - 32px));
+}
+
+.store-seo-hero {
+  display: grid;
+  gap: 28px;
+  padding: clamp(20px, 3vw, 28px);
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-md) !important;
+  background: var(--surface) !important;
+}
+
+.store-panel:not(.best-offer-panel),
+.related-stores,
+.article-content {
+  padding: 0;
+}
+
+.store-coupons-panel {
+  padding: 0;
+}
+
+.store-details-panel {
+  padding: 0;
+}
+
+.store-details-panel dl {
+  display: grid;
+  gap: 0;
+}
+
+.store-details-panel div {
+  padding: 12px 0;
+  border: 0 !important;
+  border-top: 1px solid var(--border-soft) !important;
+}
+
+.store-details-panel div:first-child {
+  border-top: 0 !important;
+}
+
+.store-details-panel dt {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.store-details-panel dd {
+  color: var(--text);
+  font-size: 14px;
+}
+
+.store-summary-table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md) !important;
+  background: var(--surface);
+}
+
+.store-summary-table table,
+table.store-summary-table {
+  min-width: 520px;
+}
+
+.store-summary-table th,
+.store-summary-table td {
+  border-color: var(--border-soft);
+}
+
+.store-faq-list details,
+.store-faq-item {
+  border: 0 !important;
+  border-top: 1px solid var(--border-soft) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.store-faq-list details:first-child,
+.store-faq-item:first-child {
+  border-top: 0 !important;
+}
+
+.article-page,
+.article-body,
+.article-content {
+  max-width: 800px;
+}
+
+.article-content p {
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.article-card h2,
+.article-card h3 {
+  font-size: clamp(19px, 2vw, 22px);
+  font-weight: 600;
+}
+
+.travel-widget-card {
+  padding: clamp(16px, 2.4vw, 24px);
+}
+
+.newsletter-section,
+.store-newsletter {
+  border-color: transparent !important;
+  background: #111827 !important;
+  color: #fff;
+}
+
+.site-footer {
+  margin-top: clamp(44px, 7vw, 72px);
+  background: #111827;
+}
+
+@media (max-width: 1100px) {
+  .site-header,
+  .article-header {
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+  }
+
+  .site-header .main-nav,
+  .article-header .main-nav {
+    grid-column: 1 / -1;
+    justify-content: start;
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    padding-top: 4px;
+  }
+
+  .header-actions {
+    justify-self: end;
+  }
+}
+
+@media (max-width: 920px) {
+  .site-header,
+  .article-header {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 10px;
+    padding: 10px 16px;
+  }
+
+  .brand-logo {
+    width: min(48vw, 184px);
+    height: 38px;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    order: 3;
+  }
+
+  .site-header:has(.nav-toggle) .main-nav,
+  .article-header:has(.nav-toggle) .main-nav {
+    display: none;
+    grid-column: 1 / -1;
+    order: 5;
+    width: 100%;
+    padding: 8px 0 0;
+    border-top: 1px solid var(--border-soft);
+  }
+
+  .nav-open .site-header:has(.nav-toggle) .main-nav,
+  .nav-open .article-header:has(.nav-toggle) .main-nav,
+  .site-header:has(.nav-toggle):focus-within .main-nav,
+  .article-header:has(.nav-toggle):focus-within .main-nav {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .site-header:not(:has(.nav-toggle)) .main-nav,
+  .article-header:not(:has(.nav-toggle)) .main-nav {
+    display: flex;
+    grid-column: 1 / -1;
+    order: 4;
+    justify-content: start;
+    width: 100%;
+    overflow-x: auto;
+    padding-top: 4px;
+    scrollbar-width: none;
+  }
+
+  .site-header:not(:has(.nav-toggle)) .main-nav::-webkit-scrollbar,
+  .article-header:not(:has(.nav-toggle)) .main-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .main-nav a {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 0;
+  }
+
+  .site-header:not(:has(.nav-toggle)) .main-nav a,
+  .article-header:not(:has(.nav-toggle)) .main-nav a {
+    width: auto;
+    flex: 0 0 auto;
+    padding: 10px 8px;
+  }
+
+  .header-actions {
+    order: 2;
+    gap: 8px;
+  }
+
+  .header-actions .primary-button,
+  .article-header .header-actions .primary-button,
+  .icon-button#language-toggle {
+    display: none;
+  }
+
+  .country-select {
+    max-width: 140px;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .country-select select {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .hero,
+  .compact-hero {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding-top: 30px;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-stats article:nth-child(-n + 2) {
+    border-top: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  main,
+  .store-landing-page,
+  .blog-page,
+  .article-page,
+  .travel-page {
+    width: min(100% - 32px, 1180px);
+  }
+
+  main > section,
+  .travel-section,
+  .store-panel,
+  .store-newsletter,
+  .store-seo-hero,
+  .blog-heading {
+    margin-top: 36px;
+  }
+
+  .store-seo-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .store-hero-main {
+    grid-template-columns: 1fr;
+  }
+
+  .store-logo {
+    width: 96px;
+    height: 58px;
+  }
+
+  .coupon-card,
+  .store-offer-card {
+    grid-template-columns: 1fr;
+  }
+
+  .coupon-card > .logo-tile,
+  .store-offer-card > .logo-tile,
+  .coupon-logo-wrap {
+    width: 58px;
+    height: 44px;
+  }
+
+  .coupon-action,
+  .store-offer-action,
+  .store-code-box,
+  .best-offer-actions,
+  .newsletter-controls {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .coupon-action button,
+  .store-code-box button,
+  .shop-deal-button,
+  .primary-button,
+  .secondary-button,
+  .newsletter-controls button {
+    width: 100%;
+  }
+
+  .article-content p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  main,
+  .store-landing-page,
+  .blog-page,
+  .article-page,
+  .travel-page {
+    width: calc(100% - 32px);
+  }
+
+  .site-header,
+  .article-header {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    padding: 8px 16px;
+  }
+
+  .brand-logo {
+    width: min(50vw, 168px);
+  }
+
+  .country-select {
+    max-width: 126px;
+    padding-inline: 8px;
+  }
+
+  .country-select span {
+    display: none;
+  }
+
+  .search-panel {
+    padding: 14px;
+  }
+
+  .search-row {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stats article {
+    border-top: 1px solid var(--border-soft) !important;
+  }
+
+  .hero-stats article:first-child {
+    border-top: 0 !important;
+  }
+
+  .logo-strip {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(112px, 38vw);
+    grid-template-columns: none;
+    justify-content: start;
+    overflow-x: auto;
+    padding: 2px 2px 8px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .logo-strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .trusted-store-card {
+    scroll-snap-align: start;
+  }
+
+  .category-grid,
+  .coupon-grid,
+  .trending-grid,
+  .home-travel-grid,
+  .store-grid,
+  .article-grid,
+  .travel-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .coupon-card,
+  .store-offer-card,
+  .article-card,
+  .travel-card,
+  .travel-article-card,
+  .home-travel-grid a,
+  .store-grid a,
+  .newsletter-section,
+  .store-newsletter,
+  .travel-widget-card {
+    padding: 16px;
+  }
+
+  .deals-layout,
+  .coupon-section {
+    width: 100% !important;
+    margin-inline: 0 !important;
+    padding: 0 !important;
+  }
+
+  .deal-board {
+    width: 100% !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+
+  .coupon-grid {
+    width: 100% !important;
+  }
+
+  .telegram-float {
+    right: 16px;
+    bottom: 16px;
+    max-width: calc(100vw - 32px);
+  }
+}
+
+@media (max-width: 360px) {
+  main,
+  .store-landing-page,
+  .blog-page,
+  .article-page,
+  .travel-page {
+    width: calc(100% - 28px);
+  }
+
+  .site-header,
+  .article-header {
+    padding-inline: 14px;
+  }
+
+  .brand-logo {
+    width: 142px;
+  }
+
+  .country-select {
+    max-width: 112px;
+  }
+
+  .coupon-card,
+  .store-offer-card,
+  .article-card,
+  .travel-card,
+  .travel-article-card,
+  .home-travel-grid a,
+  .store-grid a {
     padding: 14px;
   }
 }

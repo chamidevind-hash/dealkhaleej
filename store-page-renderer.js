@@ -691,7 +691,12 @@ ${robotsMeta}  <meta property="og:title" content="${escapeHtml(title)}">
     <a class="brand" href="/" aria-label="DealKhaleej home">
       <img class="brand-logo" src="/assets/brand/dealkhaleej-logo.png" alt="DealKhaleej">
     </a>
-    <nav class="main-nav" aria-label="Primary navigation">
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open navigation" aria-controls="main-nav" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="main-nav" id="main-nav" aria-label="Primary navigation">
       <a href="/">Home</a>
       <a href="/#stores">Stores</a>
       <a href="/#deals">Coupons</a>
