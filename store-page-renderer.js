@@ -687,7 +687,7 @@ ${robotsMeta}  <meta property="og:title" content="${escapeHtml(title)}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20260816-header-cleanup">
+  <link rel="stylesheet" href="/styles.css?v=20260816-coupon-scale">
 </head>
 <body>
   <header class="site-header article-header">
@@ -707,6 +707,11 @@ ${robotsMeta}  <meta property="og:title" content="${escapeHtml(title)}">
         <a href="/travel">Travel</a>
         <a href="/blog">Blog</a>
       </nav>
+      <form class="header-search" action="/" method="get" role="search" aria-label="Search DealKhaleej">
+        <input type="search" name="search" placeholder="Search deals" autocomplete="off">
+        <button type="submit" aria-label="Search">Search</button>
+      </form>
+
       <div class="header-actions">
         ${countrySelectorHtml(country.code)}
         <a class="primary-button" href="/#deals">View Deals</a>

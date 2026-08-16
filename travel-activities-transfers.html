@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20260816-header-cleanup">
+  <link rel="stylesheet" href="/styles.css?v=20260816-coupon-scale">
 <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
   (function () {
       var script = document.createElement("script");
@@ -27,7 +27,12 @@
   <header class="site-header article-header">
     <div class="site-header-inner">
   <a class="brand" href="/" aria-label="DealKhaleej home"><img class="brand-logo" src="/assets/brand/dealkhaleej-logo.png" alt="DealKhaleej"></a>
-      <nav class="main-nav" aria-label="Primary navigation"><a href="/#deals">Top Deals</a><a href="/#stores">Stores</a><a href="/travel">Travel</a><a href="/blog">Blog</a></nav>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="main-nav" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Primary navigation"><a href="/#deals">Top Deals</a><a href="/#stores">Stores</a><a href="/travel">Travel</a><a href="/blog">Blog</a></nav>
       <div class="header-actions"><a class="primary-button" href="/travel/activities">Activities Hub</a></div>
     </div>
   </header>
@@ -54,5 +59,23 @@
   </main>
   <footer class="site-footer"><p>DealKhaleej GCC</p><nav aria-label="Footer navigation"><a href="/">Home</a><a href="/travel">Travel</a><a href="/travel/activities">Activities</a></nav></footer>
   <script src="/travel-widgets.js" defer></script>
+  <script>
+    (function () {
+      const navToggle = document.querySelector('.nav-toggle');
+      const mainNav = document.querySelector('.main-nav');
+      if (!navToggle || !mainNav) return;
+      navToggle.addEventListener('click', function () {
+        const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', String(!isOpen));
+        document.body.classList.toggle('nav-open', !isOpen);
+      });
+      mainNav.addEventListener('click', function (event) {
+        if (event.target.closest('a')) {
+          navToggle.setAttribute('aria-expanded', 'false');
+          document.body.classList.remove('nav-open');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
