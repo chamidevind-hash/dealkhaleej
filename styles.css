@@ -4176,7 +4176,7 @@ textarea,
 .travel-page,
 .blog-page,
 .article-page {
-  font-family: var(--bs-font-sans-serif);
+  font-family: "Montserrat", sans-serif;
 }
 
 body {
@@ -4592,9 +4592,9 @@ textarea:focus,
   }
 }
 
-/* Public UI refinement: lighter surfaces, native type, mobile-first spacing */
+/* Public UI refinement: lighter surfaces, Montserrat type, mobile-first spacing */
 :root {
-  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-font-sans-serif: "Montserrat", sans-serif;
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
   --page-bg: #f7f7f8;
@@ -4640,7 +4640,7 @@ button,
 input,
 select,
 textarea {
-  font-family: var(--bs-font-sans-serif) !important;
+  font-family: "Montserrat", sans-serif !important;
 }
 
 code,
@@ -5742,10 +5742,7 @@ table.store-summary-table {
 }
 
 :root {
-  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-    "Noto Color Emoji";
+  --bs-font-sans-serif: "Montserrat", sans-serif;
 
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
@@ -5759,14 +5756,14 @@ table.store-summary-table {
 
 html,
 body {
-  font-family: var(--bs-font-sans-serif);
+  font-family: "Montserrat", sans-serif;
 }
 
 button,
 input,
 select,
 textarea {
-  font-family: inherit;
+  font-family: "Montserrat", sans-serif;
 }
 
 h1,
@@ -5778,12 +5775,11 @@ h6,
 p,
 a,
 span,
-div,
 li,
 td,
 th,
 label {
-  font-family: inherit;
+  font-family: "Montserrat", sans-serif;
 }
 
 code,
@@ -5793,12 +5789,12 @@ samp {
   font-family: var(--bs-font-monospace) !important;
 }
 
-/* Final typography tuning for native system fonts */
+/* Final typography tuning for Montserrat */
 body {
-  font-family: var(--bs-font-sans-serif) !important;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 16px !important;
   font-weight: 400 !important;
-  line-height: 1.5 !important;
+  line-height: 1.6 !important;
   letter-spacing: 0 !important;
 }
 
@@ -5816,7 +5812,7 @@ h6,
 .blog-heading h1,
 .travel-hero h1,
 .store-hero-main h1 {
-  font-family: var(--bs-font-sans-serif) !important;
+  font-family: "Montserrat", sans-serif !important;
   color: #212529 !important;
   letter-spacing: -0.02em !important;
 }
@@ -5907,7 +5903,7 @@ button,
 .travel-brand-link,
 .travel-quick-links a,
 .travel-link-grid a {
-  font-family: var(--bs-font-sans-serif) !important;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 15px !important;
   font-weight: 600 !important;
   letter-spacing: 0 !important;
