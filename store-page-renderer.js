@@ -687,28 +687,30 @@ ${robotsMeta}  <meta property="og:title" content="${escapeHtml(title)}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20260816-base-typography">
+  <link rel="stylesheet" href="/styles.css?v=20260816-header-cleanup">
 </head>
 <body>
   <header class="site-header article-header">
-    <a class="brand" href="/" aria-label="DealKhaleej home">
-      <img class="brand-logo" src="/assets/brand/dealkhaleej-logo.png" alt="DealKhaleej">
-    </a>
-    <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open navigation" aria-controls="main-nav" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <nav class="main-nav" id="main-nav" aria-label="Primary navigation">
-      <a href="/">Home</a>
-      <a href="/#stores">Stores</a>
-      <a href="/#deals">Coupons</a>
-      <a href="/travel">Travel</a>
-      <a href="/blog">Blog</a>
-    </nav>
-    <div class="header-actions">
-      ${countrySelectorHtml(country.code)}
-      <a class="primary-button" href="/#deals">View Deals</a>
+    <div class="site-header-inner">
+  <a class="brand" href="/" aria-label="DealKhaleej home">
+        <img class="brand-logo" src="/assets/brand/dealkhaleej-logo.png" alt="DealKhaleej">
+      </a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open navigation" aria-controls="main-nav" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a href="/#stores">Stores</a>
+        <a href="/#deals">Coupons</a>
+        <a href="/travel">Travel</a>
+        <a href="/blog">Blog</a>
+      </nav>
+      <div class="header-actions">
+        ${countrySelectorHtml(country.code)}
+        <a class="primary-button" href="/#deals">View Deals</a>
+      </div>
     </div>
   </header>
 
@@ -769,9 +771,6 @@ ${robotsMeta}  <meta property="og:title" content="${escapeHtml(title)}">
     ${newsletterMarkup()}
   </main>
 
-  <a class="telegram-float" href="https://t.me/dealkhaleej" target="_blank" rel="noopener noreferrer">
-    Telegram Deals
-  </a>
   <script src="/country-client.js"></script>
   <script src="/store.js"></script>
 </body>

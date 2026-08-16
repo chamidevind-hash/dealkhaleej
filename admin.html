@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20260816-base-typography">
+  <link rel="stylesheet" href="/styles.css?v=20260816-header-cleanup">
 <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
   (function () {
       var script = document.createElement("script");
@@ -19,18 +19,20 @@
 </head>
 <body class="admin-body">
   <header class="site-header">
-    <a class="brand" href="index.html" aria-label="DealKhaleej home">
-      <img class="brand-logo" src="assets/brand/dealkhaleej-logo.png" alt="DealKhaleej">
-    </a>
+    <div class="site-header-inner">
+  <a class="brand" href="index.html" aria-label="DealKhaleej home">
+        <img class="brand-logo" src="assets/brand/dealkhaleej-logo.png" alt="DealKhaleej">
+      </a>
 
-    <nav class="main-nav" aria-label="Admin navigation">
-      <a href="index.html">Public Site</a>
-      <a class="admin-auth-only is-hidden" href="#coupon-form">Add Coupon</a>
-      <a class="admin-auth-only is-hidden" href="#coupon-list">Coupon List</a>
-    </nav>
+      <nav class="main-nav" aria-label="Admin navigation">
+        <a href="index.html">Public Site</a>
+        <a class="admin-auth-only is-hidden" href="#coupon-form">Add Coupon</a>
+        <a class="admin-auth-only is-hidden" href="#coupon-list">Coupon List</a>
+      </nav>
 
-    <div class="header-actions admin-auth-only is-hidden">
-      <button class="secondary-button admin-logout" type="button" id="logout-button">Logout</button>
+      <div class="header-actions admin-auth-only is-hidden">
+        <button class="secondary-button admin-logout" type="button" id="logout-button">Logout</button>
+      </div>
     </div>
   </header>
 

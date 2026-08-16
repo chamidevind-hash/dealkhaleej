@@ -391,22 +391,24 @@ function pageShell({ title, description, canonicalPath, body }) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20260816-base-typography">
+  <link rel="stylesheet" href="/styles.css?v=20260816-header-cleanup">
 </head>
 <body>
   <header class="site-header article-header">
-    <a class="brand" href="/" aria-label="DealKhaleej home">
-      <img class="brand-logo" src="/assets/brand/dealkhaleej-logo.png" alt="DealKhaleej">
-    </a>
-    <nav class="main-nav" aria-label="Primary navigation">
-      <a href="/">Home</a>
-      <a href="/stores">Stores</a>
-      <a href="/coupons">Coupons</a>
-      <a href="/travel">Travel</a>
-      <a href="/blog">Blog</a>
-    </nav>
-    <div class="header-actions">
-      <a class="primary-button" href="/#deals">View Deals</a>
+    <div class="site-header-inner">
+  <a class="brand" href="/" aria-label="DealKhaleej home">
+        <img class="brand-logo" src="/assets/brand/dealkhaleej-logo.png" alt="DealKhaleej">
+      </a>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a href="/stores">Stores</a>
+        <a href="/coupons">Coupons</a>
+        <a href="/travel">Travel</a>
+        <a href="/blog">Blog</a>
+      </nav>
+      <div class="header-actions">
+        <a class="primary-button" href="/#deals">View Deals</a>
+      </div>
     </div>
   </header>
   ${body}
@@ -521,7 +523,7 @@ async function serveArticlePage(response, slug, country) {
     .replace('content="Saudi Arabia shopping and coupon guide from DealKhaleej."', `content="${xmlEscape(article.metaDescription)}"`)
     .replace('<meta property="og:url" content="">', `<meta property="og:url" content="${xmlEscape(url)}">`)
     .replace('<meta property="article:published_time" content="">', `<meta property="article:published_time" content="${xmlEscape(article.publishedAt)}">`)
-    .replace('<link rel="stylesheet" href="/styles.css?v=20260816-base-typography">', `<script type="application/ld+json">${structuredData}</script>\n  <link rel="stylesheet" href="/styles.css?v=20260816-base-typography">`)
+    .replace('<link rel="stylesheet" href="/styles.css?v=20260816-header-cleanup">', `<script type="application/ld+json">${structuredData}</script>\n  <link rel="stylesheet" href="/styles.css?v=20260816-header-cleanup">`)
     .replace('      <p class="empty-state">Loading article...</p>', articleMarkup(article));
   page = injectCountrySelector(page, country);
   page = injectHeadTags(page, country, articlePath, { canonicalCountry, alternateCodes });
