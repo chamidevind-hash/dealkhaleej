@@ -684,7 +684,7 @@ ${robotsMeta}  <meta property="og:title" content="${escapeHtml(title)}">
   ${clientCountryScript(country.code)}
   ${trackingSnippets()}
   <script type="application/ld+json">${jsonLd}</script>
-  <link rel="stylesheet" href="/styles.css?v=20260816-3">
+  <link rel="stylesheet" href="/styles.css?v=20260816-font2">
 </head>
 <body>
   <header class="site-header article-header">

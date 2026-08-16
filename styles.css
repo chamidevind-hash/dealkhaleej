@@ -5759,15 +5759,31 @@ table.store-summary-table {
 
 html,
 body {
-  font-family: var(--bs-font-sans-serif) !important;
+  font-family: var(--bs-font-sans-serif);
 }
 
-body *,
 button,
 input,
 select,
 textarea {
-  font-family: var(--bs-font-sans-serif) !important;
+  font-family: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span,
+div,
+li,
+td,
+th,
+label {
+  font-family: inherit;
 }
 
 code,
