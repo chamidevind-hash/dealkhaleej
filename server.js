@@ -391,7 +391,7 @@ function pageShell({ title, description, canonicalPath, body }) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20260816-montserrat-text">
+  <link rel="stylesheet" href="/styles.css?v=20260816-base-typography">
 </head>
 <body>
   <header class="site-header article-header">
@@ -521,7 +521,7 @@ async function serveArticlePage(response, slug, country) {
     .replace('content="Saudi Arabia shopping and coupon guide from DealKhaleej."', `content="${xmlEscape(article.metaDescription)}"`)
     .replace('<meta property="og:url" content="">', `<meta property="og:url" content="${xmlEscape(url)}">`)
     .replace('<meta property="article:published_time" content="">', `<meta property="article:published_time" content="${xmlEscape(article.publishedAt)}">`)
-    .replace('<link rel="stylesheet" href="/styles.css?v=20260816-montserrat-text">', `<script type="application/ld+json">${structuredData}</script>\n  <link rel="stylesheet" href="/styles.css?v=20260816-montserrat-text">`)
+    .replace('<link rel="stylesheet" href="/styles.css?v=20260816-base-typography">', `<script type="application/ld+json">${structuredData}</script>\n  <link rel="stylesheet" href="/styles.css?v=20260816-base-typography">`)
     .replace('      <p class="empty-state">Loading article...</p>', articleMarkup(article));
   page = injectCountrySelector(page, country);
   page = injectHeadTags(page, country, articlePath, { canonicalCountry, alternateCodes });
