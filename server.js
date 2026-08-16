@@ -388,7 +388,7 @@ function pageShell({ title, description, canonicalPath, body }) {
   <meta property="og:url" content="${xmlEscape(canonicalUrl)}">
   <link rel="canonical" href="${xmlEscape(canonicalUrl)}">
   ${faviconTags()}
-  <link rel="stylesheet" href="/styles.css?v=20260816-2">
+  <link rel="stylesheet" href="/styles.css?v=20260816-3">
 </head>
 <body>
   <header class="site-header article-header">
@@ -518,7 +518,7 @@ async function serveArticlePage(response, slug, country) {
     .replace('content="Saudi Arabia shopping and coupon guide from DealKhaleej."', `content="${xmlEscape(article.metaDescription)}"`)
     .replace('<meta property="og:url" content="">', `<meta property="og:url" content="${xmlEscape(url)}">`)
     .replace('<meta property="article:published_time" content="">', `<meta property="article:published_time" content="${xmlEscape(article.publishedAt)}">`)
-    .replace('<link rel="stylesheet" href="/styles.css?v=20260816-2">', `<script type="application/ld+json">${structuredData}</script>\n  <link rel="stylesheet" href="/styles.css?v=20260816-2">`)
+    .replace('<link rel="stylesheet" href="/styles.css?v=20260816-3">', `<script type="application/ld+json">${structuredData}</script>\n  <link rel="stylesheet" href="/styles.css?v=20260816-3">`)
     .replace('      <p class="empty-state">Loading article...</p>', articleMarkup(article));
   page = injectCountrySelector(page, country);
   page = injectHeadTags(page, country, articlePath, { canonicalCountry, alternateCodes });
