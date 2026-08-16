@@ -1,6 +1,8 @@
 :root {
   --font-primary: var(--bs-font-sans-serif);
   --font-arabic: var(--bs-font-sans-serif);
+  --bg-text-color: #212529;
+  --text-color: #212529;
 
   --color-primary: #E63946;
   --color-primary-dark: #C91F2C;
@@ -14,9 +16,9 @@
   --color-success-dark: #0E7A37;
   --color-success-soft: #EAF8EF;
 
-  --color-text: #172033;
+  --color-text: #212529;
   --color-text-secondary: #5E6675;
-  --color-heading: #111827;
+  --color-heading: #212529;
 
   --color-background: #F7F8FA;
   --color-surface: #FFFFFF;
@@ -37,7 +39,7 @@
   --amber: var(--color-orange);
   --coral: var(--color-primary);
   --blue: var(--color-primary);
-  --navy: #111827;
+  --navy: #212529;
   --gold: var(--color-orange);
   --gold-deep: var(--color-orange-dark);
   --shadow: 0 18px 46px rgba(17, 24, 39, 0.1);
@@ -4181,7 +4183,7 @@ textarea,
 
 body {
   background: #f3f3f3;
-  color: #222;
+  color: #212529;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
@@ -4245,7 +4247,7 @@ h3,
 .main-nav a {
   min-height: 36px;
   padding: 8px 10px;
-  color: #222;
+  color: #212529;
   font-size: 14px;
   font-weight: 700;
 }
@@ -4383,7 +4385,7 @@ textarea:focus,
 .section-link {
   border-color: var(--classic-border-dark);
   background: #fff;
-  color: #222;
+  color: #212529;
 }
 
 .coupon-card,
@@ -4597,11 +4599,13 @@ textarea:focus,
   --bs-font-sans-serif: "Montserrat", sans-serif;
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  --bg-text-color: #212529;
+  --text-color: #212529;
   --page-bg: #f7f7f8;
   --surface: #fff;
   --border: #e5e7eb;
   --border-soft: #eeeeef;
-  --text: #1f2937;
+  --text: #212529;
   --muted: #6b7280;
   --primary: #d63b3b;
   --primary-hover: #bc2d2d;
@@ -4618,7 +4622,7 @@ textarea:focus,
   --color-success: var(--success);
   --color-text: var(--text);
   --color-text-secondary: var(--muted);
-  --color-heading: #111827;
+  --color-heading: #212529;
   --color-background: var(--page-bg);
   --color-surface: var(--surface);
   --color-border: var(--border);
@@ -4658,7 +4662,7 @@ body {
 
 body {
   background: var(--page-bg) !important;
-  color: var(--text) !important;
+  color: #212529 !important;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.6;
@@ -5002,7 +5006,7 @@ main > section,
 }
 
 .hero-stats strong {
-  color: #111827;
+  color: #212529;
   font-size: clamp(24px, 4vw, 34px);
   font-weight: 700;
 }
@@ -5743,6 +5747,8 @@ table.store-summary-table {
 
 :root {
   --bs-font-sans-serif: "Montserrat", sans-serif;
+  --bg-text-color: #212529;
+  --text-color: #212529;
 
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
@@ -5757,6 +5763,7 @@ table.store-summary-table {
 html,
 body {
   font-family: "Montserrat", sans-serif;
+  color: #212529;
 }
 
 button,
@@ -5780,6 +5787,7 @@ td,
 th,
 label {
   font-family: "Montserrat", sans-serif;
+  color: inherit;
 }
 
 code,
@@ -5792,6 +5800,7 @@ samp {
 /* Final typography tuning for Montserrat */
 body {
   font-family: "Montserrat", sans-serif !important;
+  color: #212529 !important;
   font-size: 16px !important;
   font-weight: 400 !important;
   line-height: 1.6 !important;
@@ -5815,6 +5824,14 @@ h6,
   font-family: "Montserrat", sans-serif !important;
   color: #212529 !important;
   letter-spacing: -0.02em !important;
+}
+
+p,
+li,
+label,
+td,
+th {
+  color: inherit;
 }
 
 h1,
