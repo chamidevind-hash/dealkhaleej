@@ -11,6 +11,7 @@ const {
   hreflangLinks,
   routeUrlForCountry
 } = require("./config/countries");
+const { isOfferCurrentlyActive } = require("./offer-status");
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -635,7 +636,7 @@ function structuredData(siteUrl, store, coupons, content, faqs, region, country)
 
 function renderStorePage({ store, stores, coupons, articles, content, siteUrl, country = COUNTRIES.gcc, alternateCountryCodes = COUNTRY_CODES }) {
   const activeCoupons = coupons
-    .filter((coupon) => coupon.active && coupon.store.toLowerCase() === store.name.toLowerCase())
+    .filter((coupon) => isOfferCurrentlyActive(coupon) && coupon.store.toLowerCase() === store.name.toLowerCase())
     .sort((left, right) => String(right.updatedAt || "").localeCompare(String(left.updatedAt || "")));
   const featured = bestOffer(activeCoupons);
   const remaining = featured ? activeCoupons.filter((coupon) => coupon.id !== featured.id) : activeCoupons;

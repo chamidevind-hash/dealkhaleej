@@ -5,6 +5,10 @@ const { randomUUID, timingSafeEqual } = require("crypto");
 const { availableSources, importFromSource } = require("./imports/providers");
 const { renderStorePage } = require("./store-page-renderer");
 const {
+  currentRiyadhDateStamp,
+  filterCurrentOffers
+} = require("./offer-status");
+const {
   COUNTRIES,
   COUNTRY_CODES,
   GCC_COUNTRY_CODES,
@@ -275,7 +279,7 @@ function findStoreForSlug(stores, coupons, slug, country) {
 
 async function serveHomePage(response, country, url) {
   const [coupons, stores] = await Promise.all([readCoupons(), readStores()]);
-  const filteredCoupons = filterCouponsByCountry(coupons, country.code).filter((coupon) => coupon.active);
+  const filteredCoupons = filterCurrentOffers(filterCouponsByCountry(coupons, country.code));
   const filteredStores = filterStoresByCountry(stores, coupons, country.code);
   const text = countryPageText(country);
   let page = await fs.readFile(path.join(root, "index.html"), "utf8");
@@ -456,15 +460,15 @@ function pageShell({ title, description, canonicalPath, body }) {
 async function serveStoresDirectoryPage(response, country) {
   const [stores, coupons] = await Promise.all([readStores(), readCoupons()]);
   const visibleStores = filterStoresByCountry(stores, coupons, country.code);
-  const activeStoreNames = new Set(filterCouponsByCountry(coupons, country.code)
-    .filter((coupon) => coupon.active)
+  const visibleCurrentCoupons = filterCurrentOffers(filterCouponsByCountry(coupons, country.code));
+  const activeStoreNames = new Set(visibleCurrentCoupons
     .map((coupon) => coupon.store.toLowerCase()));
   const sortedStores = [...visibleStores].sort((left, right) => {
     const activeDelta = Number(activeStoreNames.has(right.name.toLowerCase())) - Number(activeStoreNames.has(left.name.toLowerCase()));
     return activeDelta || left.name.localeCompare(right.name);
   });
   const cards = sortedStores.map((store) => {
-    const activeCount = coupons.filter((coupon) => coupon.active && coupon.store.toLowerCase() === store.name.toLowerCase()).length;
+    const activeCount = visibleCurrentCoupons.filter((coupon) => coupon.store.toLowerCase() === store.name.toLowerCase()).length;
     return `
       <article class="article-card">
         <h2><a href="/store/${storeSlug(store.slug || store.name)}">${xmlEscape(store.name)}</a></h2>
@@ -490,8 +494,7 @@ async function serveStoresDirectoryPage(response, country) {
 }
 
 async function serveCouponsDirectoryPage(response, country) {
-  const coupons = filterCouponsByCountry(await readCoupons(), country.code)
-    .filter((coupon) => coupon.active)
+  const coupons = filterCurrentOffers(filterCouponsByCountry(await readCoupons(), country.code))
     .sort((left, right) => Number(right.verified) - Number(left.verified) || String(right.updatedAt || "").localeCompare(String(left.updatedAt || "")));
   const cards = coupons.map((coupon) => `
       <article class="article-card">
@@ -598,10 +601,6 @@ function sitemapDate(values) {
     ? new Date(Math.max(...dates.map((date) => date.getTime())))
     : new Date();
   return latest.toISOString().slice(0, 10);
-}
-
-function riyadhDateStamp(value = new Date()) {
-  return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Riyadh" }).format(new Date(value));
 }
 
 function passwordsMatch(candidate) {
@@ -890,12 +889,12 @@ async function handleApi(request, response, url, country) {
 
   if (url.pathname === "/api/trending" && request.method === "GET") {
     const [coupons, outboundClicks] = await Promise.all([readCoupons(), readOutboundClicks()]);
-    const visibleCoupons = filterCouponsByCountry(coupons, country.code);
-    const today = riyadhDateStamp();
+    const today = currentRiyadhDateStamp();
+    const visibleCoupons = filterCurrentOffers(filterCouponsByCountry(coupons, country.code), today);
     const activity = new Map();
 
     outboundClicks.forEach((click) => {
-      if (riyadhDateStamp(click.clickedAt) !== today) return;
+      if (currentRiyadhDateStamp(click.clickedAt) !== today) return;
 
       const current = activity.get(click.couponId) || { outboundCount: 0, lastClickedAt: "" };
       current.outboundCount += 1;
@@ -904,7 +903,7 @@ async function handleApi(request, response, url, country) {
     });
 
     const trending = visibleCoupons
-      .filter((coupon) => coupon.active && activity.has(coupon.id))
+      .filter((coupon) => activity.has(coupon.id))
       .map((coupon) => ({ ...coupon, ...activity.get(coupon.id) }))
       .sort((left, right) => right.outboundCount - left.outboundCount || right.lastClickedAt.localeCompare(left.lastClickedAt))
       .slice(0, 5);
@@ -982,14 +981,14 @@ async function handleApi(request, response, url, country) {
   }
 
   if (url.pathname === "/api/coupons" && request.method === "GET") {
-    sendJson(response, 200, filterCouponsByCountry(await readCoupons(), country.code));
+    sendJson(response, 200, filterCurrentOffers(filterCouponsByCountry(await readCoupons(), country.code)));
     return true;
   }
 
   if (url.pathname === "/api/search" && request.method === "GET") {
     const query = String(url.searchParams.get("q") || "").trim().toLowerCase();
     const [stores, coupons, articles] = await Promise.all([readStores(), readCoupons(), readArticles()]);
-    const visibleCoupons = filterCouponsByCountry(coupons, country.code);
+    const visibleCoupons = filterCurrentOffers(filterCouponsByCountry(coupons, country.code));
     const visibleStores = filterStoresByCountry(stores, coupons, country.code);
     const visibleArticles = filterArticlesByCountry(articles, country.code);
 
