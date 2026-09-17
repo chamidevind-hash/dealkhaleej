@@ -234,7 +234,7 @@ function featuredOfferMarkup(coupon, store, content, country) {
       <section class="store-panel best-offer-panel">
         <p class="eyebrow">Best available offer</p>
         <h2>No active ${escapeHtml(store.name)} offers are currently available for ${escapeHtml(country.name)}.</h2>
-        <p>DealKhaleej is not showing a country-matching offer for this store right now. Browse similar stores available for ${escapeHtml(country.name)} below or check back later.</p>
+        <p>No verified active coupons are available right now. Check back for new DealKhaleej offers, or browse similar stores available for ${escapeHtml(country.name)} below.</p>
       </section>
     `;
   }
@@ -377,13 +377,13 @@ function generatedFaqs(store, coupons, content, region) {
       question: `What is the latest ${store.name} coupon code?`,
       answer: latestCode
         ? `The current code shown on DealKhaleej is ${latestCode.code} for "${latestCode.title}". Check the offer card and merchant checkout before payment.`
-        : `DealKhaleej does not currently list a public coupon code for ${store.name}. Use the Get Offer button for current no-code offers when available.`
+        : `DealKhaleej does not currently list a verified active ${store.name} coupon. Check this page for future offers.`
     },
     {
       question: `How do I use a ${store.name} coupon?`,
       answer: latestCode
         ? `Choose the offer, copy the code, open ${store.name} through DealKhaleej, add eligible items, enter the code at checkout, and confirm the discount before payment.`
-        : `Choose a no-code offer, click Get Offer, complete the purchase through the linked store page, and confirm the final price before payment.`
+        : `DealKhaleej is not showing a current ${store.name} coupon code right now. When a verified active offer is available, use the button on the offer card and confirm the final price before payment.`
     },
     {
       question: `Why is my ${store.name} coupon not working?`,

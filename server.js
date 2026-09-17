@@ -6,7 +6,8 @@ const { availableSources, importFromSource } = require("./imports/providers");
 const { renderStorePage } = require("./store-page-renderer");
 const {
   currentRiyadhDateStamp,
-  filterCurrentOffers
+  filterCurrentOffers,
+  offerRuntimeStatus
 } = require("./offer-status");
 const {
   COUNTRIES,
@@ -838,6 +839,17 @@ function debugCouponSample(coupon) {
   };
 }
 
+function couponApiPayload(coupon, today = currentRiyadhDateStamp()) {
+  const status = offerRuntimeStatus(coupon, today);
+  return {
+    ...coupon,
+    expiryDate: status.expiryDate,
+    expired: status.expired,
+    currentlyActive: status.currentlyActive,
+    invalidExpiryDate: status.invalidExpiryDate
+  };
+}
+
 async function handleApi(request, response, url, country) {
   const idMatch = url.pathname.match(/^\/api\/coupons\/([^/]+)$/);
 
@@ -904,7 +916,7 @@ async function handleApi(request, response, url, country) {
 
     const trending = visibleCoupons
       .filter((coupon) => activity.has(coupon.id))
-      .map((coupon) => ({ ...coupon, ...activity.get(coupon.id) }))
+      .map((coupon) => ({ ...couponApiPayload(coupon, today), ...activity.get(coupon.id) }))
       .sort((left, right) => right.outboundCount - left.outboundCount || right.lastClickedAt.localeCompare(left.lastClickedAt))
       .slice(0, 5);
 
@@ -981,14 +993,18 @@ async function handleApi(request, response, url, country) {
   }
 
   if (url.pathname === "/api/coupons" && request.method === "GET") {
-    sendJson(response, 200, filterCurrentOffers(filterCouponsByCountry(await readCoupons(), country.code)));
+    const today = currentRiyadhDateStamp();
+    const coupons = filterCurrentOffers(filterCouponsByCountry(await readCoupons(), country.code), today)
+      .map((coupon) => couponApiPayload(coupon, today));
+    sendJson(response, 200, coupons);
     return true;
   }
 
   if (url.pathname === "/api/search" && request.method === "GET") {
     const query = String(url.searchParams.get("q") || "").trim().toLowerCase();
     const [stores, coupons, articles] = await Promise.all([readStores(), readCoupons(), readArticles()]);
-    const visibleCoupons = filterCurrentOffers(filterCouponsByCountry(coupons, country.code));
+    const today = currentRiyadhDateStamp();
+    const visibleCoupons = filterCurrentOffers(filterCouponsByCountry(coupons, country.code), today);
     const visibleStores = filterStoresByCountry(stores, coupons, country.code);
     const visibleArticles = filterArticlesByCountry(articles, country.code);
 
@@ -1001,7 +1017,10 @@ async function handleApi(request, response, url, country) {
     sendJson(response, 200, {
       country: country.code,
       stores: visibleStores.filter((store) => includesQuery(`${store.name} ${store.category} ${store.description}`)).slice(0, 12),
-      coupons: visibleCoupons.filter((coupon) => includesQuery(`${coupon.store} ${coupon.title} ${coupon.code} ${coupon.category} ${coupon.keywords} ${coupon.meta}`)).slice(0, 12),
+      coupons: visibleCoupons
+        .filter((coupon) => includesQuery(`${coupon.store} ${coupon.title} ${coupon.code} ${coupon.category} ${coupon.keywords} ${coupon.meta}`))
+        .slice(0, 12)
+        .map((coupon) => couponApiPayload(coupon, today)),
       articles: visibleArticles.filter((article) => includesQuery(`${article.title} ${article.excerpt} ${article.metaDescription}`)).slice(0, 12)
     });
     return true;

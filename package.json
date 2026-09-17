@@ -8,6 +8,7 @@
     "check:affiliate-go": "node scripts/check-affiliate-go.js",
     "check:article-links": "node scripts/check-article-link-content.js",
     "check:countries": "node scripts/check-country-routing.js",
+    "check:expiry-parity": "node scripts/check-expiry-parity.js",
     "check:expiry-status": "node scripts/check-expiry-status.js",
     "check:favicon": "node scripts/check-favicon.js",
     "check:indexability": "node scripts/check-indexability.js",

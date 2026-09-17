@@ -540,6 +540,10 @@ function isCouponCode(code) {
   return Boolean(couponCode && !["deal", "offer"].includes(couponCode.toLowerCase()));
 }
 
+function isCurrentCoupon(coupon) {
+  return coupon && coupon.active !== false && coupon.currentlyActive !== false && coupon.expired !== true;
+}
+
 function initials(name) {
   return name
     .split(/\s+/)
@@ -625,7 +629,7 @@ function favoriteButton(coupon) {
 }
 
 function updateFavoritesCount() {
-  const activeIds = new Set(coupons.filter((coupon) => coupon.active).map((coupon) => String(coupon.id)));
+  const activeIds = new Set(coupons.filter(isCurrentCoupon).map((coupon) => String(coupon.id)));
   const count = Array.from(favoriteCoupons).filter((id) => activeIds.has(id)).length;
   favoritesCount.textContent = String(count);
 }
@@ -845,7 +849,7 @@ function renderTrendingCoupons() {
 }
 
 function renderCoupons() {
-  const activeCoupons = coupons.filter((coupon) => coupon.active);
+  const activeCoupons = coupons.filter(isCurrentCoupon);
   const visibleCoupons = showAllCoupons ? activeCoupons : activeCoupons.slice(0, 8);
   const visibleStores = showAllStores ? stores : stores.slice(0, 18);
 
